@@ -1,0 +1,15 @@
+/*
+This stylesheet is designed specifically to work with the index page, but eventually all other pages will be assimilated to it.
+*/
+body { min-height: 100%;}                                   /*everywhere*/
+body p { margin-bottom: 0em; }                              /*everywhere*/   
+main { min-height: 100%; padding-bottom: 50px;}             /*everywhere*/
+.main-header {  }                                           /*optionally implemented*/
+.main-body { padding: 0% 15% 0% 15%}                        /*everywhere*/
+.navBar {  height: 100%; padding-right: 30px; }             /*optionally implemented*/
+.navBar a { display: block; }                               /*optionally implemented*/
+.navBox { padding-bottom: 30px; }                           /*optionally implemented*/
+.searchBar { padding-bottom: 50px; }                        /*optionally implemented*/
+.podcast { padding: 20px 0px 40px 0px; }                    /*optionally implemented*/
+.podcast p { margin-bottom: 0em; }                          /*optionally implemented*/
+.audioClip { height: auto; margin-top: 20px; padding: 8px;} /*optionally implemented*/

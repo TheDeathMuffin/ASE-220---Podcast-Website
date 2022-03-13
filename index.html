@@ -8,18 +8,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 		<link rel="stylesheet" href="index.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E"></script>
-        <style>
-            body p { margin-bottom: 0em; }
-            .mainBody { padding: 0% 15% 0% 15%}
-            .navBar {  height: 100%; padding-right: 30px; }
-            .navBar a { display: block; }
-            .searchBar { padding-bottom: 50px; }
-            .podcast { padding: 20px 0px 40px 0px; }
-            .podcast p { margin-bottom: 0em; }
-            .audioClip { height: auto; margin-top: 20px; padding: 8px;}
-            .navBox { padding-bottom: 30px; }
-
-		</style>
 	</head>
 
 	<body class="bg-light">
@@ -30,12 +18,15 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarExample01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between">
                         <li class="nav-item active">
                             <a class="nav-link" aria-current="page" href="index.html">PodScholar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
+                            <a class="nav-link" href="register.html">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
                         </li>
                     </ul>
                 </div>
@@ -45,13 +36,13 @@
 
         <main>
             <!-- Main Header -->
-            <div class="p-5 text-center">
+            <div class="p-5 text-center main-header">
                 <h1 class="mb-3">PodScholar</h1>
             </div>
             <!-- Main Header -->
             
             <!-- Main Body -->
-            <div class="mainBody">
+            <div class="main-body">
                 <!-- Row 1 -->
                 <div class="row">
                     <div class="col-md-2">
@@ -95,9 +86,8 @@
                             <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
                             <p class="year font-italic">2099</p>
                             <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                            <div class="audioClip bg-dark"><p class="text-light font-weight-bold">This is the title</p><p>These are the authors</p></div>
+                            <div class="audioClip bg-dark text-light"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
                         </div>
-
                     </div>
                     <!-- Podcasts -->
                 </div>
@@ -106,11 +96,10 @@
             <!-- Main Body -->
 		</main>
         
-
 		<!-- Page Footer -->
         <footer class="bg-secondary text-center text-lg-start fixed-bottom">
-            <div class="text-center p-3 text-">
-                © 2020 Copyright: <a class="text-dark" href="#">MyWebsite.com</a>
+            <div class="text-center p-3">
+                © 2022 Copyright: <a class="text-dark" href="#">MyWebsite.com</a>
             </div>
         </footer>
         <!-- Page Footer -->
