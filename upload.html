@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html leng="en">
 	<head>	
-		<title>PodScholar - Rules & Instructions.</title>
+		<title>PodScholar - Upload.</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E"></script>
 	</head>
 
-    <body class="bg-light">
+	<body class="bg-light">
         <!-- Page Header -->
         <header class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.html">PodScholar</a>
@@ -50,40 +50,55 @@
         <main>
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
-                <h1 class="mb-3">Uploading a Podcast</h1>
+                <h1 class="mb-3">Upload your Podcast</h1>
             </div>
             <!-- Main Header -->
-
-            <!-- Main Body -->
-            <div class="main-body-slim">
-                <div class="m-5">
-                    <h1>Rules</h1>
-                    <ul>
-                        <li>One Podcast per published work</li>
-                        <li>Maximum Podcast length is 20 minutes</li>
-                        <li>Podcasters must be an author on the published work</li>
-                        <li>Published works must have a registered DOI#</li>
-                        <li>Audio file must be mp3 or mp4 format to upload</li>
-                    </ul>
-                </div>
-                <div class="m-5">
-                    <h1>Instructions</h1>
-                    <ol>
-                        <li>Uploading is free.</li>
-                        <li>Record a research podcast with an audio recording app.</li>
-                        <li>Save the completed podcast as an mp3 or mp4 audio file to your device, computer, or cloud drive.</li>
-                        <li>Register or login, only registered users can upload a podcast.</li>
-                        <li>On PodScholar.org, click "Upload Podcast."</li>
-                        <li>Complete the form with author and manuscript.</li>
-                        <li>Upload the mp3 or mp4 file from your computer or cloud drive.</li>
-                        <li>Click "Submit Podcast."</li>
-                    </ol>
-                </div>
-            </div>
-            <!-- Main Body -->
             
+            <!-- Upload Form --> 
+            <div class="registration-form">
+                <form action="">
+                    <div class="form-group">
+                        <input type="text" class="form-control item" id="username" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control item" id="username" placeholder="Last Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control item" id="password" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control item" id="email" placeholder="Article Title" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control item" id="username" placeholder="Journal" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control item" id="username" placeholder="Publish Date" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control item" id="username" placeholder="DOI #" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control item" id="username" placeholder="3-6 Keywords for Search Optimization" required>
+                    </div>
+                    <label><strong>Upload Podcast File</strong></label>
+                    <div class="form-group">
+                        <label><input type="file" name="manuscript" data-field-type="bootstrap-file-filed" data-label="Select MP3/MP4 Files" data-file-types="application/mp3 , application/m4a" multiple required></label>
+                    </div>
+                    <h6>Terms and Conditions *</h6>
+                    <input type="checkbox" id="TOS" required>
+                    <label for="Agree">I accept the terms and conditions for PodScholar</label><br>
+                    <div class="form-group"> 
+                        <a href="#">
+                            <button type="button" class="btn btn-block create-account">Submit Podcast</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <!-- Upload Form -->
         </main>
-        <!-- Page Footer -->
+        
+		<!-- Page Footer -->
         <footer class="bg-secondary text-center text-lg-start fixed-bottom">
             <div class="text-center p-3">
                 © 2022 Copyright: <a class="text-dark" href="index.html">PodScholar.org</a>
@@ -92,3 +107,4 @@
         <!-- Page Footer -->
     </body>
 </html>
+
