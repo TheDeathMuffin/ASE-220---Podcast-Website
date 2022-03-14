@@ -35,10 +35,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Samuel Long</a>
                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="profile.html">Dashboard</a>
-                                <a class="dropdown-item" href="create.html">Upload Podcast</a>
+                                <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                                <a class="dropdown-item" href="upload.html">Upload Podcast</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="signout.html">Sign Out</a>
+                                <a class="dropdown-item text-danger" href="signout.html">Sign Out</a>
                             </div>
                         </li> 
                     </div>
@@ -50,18 +50,21 @@
         <main>
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
-                <h1 class="mb-3">Register for PodScholar</h1>
+                <h1 class="mb-3">Register Author Account</h1>
+                <h6>Complete the form to register with PodScholar and begin podcasting!</h6>
             </div>
             <!-- Main Header -->
 
             <!-- Registration Form -->
             <div class="registration-form">
                 <form action="">
-                    <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="First Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="Last Name" required>
+                    <div class="row">
+                        <div class="col form-group">
+                            <input type="text" class="form-control item" id="username" placeholder="First Name" required>
+                        </div>
+                        <div class="col form-group">
+                            <input type="text" class="form-control item" id="username" placeholder="Last Name" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control item" id="password" placeholder="Email" required>
@@ -75,9 +78,11 @@
                     <div class="form-group">
                         <input type="text" class="form-control item" id="username" placeholder="Confirm Password" required>
                     </div>
-                    <h6>Terms and Conditions *</h6>
+                    <a href="terms.html" target="_blank">
+                        <h6>Terms and Conditions</h6>
+                    </a>
                     <input type="checkbox" id="TOS" required>
-                    <label for="Agree">I accept the terms and conditions for PodScholar</label><br>
+                    <label for="Agree">I accept the terms and conditions of PodScholar</label><br>
                     <div class="form-group">
                         <a href="#">
                         <button type="button" class="btn btn-block create-account">Register</button>
