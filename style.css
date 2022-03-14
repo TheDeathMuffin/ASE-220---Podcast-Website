@@ -3,6 +3,7 @@ body p { margin-bottom: 0em; }
 main { min-height: 100%; padding-bottom: 50px;}             
 .main-body { padding: 0% 15% 0% 15%; }                        
 .main-body-slim { padding: 0% 25% 0% 25%; }
+.main-body-wide { padding: 0% 8% 0% 8%; }
 .nav-bar {  height: 100%; padding-right: 30px; }             
 .nav-bar a { display: block; }                               
 .navBox { padding-bottom: 30px; }                           
