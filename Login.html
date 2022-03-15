@@ -13,43 +13,27 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="style.css">
         <script>
-            
-            document.cookie = "person=poopingGuy";
-            document.cookie = "apple=beez";
-            document.cookie = "straight=gay";
-
-
-            $(document).on('submit','#form',function(e){
-                e.preventDefault();
-                $.ajax({
-                    url:'https://jsonblob.com/api/jsonBlob',
-                    type:'POST',
-                    data: JSON.stringify({
-                        name:$('#postData input[name=name]').val()
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType:'json',
-                    success: function (response, status, xhr) {
-                        let cookieData = decodeURIComponent(document.cookie);
-                        let ca = cookieData.split(';');
-                        for(let i = 0; i <ca.length; i++) {
-                            let c = ca[i];
-                            let d = c.substring(1);
-                            console.log(d);
-                            console.log(c);
-                            console.log("a");
+            function login() {
+                let email = $('#email').val();
+                let password = $('#password').val();
+                let match = false;
+                $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
+                    console.log(data);
+                    for (let i = 0; i < data.length; i++) {
+                        if (email == data[i]['email'] && password == data[i]['password']) {
+                            match = true;
+                            break;
                         }
-                        console.log(response);
-                        console.log(xhr.getResponseHeader('Location'));
-                        console.log("Beez");
-                    },
-                    error: function (error) {
-                        console.log(error);
+                    }
+                    if (!match) {
+                        alert("Your email/password combination is incorrect!");
+                        window.location.href = "login.html";
+                    }
+                    else {
+                        window.location.href = "dashboard.html";
                     }
                 });
-            });
-    
-    
+            }
         </script>
     </head>
 
@@ -95,7 +79,7 @@
 
             <!-- Login Form -->
             <div class="registration-form">
-                <form id="form">
+                <form id="form" action="#" onSubmit="javascript:login(email);">
                     <div class="form-group">
                         <input type="text" class="form-control item" id="email" placeholder="Email" required>
                     </div>
@@ -106,9 +90,7 @@
                         <button type="submit" class="btn btn-block create-account">Login</button>
                     </div>
                     <div class="form-group">
-                        Don't have an account? <a href = "register.html">
-                        Register Here
-                        </a>    
+                        Don't have an account? <a href = "register.html"> Register Here </a>    
                     </div>
                 </form>
             </div>
