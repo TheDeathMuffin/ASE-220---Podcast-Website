@@ -59,82 +59,77 @@
             <!-- Main Header -->
             
             <!-- Main Body -->
-            <div class="main-body">
-                <!-- Row 1 -->
+            <div class="main-body-wide">
                 <div class="row">
-                    <div class="col-md-3">
+                    <!-- Profile Information -->
+                    <div class="col-md-2 floating-menu rounded">
+                        <h5 class="font-weight-bold">Account</h5>
+                        <div class="dropdown-divider"></div>
+                        <p class="font-weight-bold">Name</p><p class="name"></p>
+                        <p class="font-weight-bold">Email</p><p id="email"></p>
+                        <p class="font-weight-bold">University/Organization</p><p id="organization"></p><br><br>
+                        <h5 class="font-weight-bold">Billing</h5>
+                        <div class="dropdown-divider"></div>
+                        <p class="font-weight-bold">Card #</p><p id="card">XXXX-XXXX-XXXX-XXXX</p>
+                        <p class="font-weight-bold">Name on Card</p><p id="cardname">------ ------</p>
+                        <p class="font-weight-bold">Billing Address</p><p id="address">------, -------, -- -----</p><br><br>
+                        <a href="updateinfo.html"><h5 class="">Edit Info</h5></a>
+                        <a href="signout.html"><h5 class="text-danger">Sign Out</h5></a>
                     </div>
-                    <div class="col-md-4 searchBar">
-                        <div class="input-group rounded">
-                            <input type="search" class="form-control rounded" placeholder="Search Your Podcasts" aria-label="Search Your Podcasts" aria-describedby="search-addon"/>
-                            <span class="input-group-text border-0" id="search-addon">
-                                <i class="fas fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4 searchBar">
-                        <div class="input-group rounded">
-                            <input type="search" class="form-control rounded" placeholder="Search Saved Podcasts" aria-label="Search Saved Podcasts" aria-describedby="search-addon"/>
-                            <span class="input-group-text border-0" id="search-addon">
-                                <i class="fas fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Row 1 -->
+                    <!-- Profile Information -->
 
-                <!-- Row 2 -->
-                <div class="row">
-                    <!-- Profile Information -->
-                    <div class="col-md-3">
-                        <div>
-                            <h5 class="font-weight-bold">Account</h5>
-                            <div class="dropdown-divider"></div>
-                            <p class="font-weight-bold">Name</p><p class="name"></p>
-                            <p class="font-weight-bold">Email</p><p id="email"></p>
-                            <p class="font-weight-bold">University/Organization</p><p id="organization"></p><br><br>
-                        </div>
-                        <div>
-                            <h5 class="font-weight-bold">Billing</h5>
-                            <div class="dropdown-divider"></div>
-                            <p class="font-weight-bold">Card #</p><p id="card">XXXX-XXXX-XXXX-----</p>
-                            <p class="font-weight-bold">Name on Card</p><p id="cardname">--------</p>
-                            <p class="font-weight-bold">Billing Address</p><p id="address">-------, KY ZZZZZ -----</p><br><br>
-                        </div>
-                        <div>
-                            <a href="signout.html"><h5 class="text-danger">Sign Out</h5></a>
-                        </div>
-                    </div>
-                    <!-- Profile Information -->
-                    
                     <!-- User Podcasts Menu -->
-                    <div class="col-md-4 podcast-menu">
-                        <p class="font-weight-bold">Your Podcasts</p>
-                        <div class="podcast rounded">
-                            <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
-                            <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
-                            <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
-                            <p class="year font-italic">2099</p>
-                            <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                            <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
+                    <div class="col-md-4">
+                        <div class="row searchBar">
+                            <div class="col-md-12 input-group rounded">
+                                <input type="search" class="form-control rounded" placeholder="Search Your Podcasts" aria-label="Search Your Podcasts" aria-describedby="search-addon"/>
+                                <span class="input-group-text border-0" id="search-addon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 podcast-menu">
+                                <p class="font-weight-bold">Your Podcasts</p>
+                                <div class="podcast rounded">
+                                    <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
+                                    <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
+                                    <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
+                                    <p class="year font-italic">2099</p>
+                                    <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
+                                    <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- User Podcasts Menu -->
+                            
                     <!-- Saved Podcasts Menu -->
-                    <div class="col-md-4 podcast-menu">
-                        <p class="font-weight-bold">Saved Podcasts</p>
-                        <div class="podcast rounded">
-                            <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
-                            <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
-                            <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
-                            <p class="year font-italic">2099</p>
-                            <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                            <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
+                    <div class="col-md-4">
+                        <div class="row searchBar">
+                            <div class="col-md-12 input-group rounded">
+                                <input type="search" class="form-control rounded" placeholder="Search Saved Podcasts" aria-label="Search Saved Podcasts" aria-describedby="search-addon"/>
+                                <span class="input-group-text border-0" id="search-addon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 podcast-menu">
+                                <p class="font-weight-bold">Saved Podcasts</p>
+                                <div class="podcast rounded">
+                                    <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
+                                    <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
+                                    <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
+                                    <p class="year font-italic">2099</p>
+                                    <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
+                                    <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- Saved Podcasts Menu -->
                 </div>
-                <!-- Row 2 -->
             </div>
             <!-- Main Body -->
 		</main>
