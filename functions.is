@@ -1,3 +1,4 @@
+
 function myAjax(method='GET',endpoint,data=null,onSuccess=null){
                     $.ajax({
                         url:endpoint,
@@ -13,4 +14,3 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
                         }
                     });
                 }
-                

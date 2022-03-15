@@ -56,32 +56,35 @@
             
             <!-- Upload Form --> 
             <div class="registration-form">
-                <form action="">
+                <form id= "upload" action="">
                     <div class="row">
                         <div class="col form-group">
-                            <input type="text" class="form-control item" id="username" placeholder="First Name" required>
+                            <input type="text" name="firstname" class="form-control item" placeholder="First Name" required>
                         </div>
                         <div class="col form-group">
-                            <input type="text" class="form-control item" id="username" placeholder="Last Name" required>
+                            <input type="text" name="lsatnaem" class="form-control item" placeholder="Last Name" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control item" id="password" placeholder="Email" required>
+                        <input type="password" name="email" class="form-control item" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="email" placeholder="Article Title" required>
+                        <input type="text"name="articleTitle" class="form-control item" placeholder="Article Title" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="Journal" required>
+                        <input type="text" name="journal" class="form-control item" placeholder="Journal" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="Publish Date" required>
+                        <textarea name="description" class="form-control item" placeholder="Podcast Description" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="DOI #" required>
+                        <input type="text" name="publishDate" class="form-control item" placeholder="Publish Date" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="3-6 Keywords for Search Optimization" required>
+                        <input type="text" name="doi" class="form-control item" placeholder="DOI #" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required>
                     </div>
                     <label><strong>Upload Podcast File</strong></label>
                     <div class="form-group">
@@ -109,6 +112,51 @@
             </div>
         </footer>
         <!-- Page Footer -->
+        <script>
+        //Re-usable AJAX function
+            function myAjax(method='GET',endpoint,data=null,onSuccess=null){
+                    $.ajax({
+                        url:endpoint,
+                        type:method,
+                        data: data==null ? null : JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType:'json',
+                        success: function (body, status, response) {
+                            onSuccess(body,status,response);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+
+            //Code For uploading podcasts
+            $(document).on('submit','#upload',function(e){
+				e.preventDefault();
+                console.log($('input[name=title]').val());
+                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
+                    //Checks if podcast already exists * I know it's wrong rn
+                    var data = body;
+                    var podcastExists = false;
+                    for (i = 0; i < data.length; i++){
+                        var doi = $('input[name=doi]').val();
+                        if (doi == body[i]["doi"]){
+                            podcastExists = true;
+                            console.log("A podcast about this published work already exists");
+                        }
+                    }
+                    if (podcastExists == false){
+                        var keyWordArray = $('input[name=keywords]').val();
+                        var keyWordArray = $('input[name=keywords]').val().split(" ");
+                        data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), title:$('input[name=title]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray});
+                        myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
+                            console.log("Successful PUT...");
+                            //myAjax('POST', 'https://jsonblob.com/api/jsonBlob/', data)
+                        })
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
 
