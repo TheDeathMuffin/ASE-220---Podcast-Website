@@ -1,0 +1,36 @@
+[
+    {
+      "title": "The Secrets of Coffee",
+      "author": "John Cena",
+      "keywords": [
+        "coffee",
+        "Secret",
+        "Food",
+        "Drink",
+        "Health"
+      ],
+      "id": "1"
+    },
+    {
+      "title": "The Mountain Trail",
+      "author": "John Morgan",
+      "keywords": [
+        "Travel",
+        "Mountain",
+        "Nature",
+        "Health"
+      ],
+      "id": "2"
+    },
+    {
+      "title": "American Express",
+      "author": "Morgan Cena",
+      "keywords": [
+        "Travel",
+        "Food",
+        "Drink",
+        "Finance"
+      ],
+      "id": "3"
+    }
+]

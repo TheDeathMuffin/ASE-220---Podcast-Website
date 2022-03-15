@@ -1,0 +1,51 @@
+[
+    {
+      "firstname": "amy",
+      "lastname": "gigabun",
+      "email": "amy@gmail.com",
+      "organization": "nku",
+      "password": "password"
+    },
+    {
+      "firstname": "james",
+      "lastname": "rae",
+      "email": "james@gmail.com",
+      "organization": "nku",
+      "password": "password"
+    },
+    {
+      "firstname": "phillip",
+      "lastname": "gigabun",
+      "email": "phillip@gmail.com",
+      "organization": "nku",
+      "password": "password"
+    },
+    {
+      "firstname": "ray",
+      "lastname": "gigabun",
+      "email": "ray@gmail.com",
+      "organization": "nku",
+      "password": "password"
+    },
+    {
+      "firstname": "elizabeth",
+      "lastname": "gigabun",
+      "email": "elizabeth@gmail.com",
+      "organization": "nku",
+      "password": "password"
+    },
+    {
+      "firstname": "Ryan",
+      "lastname": "George",
+      "email": "ryan@gmail.com",
+      "university": "nku",
+      "password": "password"
+    },
+    {
+      "firstname": "Jane",
+      "lastname": "George",
+      "email": "jane@gmail.com",
+      "university": "nku",
+      "password": "password"
+    }
+  ]
