@@ -51,7 +51,7 @@
         </header>
         <!-- Page Header -->
 
-        <main>
+        <main class="notauth">
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
                 <h1 class="mb-3">Login to PodScholar</h1>
@@ -95,6 +95,9 @@
         $('.authdel').css("display", "block");
         $('.notauth').css("visibility", "hidden");
         $('.notauthdel').css("display", "none");
+        if ($('main').hasClass('notauth')) {
+            window.location.href = "index.html";
+        }
     }
     else {
         if ($('main').hasClass('auth')) {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html leng="en">
 	<head>	
-		<title>PodScholar - Login.</title>
+		<title>PodScholar - Sign Out.</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -51,7 +51,7 @@
         </header>
         <!-- Page Header -->
 
-        <main>
+        <main class="notauth">
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
                 <h1 class="mb-3">You have been signed out.</h1>
@@ -78,6 +78,9 @@
         $('.authdel').css("display", "block");
         $('.notauth').css("visibility", "hidden");
         $('.notauthdel').css("display", "none");
+        if ($('main').hasClass('notauth')) {
+            window.location.href = "index.html";
+        }
     }
     else {
         if ($('main').hasClass('auth')) {
