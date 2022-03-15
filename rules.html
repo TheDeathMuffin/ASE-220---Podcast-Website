@@ -17,22 +17,25 @@
 
     <body class="bg-light">
         <!-- Page Header -->
-        <header class="navbar navbar-expand-lg navbar-light bg-white">
+        <header class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
             <a class="navbar-brand" href="index.html">PodScholar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto notauth">
+                <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="about.html">About</a>
                 </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <div class="form-inline my-2 my-lg-0 auth">
+                    <li class="nav-item notauthdel">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item notauthdel">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <div class="form-inline my-2 my-lg-0 authdel">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Samuel Long</a>
                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -98,11 +101,18 @@
 <script>
     if (currentUser != null) {
         $('.auth').css("visibility", "visible");
-        $(".notauth").css("visibility", "hidden");
+        $('.authdel').css("display", "block");
+        $('.notauth').css("visibility", "hidden");
+        $('.notauthdel').css("display", "none");
     }
     else {
+        if ($('main').hasClass('auth')) {
+            window.location.href = "index.html";
+        }
         $('.auth').css("visibility", "hidden");
-        $(".notauth").css("visibility", "visible");
+        $('.authdel').css("display", "none");
+        $('.notauth').css("visibility", "visible");
+        $('.notauthdel').css("display", "block");
     }
 </script>
 <!-- Shows/Hides Auth Elements when user Signed In/Out -->
