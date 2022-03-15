@@ -1,0 +1,36 @@
+//FOR TESTING PURPOSES
+
+
+POST https://jsonblob.com/api/jsonBlob
+Content-Type: application/json
+
+{
+    "purpose":"test"
+}
+
+
+###
+
+GET https://jsonblob.com/api/jsonBlob/953042859079254016
+
+
+
+
+###
+
+PUT https://jsonblob.com/api/jsonBlob/953036187040497664
+Content-Type: application/json
+
+{
+    "purpose":"double-check"
+}
+
+
+###
+    
+
+GET http://dog-api.kinduff.com/api/facts
+
+//JSON Blob for users https://jsonblob.com/953096375785242624
+
+//JSON Blob for podcasts https://jsonblob.com/953093703074070528
