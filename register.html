@@ -7,10 +7,7 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="style.css">
     </head>
 
@@ -24,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
+                    <a class="nav-link" href="register.html" id="register">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">Login</a>
@@ -57,26 +54,26 @@
 
             <!-- Registration Form -->
             <div class="registration-form">
-                <form action="">
+                <form id="signup" action="">
                     <div class="row">
                         <div class="col form-group">
-                            <input type="text" class="form-control item" id="username" placeholder="First Name" required>
+                            <input type="text" name="firstname" class="form-control item" placeholder="First Name" required>
                         </div>
                         <div class="col form-group">
-                            <input type="text" class="form-control item" id="username" placeholder="Last Name" required>
+                            <input type="text" name= "lastname"class="form-control item" id="username" placeholder="Last Name" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control item" id="password" placeholder="Email" required>
+                        <input type="text" name="email" class="form-control item" id="password" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="email" placeholder="University/Organization" required>
+                        <input type="text" name="university" class="form-control item" id="email" placeholder="University/Organization" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="Create Password" required>
+                        <input type="password" name="password" class="form-control item" id="username" placeholder="Create Password" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="Confirm Password" required>
+                        <input type="password" name="confirmPassword"class="form-control item" id="username" placeholder="Confirm Password" required>
                     </div>
                     <a href="terms.html" target="_blank">
                         <h6>Terms and Conditions</h6>
@@ -99,7 +96,135 @@
                 © 2022 Copyright: <a class="text-dark" href="index.html">PodScholar.org</a>
             </div>
         </footer>
-        <!-- Page Footer -->
+        <!-- Page Footer -->		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+
+
+                // $.ajax({
+				// 	url:'https://jsonblob.com/api/jsonBlob',
+				// 	type:'POST',
+				// 	data: JSON.stringify({
+				// 		name:'Munene'
+				// 	}),
+				// 	contentType: "application/json; charset=utf-8",
+				// 	dataType:'json',
+				// 	success: function (body, status, response) {
+                //         console.log(body)
+                //         console.log(status)
+                //         console.log(response)
+                //         console.log(response.getResponseHeader('location'));
+				// 		//console.log(response);
+				// 		//console.log(xhr.getResponseHeader('Location'));
+				// 	},
+				// 	error: function (error) {
+				// 		console.log(error);
+				// 	}
+				// });
+
+                
+
+                // myAjax('GET','https://jsonblob.com/api/jsonBlob/953042859079254016',null,function(body){
+                //     var beatles=body;
+                //     //beatles.push({name:"B2"});
+                //     myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953042859079254016', beatles, function(){
+                //         console.log("done");
+                //     })
+                // })
+                
+
+                
+                // $.ajax({
+				// 	url:'https://jsonblob.com/api/jsonBlob/953042859079254016',
+				// 	type:'GET',
+				// 	contentType: "application/json; charset=utf-8",
+				// 	dataType:'json',
+				// 	success: function (body, status, response) {
+                //         var beatles=response.responseJSON;
+                //         console.log(beatles);
+                //         //return;
+                //         beatles.push({name:"Ringo Starr"});
+
+                //         $.ajax({
+                //             url:'https://jsonblob.com/api/jsonBlob/953042859079254016',
+                //             type:'PUT',
+                //             data: JSON.stringify(beatles),
+                //             contentType: "application/json; charset=utf-8",
+                //             dataType:'json',
+                //             success: function (body, status, response) {
+                //                 console.log(body)
+                //                 console.log(status)
+                //                 console.log(response)
+                //                 console.log(response.getResponseHeader('location'));
+                //                 //console.log(response);
+                //                 //console.log(xhr.getResponseHeader('Location'));
+                //             },
+                //             error: function (error) {
+                //                 console.log(error);
+                //             }
+                //         });
+
+				// 	},
+				// 	error: function (error) {
+				// 		console.log(error);
+				// 	}
+				// });
+            
+            
+            /*$(document).on('submit','#signup',function(e){
+				e.preventDefault();
+                console.log($('input[name=firstname]').val());
+                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953042859079254016', null, function(body){
+                    var beatles = body;
+                    beatles.push({name:$('input[name=firstname]').val()});
+                    myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953042859079254016', beatles, function(){
+                        console.log("Request Complete... Pushed" + beatles);
+                    });
+                })
+            });*/
+
+            //Re-usable AJAX function
+            function myAjax(method='GET',endpoint,data=null,onSuccess=null){
+                    $.ajax({
+                        url:endpoint,
+                        type:method,
+                        data: data==null ? null : JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType:'json',
+                        success: function (body, status, response) {
+                            onSuccess(body,status,response);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+
+            //Code For registering users
+            $(document).on('submit','#signup',function(e){
+				e.preventDefault();
+                console.log($('input[name=firstname]').val());
+                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953096375785242624', null, function(body){
+                    //Checks if user already exists * I know it's wrong rn
+                    var data = body;
+                    var userExists = false;
+                    for (i = 0; i < data.length; i++){
+                        var userEmail = $('input[name=email]').val();
+                        if (userEmail == body[i]["email"]){
+                            userExists = true;
+                            console.log("A user with this email already exists");
+                        }
+                    }
+                    if (userExists == false){
+                        data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), university:$('input[name=university]').val(), password:$('input[name=password]').val()});
+                        myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
+                            console.log("Successful PUT...");
+                        })
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
-
