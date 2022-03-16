@@ -157,7 +157,7 @@
                                 console.log("Successful POST...\nLocation is: " + descriptionLocation);
                                 var keyWordArray = $('input[name=keywords]').val();
                                 var keyWordArray = $('input[name=keywords]').val().split(" ");
-                                data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=articleTitle]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray});
+                                data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=articleTitle]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray, index:(data.length + 1).toString()});
                                 myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
                                     console.log("Successful PUT...");
                                 })

@@ -147,7 +147,7 @@
                                             //Compares saved podcast DOIs and full podcast list to find the right podcast
                                             for(i = 0; i < Object.keys(podcastList).length; i++){
                                                 for(j = 0; j < savedPodcasts.length; j++){
-                                                    if(podcastList[j]["doi"] == savedPodcasts[i]){
+                                                    if(podcastList[j]["index"] == savedPodcasts[i]){
                                                         displayPodcast(i, ".2nd-menu");
                                                     }
                                                 }
