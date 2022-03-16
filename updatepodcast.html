@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html leng="en">
 	<head>	
-		<title>PodScholar - Uploading.</title>
+		<title>PodScholar - Update Podcast.</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -50,17 +50,18 @@
             </div>
         </header>
         <!-- Page Header -->
-
+        
         <main class="auth">
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
-                <h1 class="mb-3">Upload your Podcast</h1>
+                <h1 class="mb-3">Update Account Information</h1>
             </div>
             <!-- Main Header -->
-            
-            <!-- Upload Form --> 
+
+            <!-- Registration Form -->
             <div class="registration-form">
-                <form id= "upload" action="">
+                <form id="update" onSubmit="return false">
+                    <h4>Account</h4><br>
                     <div class="row">
                         <div class="col form-group">
                             <input type="text" name="firstname" class="form-control item" placeholder="First Name" required>
@@ -82,7 +83,7 @@
                         <textarea name="description" class="form-control item" placeholder="Podcast Description" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="publishedDate" class="form-control item" placeholder="Publish Date" required>
+                        <input type="text" name="publishDate" class="form-control item" placeholder="Publish Date" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="doi" class="form-control item" placeholder="DOI #" required>
@@ -92,23 +93,18 @@
                     </div>
                     <label><strong>Upload Podcast File</strong></label>
                     <div class="form-group">
-                        <label><input type="file" name="manuscript" data-field-type="bootstrap-file-filed" data-label="Select MP3/MP4 Files" data-file-types="application/mp3" data-file-types="application/m4a" multiple required></label>
+                        <label><input type="file" name="manuscript" data-field-type="bootstrap-file-filed" data-label="Select MP3/MP4 Files" data-file-types="application/mp3" data-file-types="application/m4a" multiple ></label>
                     </div>
-                    <a href="terms.html" target="_blank">
-                        <h6>Terms and Conditions</h6>
-                    </a>
-                    <input type="checkbox" id="TOS" required>
-                    <label for="Agree">I accept the terms and conditions for PodScholar</label><br>
-                    <div class="form-group"> 
+                    <div class="form-group"><br>
                         <a href="#">
-                            <button type="submit" class="btn btn-block create-account">Submit Podcast</button>
+                        <button type="submit" class="btn btn-block create-account">Save Changes</button>
                         </a>
-                    </div>
+                    </div>   
                 </form>
             </div>
-            <!-- Upload Form -->
+            <!-- Registration Form -->
         </main>
-        
+
 		<!-- Page Footer -->
         <footer class="bg-secondary text-center text-lg-start fixed-bottom">
             <div class="text-center p-3">
@@ -116,56 +112,54 @@
             </div>
         </footer>
         <!-- Page Footer -->
-        <script>
-        //Re-usable AJAX function
-            function myAjax(method='GET',endpoint,data=null,onSuccess=null){
-                    $.ajax({
-                        url:endpoint,
-                        type:method,
-                        data: data==null ? null : JSON.stringify(data),
-                        contentType: "application/json; charset=utf-8",
-                        dataType:'json',
-                        success: function (body, status, response) {
-                            onSuccess(body,status,response);
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
-                    });
-                }
-
-            //Code For uploading podcasts
-            $(document).on('submit','#upload',function(e){
-				e.preventDefault();
-                console.log($('input[name=title]').val());
-                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
-                    //Checks if podcast already exists based on DOI #
-                    var data = body;
-                    var podcastExists = false;
-                    for (i = 0; i < data.length; i++){
-                        var doi = $('input[name=doi]').val();
-                        if (doi == body[i]["doi"]){
-                            podcastExists = true;
-                            console.log("A podcast about this published work already exists");
-                        }
-                    }
-                    if (podcastExists == false){
-                        var podcastDescription = {description:$('textarea[name=description]').val()};
-                        myAjax('POST', 'https://jsonblob.com/api/jsonBlob/', podcastDescription, function(body, status, response){
-                                var descriptionLocation = response.getResponseHeader("location");
-                                var betterURL = descriptionLocation.slice(0, 4) + "s" + descriptionLocation.slice(4);
-                                console.log("Successful POST...\nLocation is: " + descriptionLocation);
-                                var keyWordArray = $('input[name=keywords]').val();
-                                var keyWordArray = $('input[name=keywords]').val().split(" ");
-                                data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=articleTitle]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray});
-                                myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
-                                    console.log("Successful PUT...");
-                                })
-                        })
-                    }
-                });
-            });
-        </script>
         <script src="postload.js"></script>
     </body>
 </html>
+
+<script>
+    /* Populates form with Podcast's Informaiton */
+    $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+        for (let i = 0; i < data.length; i++) {
+            if (currentUser == data[i]['email']) {
+                $.getJSON(data[i]['descriptionLocation'], function(data){ $('textarea[name=description]').html(data['description']); });
+                $('input[name=firstname]').val(data[i]['firstname']);
+                $('input[name=lastname]').val(data[i]['lastname']);
+                $('input[name=email]').val(data[i]['email']);
+                $('input[name=title]').val(data[i]['title']);
+                $('input[name=journal]').val(data[i]['journal']);
+                $('input[name=publishDate]').val(data[i]['publishDate']);
+                $('input[name=doi]').val(data[i]['doi']);
+                $('input[name=keywords]').val(data[i]['keywords']);
+                /*$('input[name=manuscript]').val(data[i]['manuscript']);                 */
+                break;
+            }
+        }
+    });
+ 
+    /* On Form Submit, Updates User's Information */
+    $(document).on('submit','#update',function(e){
+        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+            var descriptionLocation;
+            for (let i = 0; i < data.length; i++) {              
+                if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
+                    data[i]['firstname'] = $('input[name=firstname]').val();
+                    data[i]['lastname'] = $('input[name=lastname]').val();
+                    data[i]['email'] = $('input[name=email]').val();
+                    data[i]['title'] = $('input[name=title]').val();
+                    data[i]['journal'] = $('input[name=journal]').val();
+                    data[i]['publishDate'] = $('input[name=publishDate]').val();
+                    data[i]['doi'] = $('input[name=doi]').val();
+                    /*data[i]['manuscript'] = $('input[name=manuscript]').val();                */
+                    data[i]['keywords'] = $('input[name=keywords]').val().split(",");
+                    descriptionLocation = data[i]['descriptionLocation'];
+                }
+            }
+            e.preventDefault();
+            myAjax('PUT', descriptionLocation, $('textarea[name=description]').val(), function(){
+            });
+            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
+                window.location.href = "dashboard.html";
+            }); 
+        });       
+    });
+</script>
