@@ -13,6 +13,93 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="thisiswhoisloggedin.js"></script>
         <link rel="stylesheet" href="style.css">
+        <script>
+            //Re-usable AJAX function
+            function myAjax(method='GET',endpoint,data=null,onSuccess=null){
+                            $.ajax({
+                                url:endpoint,
+                                type:method,
+                                data: data==null ? null : JSON.stringify(data),
+                                contentType: "application/json; charset=utf-8",
+                                dataType:'json',
+                                success: function (body, status, response) {
+                                    onSuccess(body,status,response);
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
+
+            //Reusable Display Podcast Function
+            function displayPodcast(index=0){
+                var podcasts;
+                var podcastDescription;
+                //Grabs podcast Data
+                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
+                    console.log("Getting Podcast data..." + body);
+                    podcasts = body;
+                    myAjax('GET', podcasts[index]["descriptionLocation"], null, function(body){
+                        podcastDescription = body.description;
+                        console.log("Grabbing Podcast Description...\n" + "Description: " + podcastDescription)
+                        //Creating Elements
+                        const mainDiv = document.getElementById('main');
+                        var podcast = document.createElement('div'); podcast.class = "podcast rounded";
+                        var title = document.createElement('p'); title.class = "title";
+                        var link = document.createElement('a'); link.href = "#";
+                        //var authorList = document.createElement('p'); authorList.class = "authors";
+                        var description = document.createElement('p'); description.class = "article font-italic";
+                        var datePublished = document.createElement('p'); datePublished.class = "year font-italic";
+                        var doi = document.createElement('p'); doi.class = "doi";
+                        var footer = document.createElement('div'); footer.class = "audioClip bg-dark text-light rounded";
+                        var para1 = document.createElement('p'); para1.class = "font-weight-bold"; 
+                        //Filling Elements with Data
+                        link.innerHTML = "#";
+                        console.log(podcasts);
+                        title.innerHTML = podcasts[index]["title"];
+                        //authorList.innerHTML = podcasts[index]["firstname"] + " " + podcasts[index]["lastname"];
+                        description.innerHTML = podcastDescription;
+                        datePublished.innerHTML = podcasts[index]["publishDate"];
+                        doi.innerHTML = podcasts[index]["doi"];
+                        para1.innerHTML = podcasts[index]["title"];
+                        //Combining Elements
+                        title.appendChild(link);
+                        footer.appendChild(para1);
+                        podcast.appendChild(title);
+                        podcast.appendChild(description); podcast.appendChild(datePublished); podcast.appendChild(doi);
+                        podcast.appendChild(footer);
+                    })
+                    })
+                }
+            //     //Creating Elements
+            //     const mainDiv = document.getElementById('main');
+            //     var podcast = document.createElement('div'); podcast.class = "podcast rounded";
+            //     var title = document.createElement('p'); title.class = "title";
+            //     var link = document.createElement('a'); link.href = "#";
+            //     //var authorList = document.createElement('p'); authorList.class = "authors";
+            //     var description = document.createElement('p'); description.class = "article font-italic";
+            //     var datePublished = document.createElement('p'); datePublished.class = "year font-italic";
+            //     var doi = document.createElement('p'); doi.class = "doi";
+            //     var footer = document.createElement('div'); footer.class = "audioClip bg-dark text-light rounded";
+            //     var para1 = document.createElement('p'); para1.class = "font-weight-bold"; 
+            //     //Filling Elements with Data
+            //     link.innerHTML = "#";
+            //     console.log(podcasts);
+            //     title.innerHTML = podcasts[index]["title"];
+            //     //authorList.innerHTML = podcasts[index]["firstname"] + " " + podcasts[index]["lastname"];
+            //     description.innerHTML = podcastDescription;
+            //     datePublished.innerHTML = podcasts[index]["publishDate"];
+            //     doi.innerHTML = podcasts[index]["doi"];
+            //     para1.innerHTML = podcasts[index]["title"];
+            //     //Combining Elements
+            //     title.appendChild(link);
+            //     footer.appendChild(para1);
+            //     podcast.appendChild(title);
+            //     podcast.appendChild(description); podcast.appendChild(); podcast.appendChild(datePublished); podcast.appendChild(doi);
+            //     podcast.appendChild(footer);
+                
+            // }
+        </script>
     </head>
 
     <body class="bg-light">
@@ -122,6 +209,9 @@
                             <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
                             <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
                         </div>
+                        <script>
+                            displayPodcast(3);
+                        </script>
                         <!-- Podcasts -->
                     </div>
                     <!-- Podcasts Menu -->
@@ -140,7 +230,6 @@
         <!-- Page Footer -->
 	</body>
 </html>
-
 <!-- Shows/Hides Auth Elements when user Signed In/Out -->
 <script>
     if (currentUser != null) {
