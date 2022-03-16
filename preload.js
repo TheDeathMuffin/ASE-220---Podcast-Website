@@ -17,7 +17,7 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     });
 }
 //Reusable Display Podcast Function
-function displayPodcast(index=0){
+function displayPodcast(index=0, finalClass = ".podcast-menu"){
     var podcasts;
     var podcastDescription;
     //Grabs podcast Data
@@ -51,7 +51,7 @@ function displayPodcast(index=0){
             podcast.appendChild(title);
             podcast.appendChild(description); podcast.appendChild(datePublished); podcast.appendChild(doi);
             podcast.appendChild(footer);
-            $('.podcast-menu').append(podcast);
+            $(finalClass).append(podcast);
         })
     })
 }

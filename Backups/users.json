@@ -4,6 +4,11 @@
       "lastname": "gigabun",
       "email": "amy@gmail.com",
       "organization": "nku",
+      "savedPodcasts": [
+        "1",
+        "2",
+        "3"
+      ],
       "password": "password"
     },
     {
@@ -32,6 +37,11 @@
       "lastname": "gigabun",
       "email": "elizabeth@gmail.com",
       "organization": "nku",
+      "savedPodcasts": [
+        "1",
+        "2",
+        "3"
+      ],
       "password": "password"
     },
     {

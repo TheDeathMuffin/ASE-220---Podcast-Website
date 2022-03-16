@@ -89,16 +89,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 podcast-menu">
+                            <div class="col-md-12 podcast-menu 1st-menu">
                                 <p class="font-weight-bold">Your Podcasts</p>
-                                <div class="podcast rounded">
-                                    <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
-                                    <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
-                                    <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
-                                    <p class="year font-italic">2099</p>
-                                    <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                                    <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
-                                </div>
+                                <script>
+                                    //GET request to podcasts blob
+                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
+                                        console.log("Successful GET...");
+                                        var podcastList;
+                                        podcastList = body;
+                                        var usersPodcasts = 0;
+                                        console.log(podcastList);
+                                        //Displays podcasts associated with logged in user
+                                        for(i = 0; i < Object.keys(podcastList).length; i++){
+                                            if(podcastList[i]["email"] == currentUser){
+                                                displayPodcast(i, ".1st-menu");
+                                            }
+                                        }
+                                    })
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -115,16 +123,38 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 podcast-menu">
+                            <div class="col-md-12 podcast-menu 2nd-menu">
                                 <p class="font-weight-bold">Saved Podcasts</p>
-                                <div class="rounded" id="podcast">
-                                    <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
-                                    <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
-                                    <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
-                                    <p class="year font-italic">2099</p>
-                                    <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                                    <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
-                                </div>
+                                <script>
+                                    var listToDisplay = 0;
+                                    //GET request to users blob to find saved podcasts
+                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953096375785242624', null, function(body){
+                                        var savedPodcasts;
+                                        console.log("Successful GET...")
+                                        //Finds Users saved podcasts
+                                        for (i = 0; i < Object.keys(body).length; i++){
+                                            if(body[i]["email"] == currentUser){
+                                                savedPodcasts = body[i]["savedPodcasts"];
+                                                break;
+                                            }
+                                        }
+                                        //GET request for podcast blob information
+                                        myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(response){
+                                            var podcastList = response;
+                                            console.log("Successful GET...");
+                                            console.log(savedPodcasts);
+                                            console.log(podcastList);
+                                            //Compares saved podcast DOIs and full podcast list to find the right podcast
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                for(j = 0; j < savedPodcasts.length; j++){
+                                                    if(podcastList[j]["doi"] == savedPodcasts[i]){
+                                                        displayPodcast(i, ".2nd-menu");
+                                                    }
+                                                }
+                                            }
+                                        })
+                                    })
+                                </script>
                             </div>
                         </div>
                     </div>
