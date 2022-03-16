@@ -37,7 +37,7 @@
                     </li>
                     <div class="form-inline my-2 my-lg-0 authdel">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle name" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                            <a class="nav-link dropdown-toggle currentName" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="dashboard.html">Dashboard</a>
                                 <a class="dropdown-item" href="upload.html">Upload Podcast</a>
@@ -54,111 +54,61 @@
         <main class="auth">
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
-                <h1 class="mb-3 name"></h1>
+                <h1 class="mb-3 currentName"></h1>
             </div>
             <!-- Main Header -->
             
             <!-- Main Body -->
-            <div class="main-body-wide">
+            <div class="main-body">
                 <div class="row">
                     <!-- Profile Information -->
-                    <div class="col-md-2 floating-menu rounded">
-                        <h5 class="font-weight-bold">Account</h5>
-                        <div class="dropdown-divider"></div>
-                        <p class="font-weight-bold">Name</p><p class="name"></p>
-                        <p class="font-weight-bold">Email</p><p id="email"></p>
-                        <p class="font-weight-bold">University/Organization</p><p id="organization"></p><br><br>
-                        <h5 class="font-weight-bold">Billing</h5>
-                        <div class="dropdown-divider"></div>
-                        <p class="font-weight-bold">Card #</p><p id="card">XXXX-XXXX-XXXX-XXXX</p>
-                        <p class="font-weight-bold">Name on Card</p><p id="cardname">------ ------</p>
-                        <p class="font-weight-bold">Billing Address</p><p id="address">------, -------, -- -----</p><br><br>
-                        <a href="updateinfo.html"><h5 class="">Edit Info</h5></a>
-                        <a href="signout.html"><h5 class="text-danger">Sign Out</h5></a>
+                    <div class="col-md-6">
+                        <div class="floating-menu rounded">
+                            <h5 class="font-weight-bold">Account</h5>
+                            <div class="dropdown-divider"></div>
+                            <p class="font-weight-bold">Name</p><p class="currentName"></p>
+                            <p class="font-weight-bold">Email</p><p class="currentEmail"></p>
+                            <p class="font-weight-bold">University/Organization</p><p class="currentOrganization"></p><br><br>
+                            <h5 class="font-weight-bold">Billing</h5>
+                            <div class="dropdown-divider"></div>
+                            <p class="font-weight-bold">Card #</p><p id="card">XXXX-XXXX-XXXX-XXXX</p>
+                            <p class="font-weight-bold">Name on Card</p><p id="cardname">------ ------</p>
+                            <p class="font-weight-bold">Billing Address</p><p id="address">------, -------, -- -----</p><br><br>
+                            <a href="updateinfo.html"><h5 class="">Edit Info</h5></a>
+                            <a href="signout.html"><h5 class="text-danger">Sign Out</h5></a>
+                        </div>
                     </div>
                     <!-- Profile Information -->
 
                     <!-- User Podcasts Menu -->
-                    <div class="col-md-4">
-                        <div class="row searchBar">
-                            <div class="col-md-12 input-group rounded">
-                                <input type="search" class="form-control rounded" placeholder="Search Your Podcasts" aria-label="Search Your Podcasts" aria-describedby="search-addon"/>
-                                <span class="input-group-text border-0" id="search-addon">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="searchBar input-group rounded">
+                            <input type="search" class="form-control rounded" placeholder="Search Your Podcasts" aria-label="Search Your Podcasts" aria-describedby="search-addon"/>
+                            <span class="input-group-text border-0" id="search-addon">
+                                <i class="fas fa-search"></i>
+                            </span>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 podcast-menu 1st-menu">
-                                <p class="font-weight-bold">Your Podcasts</p>
-                                <script>
-                                    //GET request to podcasts blob
-                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
-                                        console.log("Successful GET...");
-                                        var podcastList;
-                                        podcastList = body;
-                                        var usersPodcasts = 0;
-                                        console.log(podcastList);
-                                        //Displays podcasts associated with logged in user
-                                        for(i = 0; i < Object.keys(podcastList).length; i++){
-                                            if(podcastList[i]["email"] == currentUser){
-                                                displayPodcast(i, ".1st-menu");
-                                            }
+                        <div class="podcast-menu 1st-menu">
+                            <p class="font-weight-bold">Your Podcasts</p>
+                            <script>
+                                //GET request to podcasts blob
+                                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
+                                    console.log("Successful GET...");
+                                    var podcastList;
+                                    podcastList = body;
+                                    var usersPodcasts = 0;
+                                    console.log(podcastList);
+                                    //Displays podcasts associated with logged in user
+                                    for(i = 0; i < Object.keys(podcastList).length; i++){
+                                        if(podcastList[i]["email"] == currentUser){
+                                            displayPodcast(i, ".1st-menu");
                                         }
-                                    })
-                                </script>
-                            </div>
+                                    }
+                                })
+                            </script>
                         </div>
                     </div>
                     <!-- User Podcasts Menu -->
-                            
-                    <!-- Saved Podcasts Menu -->
-                    <div class="col-md-4">
-                        <div class="row searchBar">
-                            <div class="col-md-12 input-group rounded">
-                                <input type="search" class="form-control rounded" placeholder="Search Saved Podcasts" aria-label="Search Saved Podcasts" aria-describedby="search-addon"/>
-                                <span class="input-group-text border-0" id="search-addon">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 podcast-menu 2nd-menu">
-                                <p class="font-weight-bold">Saved Podcasts</p>
-                                <script>
-                                    var listToDisplay = 0;
-                                    //GET request to users blob to find saved podcasts
-                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953096375785242624', null, function(body){
-                                        var savedPodcasts;
-                                        console.log("Successful GET...")
-                                        //Finds Users saved podcasts
-                                        for (i = 0; i < Object.keys(body).length; i++){
-                                            if(body[i]["email"] == currentUser){
-                                                savedPodcasts = body[i]["savedPodcasts"];
-                                                break;
-                                            }
-                                        }
-                                        //GET request for podcast blob information
-                                        myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(response){
-                                            var podcastList = response;
-                                            console.log("Successful GET...");
-                                            console.log(savedPodcasts);
-                                            console.log(podcastList);
-                                            //Compares saved podcast DOIs and full podcast list to find the right podcast
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                for(j = 0; j < savedPodcasts.length; j++){
-                                                    if(podcastList[j]["index"] == savedPodcasts[i]){
-                                                        displayPodcast(i, ".2nd-menu");
-                                                    }
-                                                }
-                                            }
-                                        })
-                                    })
-                                </script>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Saved Podcasts Menu -->
                 </div>
             </div>
             <!-- Main Body -->
@@ -174,31 +124,3 @@
         <script src="postload.js"></script>
     </body>
 </html>
-
-<!-- Populates Page with User's Details -->
-<script>
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-            if (currentUser == data[i]['email']) {
-                $('.name').append(data[i]['firstname'],' ',data[i]['lastname']);
-                $('#email').append(data[i]['email']);
-                $('#organization').append(data[i]['organization']);
-                break;
-            }
-        }
-    });
-</script>
-<!-- Populates Page with User's Details -->
-<!-- Populates Podcast List -->
-<script>
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-            /*$('').append(data[i]['firstname'],' ',data[i]['lastname']);
-            $('').append(data[i]['email']);
-            $('').append(data[i]['organization']);*/
-        }
-    });
-</script>
-<!-- Populates Podcast List -->
