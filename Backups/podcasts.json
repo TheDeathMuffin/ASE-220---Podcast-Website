@@ -1,36 +1,80 @@
 [
-    {
-      "title": "The Secrets of Coffee",
-      "author": "John Cena",
-      "keywords": [
-        "coffee",
-        "Secret",
-        "Food",
-        "Drink",
-        "Health"
-      ],
-      "id": "1"
-    },
-    {
-      "title": "The Mountain Trail",
-      "author": "John Morgan",
-      "keywords": [
-        "Travel",
-        "Mountain",
-        "Nature",
-        "Health"
-      ],
-      "id": "2"
-    },
-    {
-      "title": "American Express",
-      "author": "Morgan Cena",
-      "keywords": [
-        "Travel",
-        "Food",
-        "Drink",
-        "Finance"
-      ],
-      "id": "3"
-    }
+  {
+    "firstname": "Amy",
+    "lastname": "Gigabun",
+    "email": "amy@gmail.com",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953476276065419264",
+    "title": "The Secrets of Coffee",
+    "journal": "Book",
+    "publishedDate": "08-02-2020",
+    "doi": "111",
+    "keywords": [
+      "coffee",
+      "Secret",
+      "Food",
+      "Drink",
+      "Health"
+    ]
+  },
+  {
+    "firstname": "John",
+    "lastname": "Morgan",
+    "email": "john@gmail.com",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953476912341336064",
+    "title": "The Mountain Trail",
+    "journal": "Book",
+    "publishedDate": "10-16-2019",
+    "doi": "222",
+    "keywords": [
+      "Travel",
+      "Mountain",
+      "Nature",
+      "Health"
+    ]
+  },
+  {
+    "firstname": "Phoenix",
+    "lastname": "Ray",
+    "email": "phoenix@gmail.com",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953477213584637952",
+    "title": "Ahh it hurts my eyes",
+    "journal": "Book",
+    "publishedDate": "04-23-2022",
+    "doi": "333",
+    "keywords": [
+      "Sun",
+      "Blaze",
+      "Blind",
+      "Eyes"
+    ]
+  },
+  {
+    "firstname": "asdf",
+    "lastname": "asdf",
+    "email": "adsf@fd",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953399773055172608",
+    "title": "adf",
+    "journal": "adsf",
+    "publishedDate": "08-03-2022",
+    "doi": "vdv",
+    "keywords": [
+      "daasd"
+    ]
+  },
+  {
+    "firstname": "Testing",
+    "lastname": "Testing",
+    "email": "testing@gmail.com",
+    "descriptionLocation": "http://jsonblob.com/api/jsonBlob/953504499805470720",
+    "title": "testing title",
+    "journal": "testing journal",
+    "publishedDate": "02-01-2019",
+    "doi": "testing doi ",
+    "keywords": [
+      "testing",
+      "doi",
+      "date",
+      "description"
+    ]
+  }
 ]

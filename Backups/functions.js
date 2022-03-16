@@ -1,21 +1,4 @@
-/* This is used to store the email for the currently-signed in user. It is a jenky but necessary (for now) form of authentication testing. */
-const currentUser = 'amy@gmail.com';                                        /* To simulate no user being signed in, set this value to null */
 
-function myAjax(method='GET',endpoint,data=null,onSuccess=null){
-    $.ajax({
-        url:endpoint,
-        type:method,
-        data: data==null ? null : JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType:'json',
-        success: function (body, status, response) {
-            onSuccess(body,status,response);
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
 //Reusable Display Podcast Function
 function displayPodcast(index=0){
     var podcasts;
@@ -42,7 +25,7 @@ function displayPodcast(index=0){
             console.log(podcasts);
             //authorList.innerHTML = podcasts[index]["firstname"] + " " + podcasts[index]["lastname"];
             description.innerHTML = podcastDescription;
-            datePublished.innerHTML = podcasts[index]["publishedDate"];
+            datePublished.innerHTML = podcasts[index]["publishDate"];
             doi.innerHTML = podcasts[index]["doi"];
             para1.innerHTML = podcasts[index]["title"];
             //Combining Elements
@@ -55,4 +38,3 @@ function displayPodcast(index=0){
         })
     })
 }
-

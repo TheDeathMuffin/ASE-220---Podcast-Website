@@ -16,50 +16,24 @@
         <script>
             //Re-usable AJAX function
             function myAjax(method='GET',endpoint,data=null,onSuccess=null){
-                            $.ajax({
-                                url:endpoint,
-                                type:method,
-                                data: data==null ? null : JSON.stringify(data),
-                                contentType: "application/json; charset=utf-8",
-                                dataType:'json',
-                                success: function (body, status, response) {
-                                    onSuccess(body,status,response);
-                                },
-                                error: function (error) {
-                                    console.log(error);
-                                }
-                            });
-                        }
-
+                $.ajax({
+                    url:endpoint,
+                    type:method,
+                    data: data==null ? null : JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType:'json',
+                    success: function (body, status, response) {
+                        onSuccess(body,status,response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+             }
+            //Request to grab podcast List information and turn it into an array
             
-            //     //Creating Elements
-            //     const mainDiv = document.getElementById('main');
-            //     var podcast = document.createElement('div'); podcast.class = "podcast rounded";
-            //     var title = document.createElement('p'); title.class = "title";
-            //     var link = document.createElement('a'); link.href = "#";
-            //     //var authorList = document.createElement('p'); authorList.class = "authors";
-            //     var description = document.createElement('p'); description.class = "article font-italic";
-            //     var datePublished = document.createElement('p'); datePublished.class = "year font-italic";
-            //     var doi = document.createElement('p'); doi.class = "doi";
-            //     var footer = document.createElement('div'); footer.class = "audioClip bg-dark text-light rounded";
-            //     var para1 = document.createElement('p'); para1.class = "font-weight-bold"; 
-            //     //Filling Elements with Data
-            //     link.innerHTML = "#";
-            //     console.log(podcasts);
-            //     title.innerHTML = podcasts[index]["title"];
-            //     //authorList.innerHTML = podcasts[index]["firstname"] + " " + podcasts[index]["lastname"];
-            //     description.innerHTML = podcastDescription;
-            //     datePublished.innerHTML = podcasts[index]["publishDate"];
-            //     doi.innerHTML = podcasts[index]["doi"];
-            //     para1.innerHTML = podcasts[index]["title"];
-            //     //Combining Elements
-            //     title.appendChild(link);
-            //     footer.appendChild(para1);
-            //     podcast.appendChild(title);
-            //     podcast.appendChild(description); podcast.appendChild(); podcast.appendChild(datePublished); podcast.appendChild(doi);
-            //     podcast.appendChild(footer);
-                
-            // }
+            let params = (new URL(document.location)).searchParams
+            //var params = new URLSearchParams(window.location.search)
         </script>
     </head>
 
@@ -129,88 +103,76 @@
                     <div class="col-md-2 nav-bar">
                         <div class="navBox">
                             <p class="font-weight-bold subheading">Search by Date Published</p>
-                            <a href="#?sortDate=2022">2022</a>
-                            <a href="#?sortDate=2021">2021</a>
-                            <a href="#?sortDate=2020">2020</a>
-                            <a href="#?sortDate=2019">2019</a>
+                            <a href="?sortDate=2022">2022</a>
+                            <a href="?sortDate=2021">2021</a>
+                            <a href="?sortDate=2020">2020</a>
+                            <a href="?sortDate=2019">2019</a>
                         </div>
                         <div class="navBox">
                             <p class="font-weight-bold">Sort by Date</p>
-                            <a href="#?sortDate=Oldest">Oldest</a>
-                            <a href="#?sortDate=Newest">Newest</a>
+                            <a href="?sortBy=Oldest">Oldest</a>
+                            <a href="?sortBy=Newest">Newest</a>
                         </div>
                     </div>
                     <!-- Navigation -->
                     
                     <!-- Podcasts Menu -->
                     <div class="col-md-8 podcast-menu">
-                        <p class="font-weight-bold">Recent Uploads</p>
+                        <p class="font-weight-bold">Uploads</p>
                         <!-- Podcasts -->
-                        <div class="podcast rounded">
-                            <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
-                            <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
-                            <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
-                            <p class="year font-italic">2099</p>
-                            <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                            <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
-                        </div>
-                        <div class="podcast rounded">
-                            <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
-                            <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
-                            <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
-                            <p class="year font-italic">2099</p>
-                            <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                            <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
-                        </div>
-                        <div class="podcast rounded">
-                            <p class="title"><a class="podcastLink font-weight-bold" href="#">Yahbba dubba dubba due doad snda sdna sdjasjdhasd</a></p>
-                            <p class="authors">Myself McGee, Jeremy McPencil, Apple McDog, Coffee McMouse</p>
-                            <p class="article font-italic">The Very Merry Way to Go About Your Day!</p>
-                            <p class="year font-italic">2099</p>
-                            <p class="doi">doi: 20.1232/sdaosidoiasdoi</p>
-                            <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">This is the title</p><p>These are the authors</p></div>
-                        </div>
                         <script>
-                            //Reusable Display Podcast Function
-                            function displayPodcast(index=0){
-                                var podcasts;
-                                var podcastDescription;
-                                //Grabs podcast Data
+                            var podcastList
                                 myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
-                                    console.log("Getting Podcast data..." + body);
-                                    podcasts = body;
-                                    myAjax('GET', podcasts[index]["descriptionLocation"], null, function(body){
-                                        podcastDescription = body.description;
-                                        console.log("Grabbing Podcast Description...\n" + "Description: " + podcastDescription)
-                                        //Creating Elements
-                                        var podcast = document.createElement('div'); podcast.classList.add("podcast"); podcast.classList.add("rounded");
-                                        var title = document.createElement('p'); title.class = "title";
-                                        var link = document.createElement('a'); link.href = "#";
-                                        //var authorList = document.createElement('p'); authorList.class = "authors";
-                                        var description = document.createElement('p'); description.classList.add("article"); description.classList.add("font-italic");
-                                        var datePublished = document.createElement('p'); datePublished.classList.add("font-italic");
-                                        var doi = document.createElement('p'); doi.class = "doi";
-                                        var footer = document.createElement('div'); footer.classList.add("audioClip"); footer.classList.add("bg-dark"); footer.classList.add("text-light"); footer.classList.add("rounded");
-                                        var para1 = document.createElement('p'); para1.classList.add("font-weight-bold");
-                                        //Filling Elements with Data
-                                        link.innerHTML = podcasts[index]["title"];
-                                        console.log(podcasts);
-                                        //authorList.innerHTML = podcasts[index]["firstname"] + " " + podcasts[index]["lastname"];
-                                        description.innerHTML = podcastDescription;
-                                        datePublished.innerHTML = podcasts[index]["publishDate"];
-                                        doi.innerHTML = podcasts[index]["doi"];
-                                        para1.innerHTML = podcasts[index]["title"];
-                                        //Combining Elements
-                                        title.appendChild(link);
-                                        footer.appendChild(para1);
-                                        podcast.appendChild(title);
-                                        podcast.appendChild(description); podcast.appendChild(datePublished); podcast.appendChild(doi);
-                                        podcast.appendChild(footer);
-                                        $('.podcast-menu').append(podcast);
-                                    })
+                                    podcastList = body;
+                                    //Lists podcasts by date published
+                                    if(params.has("sortDate")){
+                                        if(params.get("sortDate") == "2022"){
+                                            for (i = 0; i < Object.keys(podcastList).length; i++){
+                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
+                                                    displayPodcast(i);
+                                                }
+                                            }
+                                        } else if (params.get("sortDate") == "2021"){
+                                            for (i = 0; i < Object.keys(podcastList).length; i++){
+                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
+                                                    displayPodcast(i);
+                                                }
+                                            }
+                                        } else if (params.get("sortDate") == "2020"){
+                                            for (i = 0; i < Object.keys(podcastList).length; i++){
+                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
+                                                    displayPodcast(i);
+                                                }
+                                            }
+                                        } else if(params.get("sortDate") == "2019"){
+                                            for (i = 0; i < Object.keys(podcastList).length; i++){
+                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
+                                                    displayPodcast(i);
+                                                }
+                                            }
+                                        }
+                                    //Lists either 5 most recent or 5 oldest podcasts
+                                    } else if(params.has("sortBy")){
+                                        //By 5 Oldest/First Added
+                                        if(params.get("sortBy") == "Oldest"){
+                                            for(i = 0; i < 5; i++){
+                                                displayPodcast(i);
+                                            }
+                                        //By 5 Newest/Most recently added
+                                        } else if(params.get("sortBy") == "Newest"){
+                                            console.log(Object.keys(podcastList).length);
+                                            console.log(Object.keys(podcastList).length - 5);
+                                            for (i = Object.keys(podcastList).length - 1; i > Object.keys(podcastList).length - 6; i--){
+                                                displayPodcast(i);
+                                            }
+                                        }
+                                    } else {
+                                        for (i = 0; i < body.length; i++){
+                                            displayPodcast(i);
+                                        }
+                                    }
                                 })
-                            }
-                            displayPodcast(3);
+                            
                         </script>
                         <!-- Podcasts -->
                     </div>
