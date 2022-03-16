@@ -1,5 +1,6 @@
 /* This is used to store the email for the currently-signed in user. It is a jenky but necessary (for now) form of authentication testing. */
-const currentUser = 'amy@gmail.com';                                        /* To simulate no user being signed in, set this value to null */
+const currentUser = 'amy@gmail.com';     
+let apiData;                                   /* To simulate no user being signed in, set this value to null */
 
 function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     $.ajax({
@@ -17,7 +18,82 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     });
 }
 //Reusable Display Podcast Function
-function displayPodcast(index=0, finalClass = ".podcast-menu"){
+function displayPodcast(index=0){
+     $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+                apiData = data;
+                console.log(data[index])
+                var podcast = document.createElement('div')
+           
+
+                const htmlString = 
+                    `
+                   
+                     <div class="podcast rounded" id="${data[index].id}">
+                        <p class="title"><a class="podcastLink font-weight-bold" href="#">${data[index].title}</a></p>
+                        <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
+                        
+                        <p class="article font-italic"></p>
+                        <p class="year font-italic">Date published: ${data[index].publishedDate}</p>
+                        <p class="doi">DOI: ${data[index].doi}</p>
+                        <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p></div>
+                    </div>
+                    
+                    `;
+
+                    podcast.innerHTML += htmlString;
+                    $('.podcast-menu').append(podcast);
+                
+        });
+
+}
+
+const justSearch = document.getElementById('search');
+
+let podcastsShow = [];
+
+justSearch.addEventListener("keyup", (e) =>{
+    const searchString = e.target.value;
+    
+    if(searchString.length == 0){
+        displayAllShows();
+        return
+    }
+
+   
+    console.log(apiData[5].title)
+    console.log(searchString)
+
+    const filteredCharacters = apiData.filter((show) => {
+        return (
+            show.title.includes(searchString)
+        );
+    });
+
+    console.log(filteredCharacters);
+})
+/*
+    for(i=0; i<=7; i++){
+
+        if(apiData[i].title.includes(searchString)){
+            podcastsShow.push(apiData[i].index);
+        }
+    }
+
+    //for(i=0; i <= podcastsShow.length; i++){
+      //  var index = podcastsShow[i];
+    //}
+    
+    console.log(podcastsShow);
+
+})
+*/
+
+function displayAllShows(){
+    for(i =0; i <= 7; i++){
+        displayPodcast(i);
+    }
+}
+    /*
     var podcasts;
     var podcastDescription;
     //Grabs podcast Data
@@ -28,31 +104,55 @@ function displayPodcast(index=0, finalClass = ".podcast-menu"){
             podcastDescription = body.description;
             console.log("Grabbing Podcast Description...\n" + "Description: " + podcastDescription)
             //Creating Elements
+
+            console.log(podcasts[0].firstname)
+
+            const htmlString = podcasts.map((podcasts) => {
+                return`
+                <li class="character">
+                 <div class="podcast rounded" id="${podcasts.id}">
+                    <p class="title"><a class="podcastLink font-weight-bold" href="#">${podcasts.title}</a></p>
+                    <p class="authors">${podcasts.firstname +" " + podcasts.lastname}</p>
+                    
+                    <p class="article font-italic"></p>
+                    <p class="year font-italic">Date published: ${podcasts.publishedDate}</p>
+                    <p class="doi">DOI: ${podcasts.doi}</p>
+                    <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${podcasts.title}</p></div>
+                </div>
+                </li>
+                `;
+            })
+
+            console.log(htmlString);
+
             var podcast = document.createElement('div'); podcast.classList.add("podcast"); podcast.classList.add("rounded");
             var title = document.createElement('p'); title.class = "title";
-            var link = document.createElement('a'); link.href = "#";
+          //  var link = document.createElement('a'); link.href = "#";
             //var authorList = document.createElement('p'); authorList.class = "authors";
-            var description = document.createElement('p'); description.classList.add("article"); description.classList.add("font-italic");
-            var datePublished = document.createElement('p'); datePublished.classList.add("font-italic");
-            var doi = document.createElement('p'); doi.class = "doi";
-            var footer = document.createElement('div'); footer.classList.add("audioClip"); footer.classList.add("bg-dark"); footer.classList.add("text-light"); footer.classList.add("rounded");
-            var para1 = document.createElement('p'); para1.classList.add("font-weight-bold");
+         //   var description = document.createElement('p'); description.classList.add("article"); description.classList.add("font-italic");
+          //  var datePublished = document.createElement('p'); datePublished.classList.add("font-italic");
+          //  var doi = document.createElement('p'); doi.class = "doi";
+          //  var footer = document.createElement('div'); footer.classList.add("audioClip"); footer.classList.add("bg-dark"); footer.classList.add("text-light"); footer.classList.add("rounded");
+          //  var para1 = document.createElement('p'); para1.classList.add("font-weight-bold");
             //Filling Elements with Data
-            link.innerHTML = podcasts[index]["title"];
-            console.log(podcasts);
+         //   link.innerHTML = podcasts[index]["title"];
+         //   console.log(podcasts);
             //authorList.innerHTML = podcasts[index]["firstname"] + " " + podcasts[index]["lastname"];
-            description.innerHTML = podcastDescription;
-            datePublished.innerHTML = podcasts[index]["publishedDate"];
-            doi.innerHTML = podcasts[index]["doi"];
-            para1.innerHTML = podcasts[index]["title"];
+         //   description.innerHTML = podcastDescription;
+         //   datePublished.innerHTML = podcasts[index]["publishedDate"];
+          //  doi.innerHTML = podcasts[index]["doi"];
+          //  para1.innerHTML = podcasts[index]["title"];
             //Combining Elements
-            title.appendChild(link);
-            footer.appendChild(para1);
-            podcast.appendChild(title);
-            podcast.appendChild(description); podcast.appendChild(datePublished); podcast.appendChild(doi);
-            podcast.appendChild(footer);
-            $(finalClass).append(podcast);
+         //   title.appendChild(link);
+         //   footer.appendChild(para1);
+            var podcast = document.createElement('div')
+            podcast.innerHTML = htmlString;
+            //podcast.appendChild(title);
+            //podcast.appendChild(description); podcast.appendChild(datePublished); podcast.appendChild(doi);
+           // podcast.appendChild(footer);
+            $('.podcast-menu').append(podcast);
         })
-    })
-}
+    })*/
+
+
 
