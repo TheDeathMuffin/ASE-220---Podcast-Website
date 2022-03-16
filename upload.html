@@ -66,7 +66,7 @@
                             <input type="text" name="firstname" class="form-control item" placeholder="First Name" required>
                         </div>
                         <div class="col form-group">
-                            <input type="text" name="lsatnaem" class="form-control item" placeholder="Last Name" required>
+                            <input type="text" name="lastname" class="form-control item" placeholder="Last Name" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -139,7 +139,7 @@
 				e.preventDefault();
                 console.log($('input[name=title]').val());
                 myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
-                    //Checks if podcast already exists * I know it's wrong rn
+                    //Checks if podcast already exists based on DOI #
                     var data = body;
                     var podcastExists = false;
                     for (i = 0; i < data.length; i++){
@@ -150,12 +150,16 @@
                         }
                     }
                     if (podcastExists == false){
-                        var keyWordArray = $('input[name=keywords]').val();
-                        var keyWordArray = $('input[name=keywords]').val().split(" ");
-                        data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), title:$('input[name=title]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray});
-                        myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
-                            console.log("Successful PUT...");
-                            //myAjax('POST', 'https://jsonblob.com/api/jsonBlob/', data)
+                        var podcastDescription = {description:$('textarea[name=description]').val()};
+                        myAjax('POST', 'https://jsonblob.com/api/jsonBlob/', podcastDescription, function(body, status, response){
+                                var descriptionLocation = response.getResponseHeader("location");
+                                console.log("Successful POST...\nLocation is: " + descriptionLocation);
+                                var keyWordArray = $('input[name=keywords]').val();
+                                var keyWordArray = $('input[name=keywords]').val().split(" ");
+                                data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:descriptionLocation, title:$('input[name=articleTitle]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray});
+                                myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
+                                    console.log("Successful PUT...");
+                                })
                         })
                     }
                 });
