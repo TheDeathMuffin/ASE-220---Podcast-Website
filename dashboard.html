@@ -74,7 +74,7 @@
                             <p class="font-weight-bold">Card #</p><p id="card">XXXX-XXXX-XXXX-XXXX</p>
                             <p class="font-weight-bold">Name on Card</p><p id="cardname">------ ------</p>
                             <p class="font-weight-bold">Billing Address</p><p id="address">------, -------, -- -----</p><br><br>
-                            <a href="updateinfo.html"><button type="button" class="btn btn-warning">Edit Info</button></a>
+                            <a href="updateinfo.html"><button type="button" class="btn btn-primary">Edit Info</button></a>
                             <a href="signout.html"><button type="button" class="btn btn-danger">Sign Out</button></a>
                         </div>
                     </div>
@@ -90,6 +90,7 @@
                             </span>
                         </div>
                         <div class="podcast-menu mt-0">
+                            <button type="button" class="btn btn-success"><a class="text-white" href="upload.html">Upload Podcast</a></button>
                             <script>
                                 //GET request to podcasts blob
                                 myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
