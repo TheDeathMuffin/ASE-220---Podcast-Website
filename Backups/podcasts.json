@@ -16,7 +16,7 @@
       "technology",
       "politics"
     ],
-    "index": "1"
+    "index": "0"
   },
   {
     "firstname": "John",
@@ -35,7 +35,7 @@
       "technology",
       "politics"
     ],
-    "index": "2"
+    "index": "1"
   },
   {
     "firstname": "Phoenix",
@@ -54,7 +54,7 @@
       "technology",
       "politics"
     ],
-    "index": "3"
+    "index": "2"
   },
   {
     "firstname": "Top",
@@ -73,7 +73,7 @@
       "technology",
       "politics"
     ],
-    "index": "4"
+    "index": "3"
   },
   {
     "firstname": "Testing",
@@ -93,7 +93,7 @@
       "politics",
       "sports"
     ],
-    "index": "5"
+    "index": "4"
   },
   {
     "firstname": "Rick",
@@ -112,7 +112,7 @@
       "technology",
       "politics"
     ],
-    "index": "6"
+    "index": "5"
   },
   {
     "firstname": "Chris",
@@ -131,7 +131,7 @@
       "technology",
       "politics"
     ],
-    "index": "7"
+    "index": "6"
   },
   {
     "firstname": "Nun",
@@ -150,7 +150,7 @@
       "technology",
       "politics"
     ],
-    "index": "8"
+    "index": "7"
   },
   {
     "firstname": "Howie",
@@ -169,7 +169,7 @@
       "technology",
       "politics"
     ],
-    "index": "9"
+    "index": "8"
   },
   {
     "firstname": "adsf",
@@ -183,6 +183,6 @@
     "keywords": [
       null
     ],
-    "index": "10"
+    "index": "9"
   }
 ]
