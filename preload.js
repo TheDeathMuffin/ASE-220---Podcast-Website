@@ -18,16 +18,15 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     });
 }
 //Reusable Display Podcast Function
-function displayPodcast(index=0){
-     $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+function displayPodcast(index=0,allowDel=true,allowSave=true){
+    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
+    $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
                 apiData = data;
                 console.log(data[index])
                 var podcast = document.createElement('div')
-           
 
-                const htmlString = 
+                    var htmlString = 
                     `
-                   
                      <div class="podcast rounded" id="${data[index].id}">
                         <p class="title"><a class="podcastLink font-weight-bold" href="#">${data[index].title}</a></p>
                         <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
@@ -35,16 +34,41 @@ function displayPodcast(index=0){
                         <p class="article font-italic"></p>
                         <p class="year font-italic">Date published: ${data[index].publishedDate}</p>
                         <p class="doi">DOI: ${data[index].doi}</p>
-                        <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p></div>
-                    </div>
-                    
+                        <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p></div><br>
                     `;
 
+                    /* Determines what buttons appear on a podcast card */
+                    if ( currentUser == data[index]['email'] ) {
+                        if ( allowDel == true ) {
+                            htmlString += `<button type="button" class="btn btn-warning ownerButton">Edit</button> <button type="button" class="btn btn-danger ownerButton">Delete</button>`;
+                        }
+                        else {
+                            htmlString += `<i>This is your podcast!</i>`;
+                        }
+                    }
+                    else if ( allowSave == true ) {
+                            var included = false;
+                            for (i = 0; i < data2.length; i++) {
+                                if ( currentUser == data2[i]['email'] ) {
+                                    for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {
+                                        if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {
+                                            htmlString += `<i>You have saved this podcast!</i>`;
+                                            included = true;
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                            if ( included == false ) {
+                                htmlString += `<button type="button" class="btn btn-success notOwnerButton">Save</button>`;
+                            }   
+                    }
+                    htmlString += `</div>`
                     podcast.innerHTML += htmlString;
                     $('.podcast-menu').append(podcast);
-                
         });
-
+    });
 }
 
 const justSearch = document.getElementById('search');
@@ -153,6 +177,3 @@ function displayAllShows(){
             $('.podcast-menu').append(podcast);
         })
     })*/
-
-
-
