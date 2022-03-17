@@ -88,27 +88,27 @@
                         <input type="text" name="doi" class="form-control item" placeholder="DOI #">
                     </div>
                     <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <label>Math<input type="checkbox" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required></label>
+                        <div class="row justify-content-center justify-content-between flex-wrap">
+                            <div class="">
+                                <label>Math<input type="checkbox" name="math" class="form-control item"></label>
                              </div>
-                            <div class="col">
-                                <label>Science<input type="checkbox" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required></label>
+                            <div class="">
+                                <label>Science<input type="checkbox" name="science" class="form-control item"></label>
                             </div>
-                             <div class="col">
-                                <label>History<input type="checkbox" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required></label>
+                             <div class="">
+                                <label>History<input type="checkbox" name="history" class="form-control item"></label>
                             </div>
-                             <div class="col">
-                                <label>Arts<input type="checkbox" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required></label>
+                             <div class="">
+                                <label>Arts<input type="checkbox" name="arts" class="form-control item"></label>
                             </div>
-                            <div class="col">
-                                <label>Technology</label><input type="checkbox" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required></label>
+                            <div class="">
+                                <label>Technology</label><input type="checkbox" name="technology" class="form-control item"></label>
                             </div>
-                            <div class="col">
-                             <label>Politics<input type="checkbox" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required></label>
+                            <div class="">
+                             <label>Politics<input type="checkbox" name="" class="politics"form-control item></label>
                             </div>
-                            <div class="col">
-                                <label>Sports<input type="checkbox" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required></label>
+                            <div class="">
+                                <label>Sports<input type="checkbox" name="sports" class="form-control item"></label>
                                </div>
                         </div>
                     </div>
@@ -158,6 +158,7 @@
 
             //Code For uploading podcasts
             $(document).on('submit','#upload',function(e){
+                var categories;
 				e.preventDefault();
                 console.log($('input[name=title]').val());
                 myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
@@ -179,6 +180,7 @@
                                 console.log("Successful POST...\nLocation is: " + descriptionLocation);
                                 var keyWordArray = $('input[name=keywords]').val();
                                 var keyWordArray = $('input[name=keywords]').val().split(" ");
+                                categories.push($('input[name=]'));
                                 data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=articleTitle]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray, index:(data.length + 1).toString()});
                                 myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
                                     console.log("Successful PUT...");
