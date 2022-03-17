@@ -89,11 +89,11 @@ function searchBar(type = "indexSearch"){
                     yourPodcasts.push(podcastList[i])
                 }
             }
-            //Loop to find saved Podcasts for currently logged user
-            for(i = 0; i < Object.keys(users).lengthl; i ++){
-                if(users[i]["email"] == currentUser){
-                    savedPodcasts = users[i]["savedPodcasts"];
-                    break;
+            for (i = 0; i < users.length; i++){
+                if(currentUser == users[i]["email"]){
+                    for(j = 0; j < users[i]["savedPodcasts"].length; j ++){
+                        savedPodcasts.push(users[i]["savedPodcasts"][j])
+                    }
                 }
             }
             console.log(response);
@@ -101,7 +101,7 @@ function searchBar(type = "indexSearch"){
                 if(e.which == 13){
                     alert(e.target.value);
                     clearBox(".podcast-menu");
-
+                    //For Dashboard search podcast menu
                     if(type == "dashboardSearch"){
                         for(i = 0; i < yourPodcasts.length; i++){
                             var hasDisplayed = false;
@@ -121,6 +121,7 @@ function searchBar(type = "indexSearch"){
                                 if(hasDisplayed){break};
                             }
                         }
+                    //For Saved Podcasts Search bar
                     } else if(type == "savedSearch"){
                         console.log("Loading Saved Podcasts... \n");
                         console.log(savedPodcasts);
@@ -142,6 +143,7 @@ function searchBar(type = "indexSearch"){
                                 if(hasDisplayed){break};
                             }
                         }
+                    //Mainly for normal searches through ALL podcasts
                     } else {
                         for(i = 0; i < podcastList.length; i++){
                             var hasDisplayed = false;
