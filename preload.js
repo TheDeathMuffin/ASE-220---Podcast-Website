@@ -40,7 +40,7 @@ function displayPodcast(index=0,allowDel=true,allowSave=true){
                     /* Determines what buttons appear on a podcast card */
                     if ( currentUser == data[index]['email'] ) {
                         if ( allowDel == true ) {
-                            htmlString += `<button type="button" class="btn btn-warning ownerButton">Edit</button> <button type="button" class="btn btn-danger ownerButton">Delete</button>`;
+                            htmlString += `<button type="button" class="btn btn-warning ownerButton"><a href="updatepodcast.html?index=${data[index].index}">Edit</a></button> <button type="button" class="btn btn-danger ownerButton">Delete</button>`;
                         }
                         else {
                             htmlString += `<i>This is your podcast!</i>`;
