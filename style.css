@@ -20,6 +20,8 @@ main { min-height: 100%; padding-bottom: 50px;}
 .authdel { display:none; }
 .notauth {}
 .notauthdel {}
+.ownerButton { }
+.notOwnerButton {}
 
 .registration-form{ padding: 50px 0; }
 .registration-form form{ background-color: #fff; max-width: 600px; margin: auto; padding: 50px 70px; border-radius: 10px; margin-top: -40px;
@@ -27,3 +29,4 @@ main { min-height: 100%; padding-bottom: 50px;}
 .registration-form .item{ border-radius: 10px; margin-bottom: 25px; padding: 10px 20px; }
 .registration-form .create-account{ border-radius: 10px; padding: 10px 20px; font-size: 18px; font-weight: bold; background-color: #5791ff; border: none;
     color: white; margin-top: 20px; }
+.btn-info { background-color: #5791ff; }
