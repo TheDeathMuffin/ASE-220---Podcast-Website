@@ -18,7 +18,7 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     });
 }
 //Reusable Display Podcast Function
-function displayPodcast(index=0,allowDel=true,allowSave=true){
+function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true,allowSave=true){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
                 apiData = data;
