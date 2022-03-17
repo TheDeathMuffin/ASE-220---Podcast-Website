@@ -90,25 +90,25 @@
                     <div class="container">
                         <div class="row justify-content-center justify-content-between flex-wrap">
                             <div class="">
-                                <label>Math<input type="checkbox" name="math" class="form-control item"></label>
+                                <label>Math<input type="checkbox" id="math" name="math" class="checkbox form-control item"></label>
                              </div>
                             <div class="">
-                                <label>Science<input type="checkbox" name="science" class="form-control item"></label>
+                                <label>Science<input type="checkbox" id="science" name="science" class="checkbox form-control item"></label>
                             </div>
                              <div class="">
-                                <label>History<input type="checkbox" name="history" class="form-control item"></label>
+                                <label>History<input type="checkbox" id="history" name="history" class="checkbox form-control item"></label>
                             </div>
                              <div class="">
-                                <label>Arts<input type="checkbox" name="arts" class="form-control item"></label>
+                                <label>Arts<input type="checkbox" id="arts" name="arts" class="checkbox form-control item"></label>
                             </div>
                             <div class="">
-                                <label>Technology</label><input type="checkbox" name="technology" class="form-control item"></label>
+                                <label>Technology</label><input type="checkbox" id="technology" name="technology" class="checkbox form-control item"></label>
                             </div>
                             <div class="">
-                             <label>Politics<input type="checkbox" name="" class="politics"form-control item></label>
+                             <label>Politics<input type="checkbox" id="politics" name="politics" class="checkbox form-control item"form-control item></label>
                             </div>
                             <div class="">
-                                <label>Sports<input type="checkbox" name="sports" class="form-control item"></label>
+                                <label>Sports<input type="checkbox" id="sports" name="sports" class="checkbox form-control item"></label>
                                </div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
 
             //Code For uploading podcasts
             $(document).on('submit','#upload',function(e){
-                var categories;
+                var categories = [];
 				e.preventDefault();
                 console.log($('input[name=title]').val());
                 myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
@@ -178,10 +178,33 @@
                                 var descriptionLocation = response.getResponseHeader("location");
                                 var betterURL = descriptionLocation.slice(0, 4) + "s" + descriptionLocation.slice(4);
                                 console.log("Successful POST...\nLocation is: " + descriptionLocation);
-                                var keyWordArray = $('input[name=keywords]').val();
-                                var keyWordArray = $('input[name=keywords]').val().split(" ");
-                                categories.push($('input[name=]'));
-                                data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=articleTitle]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:keyWordArray, index:(data.length + 1).toString()});
+
+                                //Checks if Certain value is checked in checkbox
+                                if($('#math:checked').val()){
+                                    categories.push('math')
+                                }
+                                if($('#science:checked').val()){
+                                    categories.push('science')
+                                }
+                                if($('#history:checked').val()){
+                                    categories.push('history')
+                                }
+                                if($('#arts:checked').val()){
+                                    categories.push('arts')
+                                }
+                                if($('#technology:checked').val()){
+                                    categories.push('technology')
+                                }
+                                if($('#politics:checked').val()){
+                                    categories.push('politics')
+                                }
+                                if($('#sports:checked').val()){
+                                    categories.push('sports')
+                                }
+
+                                
+                                console.log(categories);
+                                data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=articleTitle]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:categories, index:(data.length + 1).toString()});
                                 myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
                                     console.log("Successful PUT...");
                                 })

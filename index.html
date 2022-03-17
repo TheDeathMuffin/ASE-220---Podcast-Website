@@ -115,6 +115,9 @@
                                 myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
                                     podcastList = body;
                                     //Lists podcasts by date published
+                                    if(params.has("category")){
+                                        
+                                    }
                                     if(params.has("sortDate")){
                                         if(params.get("sortDate") == "2022"){
                                             for (i = 0; i < Object.keys(podcastList).length; i++){
