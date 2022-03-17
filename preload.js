@@ -66,7 +66,8 @@ function displayPodcast(index=0,allowDel=true,allowSave=true){
                     }
                     htmlString += `</div>`
                     podcast.innerHTML += htmlString;
-                    $('.podcast-menu').append(podcast);
+                    $(appendingClass).append(podcast);
+                
         });
     });
 }
