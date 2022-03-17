@@ -80,17 +80,13 @@ myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, func
     var podcastList = response;
     let podcastsShow = [];
     console.log(response);
-    $('#submit')("keyup", (e) =>{
-        const searchString = e.target.value;
-        console.log(searchString);
-        for(i = 0; i < podcastList.length; i++){
-            if(Object.keys(podcastList[i]).length == 0){
-                console.log("continue");
-                continue;
-            }
-            if(podcastList[i]["title"].includes(searchString)){
-                clearBox(".podcast-menu");
-                displayPodcast(i);
+    $('#search').on("keypress", function(e){
+        if(e.which == 13){
+            alert(e.target.value);
+            for(i = 0; i < podcastList.length; i++){
+                if(e.target.value == podcastList[i]["title"]){
+                    displayPodcast(i);
+                }
             }
         }
     })
