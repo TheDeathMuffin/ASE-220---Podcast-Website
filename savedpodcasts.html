@@ -92,21 +92,26 @@
                         <div class="podcast-menu 1st-menu mt-0">
                             <script>
                                 //GET request to podcasts blob
-                                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
-                                    console.log("Successful GET...");
-                                    var podcastList;
-                                    podcastList = body;
-                                    var usersPodcasts = 0;
-                                    console.log(podcastList);
-                                    //Displays podcasts associated with logged in user
-                                    for(i = 0; i < Object.keys(podcastList).length; i++){
-                                        if(podcastList[i]["email"] == currentUser){
-                                            
-                                            
-                                            displayPodcast(i, ".1st-menu");
+                                $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
+                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(data){
+                                        savedList = [];
+                                        for (i = 0; i < data2.length; i++) {
+                                            if (currentUser == data2[i]["email"]) {
+                                                for (j = 0; j < data2[i]["savedPodcasts"].length; j++) {
+                                                    savedList.push(data2[i]["savedPodcasts"][j]);
+                                                }
+                                            }
                                         }
-                                    }
-                                })
+                                        var podcastList;
+                                        for (k = 0; k < data.length; k++) {
+                                            for (l = 0; l < savedList.length; l++) {
+                                                if (savedList[l] == data[k]['index']) {
+                                                    displayPodcast(data[k]['index'], ".1st-menu");
+                                                }
+                                            }
+                                        }
+                                    })
+                                });
                             </script>
                         </div>
                     </div>
