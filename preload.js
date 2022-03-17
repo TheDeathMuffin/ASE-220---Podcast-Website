@@ -21,6 +21,7 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
 function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+                if (Object.keys(data[index]).length === 0) { return; }
                 apiData = data;
                 console.log(data[index])
                 var podcast = document.createElement('div')
