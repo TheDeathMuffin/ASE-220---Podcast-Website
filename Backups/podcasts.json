@@ -121,7 +121,7 @@
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953706443744493568",
     "title": "How to say no to snakes that are sexually active.",
     "journal": "Book",
-    "publishedDate": "10/010/10101",
+    "publishedDate": "10-10-2020",
     "doi": "s9029u392u3923",
     "keywords": [
       "math",
@@ -172,14 +172,14 @@
     "index": "8"
   },
   {
-    "firstname": "adsf",
-    "lastname": "asdf",
+    "firstname": "firstadsf",
+    "lastname": "lastasdf",
     "email": "dsafl@asdf",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953826975290769408",
     "title": "asdf asdf asdfasdf asdf asdf asdf asdf asdf",
     "journal": "asdf",
-    "publishedDate": "asdf",
-    "doi": "asdf",
+    "publishedDate": "01-19-2019",
+    "doi": "9999999999",
     "keywords": [
       null
     ],
