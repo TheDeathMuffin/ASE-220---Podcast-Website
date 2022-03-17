@@ -71,19 +71,25 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
         });
     });
 }
-
+function clearBox(className = ".podcast-menu")
+{
+    document.getElementsByClassName(className).innerHTML = "";
+}
 myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
     let justSearch = document.getElementById('search');
-    var newodcastList = response;
+    var podcastList = response;
     let podcastsShow = [];
     console.log(response);
-    justSearch.addEventListener("keyup", (e) =>{
+    $('#submit')("keyup", (e) =>{
         const searchString = e.target.value;
         console.log(searchString);
         for(i = 0; i < podcastList.length; i++){
-            console.log("Success GET...");
-            console.log(podcastList[i]["title"]);
+            if(Object.keys(podcastList[i]).length == 0){
+                console.log("continue");
+                continue;
+            }
             if(podcastList[i]["title"].includes(searchString)){
+                clearBox(".podcast-menu");
                 displayPodcast(i);
             }
         }
