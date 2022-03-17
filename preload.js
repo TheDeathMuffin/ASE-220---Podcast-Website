@@ -52,7 +52,7 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
                                 if ( currentUser == data2[i]['email'] ) {
                                     for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {
                                         if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {
-                                            htmlString += `<button type="button" class="btn btn-danger notOwnerButton">Unsave</button>`;
+                                            htmlString += `<button type="button" class="btn btn-danger notOwnerButton"><a href="unsave.html?index=${data[index].index}">Unsave</a></button>`;
                                             included = true;
                                             break;
                                         }
@@ -61,7 +61,7 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
                                 }
                             }
                             if ( included == false ) {
-                                htmlString += `<button type="button" class="btn btn-success notOwnerButton">Save</button>`;
+                                htmlString += `<button type="button" class="btn btn-success notOwnerButton"><a href="save.html?index=${data[index].index}">Save</a></button>`;
                             }   
                     }
                     htmlString += `</div>`
