@@ -72,13 +72,26 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
     });
 }
 
-const justSearch = document.getElementById('search');
+myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
+    let justSearch = document.getElementById('search');
+    var newodcastList = response;
+    let podcastsShow = [];
+    console.log(response);
+    justSearch.addEventListener("keyup", (e) =>{
+        const searchString = e.target.value;
+        console.log(searchString);
+        for(i = 0; i < podcastList.length; i++){
+            console.log("Success GET...");
+            console.log(podcastList[i]["title"]);
+            if(podcastList[i]["title"].includes(searchString)){
+                displayPodcast(i);
+            }
+        }
+    })
+})
 
-let podcastsShow = [];
 
-/*justSearch.addEventListener("keyup", (e) =>{
-    const searchString = e.target.value;
-    
+    /*
     if(searchString.length == 0){
         displayAllShows();
         return
@@ -94,24 +107,22 @@ let podcastsShow = [];
         );
     });
 
-    console.log(filteredCharacters);
-})*/
-/*
-    for(i=0; i<=7; i++){
+    console.log(filteredCharacters);*/
+// })
 
-        if(apiData[i].title.includes(searchString)){
-            podcastsShow.push(apiData[i].index);
-        }
-    }
+    // for(i=0; i<=7; i++){
 
-    //for(i=0; i <= podcastsShow.length; i++){
-      //  var index = podcastsShow[i];
-    //}
+    //     if(apiData[i].title.includes(searchString)){
+    //         podcastsShow.push(apiData[i].index);
+    //     }
+    // }
+
+    // for(i=0; i <= podcastsShow.length; i++){
+    //     var index = podcastsShow[i];
+    // }
     
-    console.log(podcastsShow);
+    // console.log(podcastsShow);
 
-})
-*/
 
 function displayAllShows(){
     for(i =0; i <= 7; i++){
