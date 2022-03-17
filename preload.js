@@ -18,7 +18,7 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     });
 }
 //Reusable Display Podcast Function
-function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true,allowSave=true){
+function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
                 apiData = data;
@@ -39,13 +39,13 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true,all
                     /* Determines what buttons appear on a podcast card */
                     if ( currentUser == data[index]['email'] ) {
                         if ( allowDel == true ) {
-                            htmlString += `<button type="button" class="btn btn-warning ownerButton"><a href="updatepodcast.html?index=${data[index].index}">Edit</a></button> <button type="button" class="btn btn-danger ownerButton">Delete</button>`;
+                            htmlString += `<button type="button" class="btn btn-warning ownerButton"><a href="updatepodcast.html?index=${data[index].index}">Edit</a></button> <button type="button" class="btn btn-danger ownerButton deleteButton"><a href="delete.html?index=${data[index].index}">Delete</a></button>`;
                         }
                         else {
                             htmlString += `<i>This is your podcast!</i>`;
                         }
                     }
-                    else if ( allowSave == true ) {
+                    else {
                             var included = false;
                             for (i = 0; i < data2.length; i++) {
                                 if ( currentUser == data2[i]['email'] ) {
@@ -75,7 +75,7 @@ const justSearch = document.getElementById('search');
 
 let podcastsShow = [];
 
-justSearch.addEventListener("keyup", (e) =>{
+/*justSearch.addEventListener("keyup", (e) =>{
     const searchString = e.target.value;
     
     if(searchString.length == 0){
@@ -94,7 +94,7 @@ justSearch.addEventListener("keyup", (e) =>{
     });
 
     console.log(filteredCharacters);
-})
+})*/
 /*
     for(i=0; i<=7; i++){
 
