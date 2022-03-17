@@ -116,7 +116,75 @@
                                     podcastList = body;
                                     //Lists podcasts by date published
                                     if(params.has("category")){
-                                        
+                                        if(params.get("category") == "math"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                for(j = 0; j < podcastList[i]["keywords"].length; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(params.get("category") == "science"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+                                                for(j = 0; j < keywordList.length; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i, ".podcast-menu", true);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(params.get("category") == "history"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+                                                for(j = 0; j < keywordList.length; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i, ".podcast-menu", true);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(params.get("category") == "arts"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+                                                for(j = 0; j < keywordList.length; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i, ".podcast-menu", true);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(params.get("category") == "technology"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+                                                for(j = 0; j < keywordList.length; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i, ".podcast-menu", true);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(params.get("category") == "politics"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+                                                for(j = 0; j < keywordList.length; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i, ".podcast-menu", true);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(params.get("category") == "sports"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+                                                for(j = 0; j < keywordList.length; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i, ".podcast-menu", true);
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                     if(params.has("sortDate")){
                                         if(params.get("sortDate") == "2022"){
