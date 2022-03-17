@@ -71,39 +71,105 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
         });
     });
 }
+//Function used to reset podcast div in searchBar function
 function clearBox(className = ".podcast-menu")
 {
     $(".podcast-menu").empty();
 }
 //Working Complicated Search Bar
-myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
-    var podcastList = response;
-    console.log(response);
-    $('#search').on("keypress", function(e){
-        if(e.which == 13){
-            alert(e.target.value);
-            clearBox();
-            for(i = 0; i < podcastList.length; i++){
-                var hasDisplayed = false;
-                var podcastTitle = podcastList[i]["title"].toLowerCase();
-                var searchString = e.target.value.toLowerCase();
-                var searchArray = searchString.split(" ");
-                var titleArray = podcastTitle.split(" ");
-                //console.log(searchArray); console.log(titleArray);
-                for(j = 0; j < titleArray.length; j++){
-                    for(k = 0; k < searchArray.length; k++){
-                        if(titleArray[j].includes(searchArray[k])){
-                            displayPodcast(i);
-                            hasDisplayed = true;
-                            break;
-                        }
-                    }
-                    if(hasDisplayed){break};
+function searchBar(type = "indexSearch"){
+    myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
+        myAjax('GET', "https://jsonblob.com/api/jsonBlob/953096375785242624", null, function(users){
+            var podcastList = response;
+            var savedPodcasts = [];
+            var yourPodcasts = [];
+            //Loop to find your Podcasts
+            for(i = 0; i < Object.keys(podcastList).length; i++){
+                if(podcastList[i]["email"] == currentUser){
+                    yourPodcasts.push(podcastList[i])
                 }
             }
-        }
+            //Loop to find saved Podcasts for currently logged user
+            for(i = 0; i < Object.keys(users).lengthl; i ++){
+                if(users[i]["email"] == currentUser){
+                    savedPodcasts = users[i]["savedPodcasts"];
+                    break;
+                }
+            }
+            console.log(response);
+            $(".search").on("keypress", function(e){
+                if(e.which == 13){
+                    alert(e.target.value);
+                    clearBox(".podcast-menu");
+
+                    if(type == "dashboardSearch"){
+                        for(i = 0; i < yourPodcasts.length; i++){
+                            var hasDisplayed = false;
+                            var podcastTitle = podcastList[i]["title"].toLowerCase();
+                            var searchString = e.target.value.toLowerCase();
+                            var searchArray = searchString.split(" ");
+                            var titleArray = podcastTitle.split(" ");
+                            //console.log(searchArray); console.log(titleArray);
+                            for(j = 0; j < titleArray.length; j++){
+                                for(k = 0; k < searchArray.length; k++){
+                                    if(titleArray[j].includes(searchArray[k])){
+                                        displayPodcast(i);
+                                        hasDisplayed = true;
+                                        break;
+                                    }
+                                }
+                                if(hasDisplayed){break};
+                            }
+                        }
+                    } else if(type == "savedSearch"){
+                        console.log("Loading Saved Podcasts... \n");
+                        console.log(savedPodcasts);
+                        for(i = 0; i < savedPodcasts.length; i++){
+                            var hasDisplayed = false;
+                            var podcastTitle = podcastList[i]["title"].toLowerCase();
+                            var searchString = e.target.value.toLowerCase();
+                            var searchArray = searchString.split(" ");
+                            var titleArray = podcastTitle.split(" ");
+                            //console.log(searchArray); console.log(titleArray);
+                            for(j = 0; j < titleArray.length; j++){
+                                for(k = 0; k < searchArray.length; k++){
+                                    if(titleArray[j].includes(searchArray[k])){
+                                        displayPodcast(i);
+                                        hasDisplayed = true;
+                                        break;
+                                    }
+                                }
+                                if(hasDisplayed){break};
+                            }
+                        }
+                    } else {
+                        for(i = 0; i < podcastList.length; i++){
+                            var hasDisplayed = false;
+                            var podcastTitle = podcastList[i]["title"].toLowerCase();
+                            var searchString = e.target.value.toLowerCase();
+                            var searchArray = searchString.split(" ");
+                            var titleArray = podcastTitle.split(" ");
+                            //console.log(searchArray); console.log(titleArray);
+                            for(j = 0; j < titleArray.length; j++){
+                                for(k = 0; k < searchArray.length; k++){
+                                    if(titleArray[j].includes(searchArray[k])){
+                                        displayPodcast(i);
+                                        hasDisplayed = true;
+                                        break;
+                                    }
+                                }
+                                if(hasDisplayed){break};
+                            }
+                        }
+                    }
+                    
+                }
+            })
+        });
+        
     })
-})
+}
+
 
 
     /*
