@@ -73,19 +73,32 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
 }
 function clearBox(className = ".podcast-menu")
 {
-    document.getElementsByClassName(className).innerHTML = "";
+    $(".podcast-menu").empty();
 }
+//Working Complicated Search Bar
 myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
-    let justSearch = document.getElementById('search');
     var podcastList = response;
-    let podcastsShow = [];
     console.log(response);
     $('#search').on("keypress", function(e){
         if(e.which == 13){
             alert(e.target.value);
+            clearBox();
             for(i = 0; i < podcastList.length; i++){
-                if(e.target.value == podcastList[i]["title"]){
-                    displayPodcast(i);
+                var hasDisplayed = false;
+                var podcastTitle = podcastList[i]["title"].toLowerCase();
+                var searchString = e.target.value.toLowerCase();
+                var searchArray = searchString.split(" ");
+                var titleArray = podcastTitle.split(" ");
+                //console.log(searchArray); console.log(titleArray);
+                for(j = 0; j < titleArray.length; j++){
+                    for(k = 0; k < searchArray.length; k++){
+                        if(titleArray[j].includes(searchArray[k])){
+                            displayPodcast(i);
+                            hasDisplayed = true;
+                            break;
+                        }
+                    }
+                    if(hasDisplayed){break};
                 }
             }
         }
