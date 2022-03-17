@@ -36,7 +36,6 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true,all
                         <p class="doi">DOI: ${data[index].doi}</p>
                         <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p></div><br>
                     `;
-
                     /* Determines what buttons appear on a podcast card */
                     if ( currentUser == data[index]['email'] ) {
                         if ( allowDel == true ) {
@@ -52,7 +51,7 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true,all
                                 if ( currentUser == data2[i]['email'] ) {
                                     for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {
                                         if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {
-                                            htmlString += `<i>You have saved this podcast!</i>`;
+                                            htmlString += `<button type="button" class="btn btn-danger notOwnerButton">Unsave</button>`;
                                             included = true;
                                             break;
                                         }
