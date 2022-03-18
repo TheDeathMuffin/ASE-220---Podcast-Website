@@ -79,7 +79,7 @@
 
                 <!-- Row 2 -->
                 <div class="row">
-                    <!-- Navigation -->
+                    <!-- Navigation/Feed -->
                     <div class="col-md-2 nav-bar">
                         <div class="navBox">
                             <p class="font-weight-bold subheading">Search by Date Published</p>
@@ -89,12 +89,12 @@
                             <a href="?sortDate=2019">2019</a>
                         </div>
                         <div class="navBox">
-                            <p class="font-weight-bold">Sort by Date</p>
+                            <p class="font-weight-bold">Sort by Date Uplaoded</p>
                             <a href="?sortBy=Oldest">Oldest</a>
                             <a href="?sortBy=Newest">Newest</a>
                         </div>
                         <div class="navBox">
-                            <p class="font-weight-bold">Sort by Category</p>
+                            <p class="font-weight-bold">Category Feed</p>
                             <a href="?category=math">Math</a>
                             <a href="?category=science">Science</a>
                             <a href="?category=history">History</a>
@@ -112,10 +112,11 @@
                         <!-- Podcasts -->
                         <script src="preload.js"></script>
                         <script>
+                            //Code for Impelmenting Feed
                             var podcastList
                                 myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
                                     podcastList = body;
-                                    //Lists podcasts by date published
+                                    //Lists podcasts with Math as category
                                     if(params.has("category")){
                                         if(params.get("category") == "math"){
                                             for(i = 0; i < Object.keys(podcastList).length; i++){
@@ -127,6 +128,7 @@
                                                 }
                                             }
                                         }
+                                        //Lists podcasts with science as category
                                         if(params.get("category") == "science"){
                                             for(i = 0; i < Object.keys(podcastList).length; i++){
                                                 var keywordList = podcastList[i]["keywords"];
@@ -137,6 +139,7 @@
                                                 }
                                             }
                                         }
+                                        //Lists Podcasts with History as category
                                         if(params.get("category") == "history"){
                                             for(i = 0; i < Object.keys(podcastList).length; i++){
                                                 var keywordList = podcastList[i]["keywords"];
@@ -147,6 +150,7 @@
                                                 }
                                             }
                                         }
+                                        //Lists podcasts with arts as category
                                         if(params.get("category") == "arts"){
                                             for(i = 0; i < Object.keys(podcastList).length; i++){
                                                 var keywordList = podcastList[i]["keywords"];
@@ -158,26 +162,67 @@
                                                 }
                                             }
                                         }
+                                        //Lists podcasts by technology
+                                        if(params.get("category") == "technology"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+
+                                                for(j = 0; j < keywordList; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        //Lists podcasts by politics
+                                        if(params.get("category") == "politics"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+
+                                                for(j = 0; j < keywordList; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        //Lists podcasts by sports
+                                        if(params.get("category") == "sports"){
+                                            for(i = 0; i < Object.keys(podcastList).length; i++){
+                                                var keywordList = podcastList[i]["keywords"];
+
+                                                for(j = 0; j < keywordList; j++){
+                                                    if(keywordList[j] == params.get("category")){
+                                                        displayPodcast(i);
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
+                                    //Lists podcasts by date published
                                     if(params.has("sortDate")){
+                                        //By 2022
                                         if(params.get("sortDate") == "2022"){
                                             for (i = 0; i < Object.keys(podcastList).length; i++){
                                                 if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
                                                     displayPodcast(i);
                                                 }
                                             }
+                                            //By 2021
                                         } else if (params.get("sortDate") == "2021"){
                                             for (i = 0; i < Object.keys(podcastList).length; i++){
                                                 if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
                                                     displayPodcast(i);
                                                 }
                                             }
+                                            //By 2020
                                         } else if (params.get("sortDate") == "2020"){
                                             for (i = 0; i < Object.keys(podcastList).length; i++){
                                                 if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
                                                     displayPodcast(i);
                                                 }
                                             }
+                                            //By 2019
                                         } else if(params.get("sortDate") == "2019"){
                                             for (i = 0; i < Object.keys(podcastList).length; i++){
                                                 if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
