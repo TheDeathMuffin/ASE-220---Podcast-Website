@@ -215,6 +215,7 @@
                                 }
 
                                 console.log(categories);
+                                //Gets values and puts it into data so it can be used in the put request
                                 data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=title]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:categories, index:(data.length + 1).toString()});
                                 myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
                                     console.log("Successful PUT...");
