@@ -6,8 +6,11 @@
 <link rel="shortcut icon" type="image/x-icon" href="icon/icon.ico"/>
 <script>
     let params = (new URL(document.location)).searchParams;
+    //pulls the jsonblob for the function
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
+        //an array to create a new podcast save list
         newSavedPodcasts = [];
+        //loops to save the podcast and indicate it in the array
         for (let i = 0; i < data.length; i++) {              
             if (currentUser == data[i]["email"]) {
                 for (let j = 0; j < data[i]["savedPodcasts"].length; j++) {
