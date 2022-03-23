@@ -96,7 +96,6 @@ function searchBar(type = "indexSearch"){
                     }
                 }
             }
-            console.log(response);
             $(".search").on("keypress", function(e){
                 if(e.which == 13){
                     alert(e.target.value);
