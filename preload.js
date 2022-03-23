@@ -96,9 +96,9 @@ function searchBar(type = "indexSearch"){
                     }
                 }
             }
+            console.log(response);
             $(".search").on("keypress", function(e){
                 if(e.which == 13){
-                    alert(e.target.value);
                     clearBox(".podcast-menu");
                     //For Dashboard search podcast menu
                     if(type == "dashboardSearch"){
