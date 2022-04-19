@@ -17,6 +17,7 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
         }
     });
 }
+
 //Reusable Display Podcast Function
 function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=true){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
