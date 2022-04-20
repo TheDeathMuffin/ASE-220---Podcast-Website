@@ -16,6 +16,13 @@ main { min-height: 100%; padding-bottom: 50px;}
 .edit-option { position: absolute; right: 2px; width: 30px; height: 30px; }                                        /* can remove if we do not end up using icons for removing/editing podcasts/accounts */       
 .audioClip { height: auto; margin-top: 20px; padding: 8px;}  
 
+.iconImage { height: 24px; width: 24px; }
+.unliked {  }
+.liked {  }
+.unsaved {}
+.saved {  }
+
+
 .auth { visibility:hidden; }
 .authdel { display:none; }
 .notauth {}
