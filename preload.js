@@ -3,6 +3,19 @@ const currentUser = 'amy@gmail.com';
 let apiData;                                   /* To simulate no user being signed in, set this value to null */
 
 var noResultsFound = `<p class="font-italic text-secondary h4 pt-5">No results found.</p>`;
+var no_card_added = true;
+
+$.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+        if (currentUser == data[i]['email']) {
+            if (data[i]['billing']['card_no'] != 0) {
+                no_card_added = false;
+            }
+            break;
+        }
+    }
+});
 
 function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     $.ajax({
@@ -49,12 +62,12 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=false){
                     htmlString += ` <a class="tag" href="tags/detail.html?tag=${data[index]['tags'][i]}">${data[index]['tags'][i]}</a>`;
                 }
                 htmlString += `</p>
-                <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p>
+                <div class="audioClip bg-dark text-light rounded mb-2"><p class="font-weight-bold">${data[index].title}</p>
                 
                 <a  data-toggle="collapse" href="#previewText" role="button" aria-expanded="false" aria-controls="previewText">Preview transcript...</a>
                 <div class="collapse" id="previewText"><div class="card card-body bg-dark font-italic text-light">
                 "This is 2 lines of text from the podcast. This feature is not yet implemented, so please be patient my children. It will dissappear into the void of all space and time, forever and ever until everything goes away and never comes back..."
-                </div></div></div><br>
+                </div></div></div>
                 `;
             /* Determines what buttons appear on a podcast card */
             if ( currentUser == data[index]['email'] ) {    /* Block only executes if the displayed podcast is owned by the current user. */
