@@ -7,23 +7,39 @@
 <script>
     let params = (new URL(document.location)).searchParams;
     //pulls the jsonblob for the function
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
-        //an array to create a new podcast save list
-        newSavedPodcasts = [];
-        //loops to save the podcast and indicate it in the array
-        for (let i = 0; i < data.length; i++) {              
-            if (currentUser == data[i]["email"]) {
-                for (let j = 0; j < data[i]["likedPodcasts"].length; j++) {
-                    if (params.get("index") == data[i]["likedPodcasts"][j]) {
-                        continue;
+    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){       //Gathers user data.
+        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data2){  //Gathers podcast data.
+            //an array to create a new podcast like list
+            newLikedPodcasts = [];
+            //loops to like the podcast and indicate it in the array
+            for (let i = 0; i < data.length; i++) {              
+                if (currentUser == data[i]["email"]) {
+                    for (let j = 0; j < data[i]["likedPodcasts"].length; j++) {
+                        if (params.get("index") == data[i]["likedPodcasts"][j]) {
+                            continue;
+                        }
+                        newLikedPodcasts.push(data[i]["likedPodcasts"][j]);
                     }
-                    newSavedPodcasts.push(data[i]["likedPodcasts"][j]);
+                    data[i]['likedPodcasts'] = newLikedPodcasts;
+                }    
+            }
+            for (let k = 0; k < data2.length; k++) {              
+                if (params.get("index") == data2[k]['index']) {              //Loops to find the liked podcast.
+                    data2[k]["likes"] = data2[k]["likes"] - 1;               //Decrements like count by 1.
+                    if (data2[k]["likes"] < 0) {
+                        data2[k]["likes"] = 0;
+                    }
                 }
-                data[i]['likedPodcasts'] = newSavedPodcasts;
-            }    
-        }
-        myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
-            window.location.href = "index.html";
+            }
+
+            //Updates the podcast's likes count.
+            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data2, function(){
+                //window.location.href = "dashboard.html";
+            }); 
+            //Updates the users liked list.
+            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
+                window.location.href = "index.html";
+            });
         }); 
     });       
 </script>

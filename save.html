@@ -5,24 +5,35 @@
 <script src="preload.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="icon/icon.ico"/>
 <script>
-    //Saves a podcast to an account
+    //Checks users email and saves the podcast.
     let params = (new URL(document.location)).searchParams;
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
-        newSavedPodcasts = [];
-        //Checks users Email and saves the podcast if it isn't already saved
-        for (let i = 0; i < data.length; i++) {              
-            if (currentUser == data[i]["email"]) {
-                for (let j = 0; j < data[i]["savedPodcasts"].length; j++) {
-                    newSavedPodcasts.push(data[i]["savedPodcasts"][j]);
+    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){       //Gathers user data.
+        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data2){  //Gathers podcast data.
+            newSavedPodcasts = [];
+            for (let i = 0; i < data.length; i++) {                     //Loops for each user.
+                if (currentUser == data[i]["email"]) {                  //When the looped user matches the current user, compile their podcasts into an array.
+                    for (let j = 0; j < data[i]["savedPodcasts"].length; j++) {
+                        newSavedPodcasts.push(data[i]["savedPodcasts"][j]);
+                    }
+                    newSavedPodcasts.push(params.get("index"));         //Add the newly-saved podcast to the saved podcast list.
+                    data[i]['savedPodcasts'] = newSavedPodcasts;
                 }
-                newSavedPodcasts.push(params.get("index"));
-                data[i]['savedPodcasts'] = newSavedPodcasts;
-            }    
-        }
-        //For sam to comment the use
-        myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
-            window.location.href = "index.html";
-        }); 
+            }
+            for (let j = 0; j < data2.length; j++) {              
+                if (params.get("index") == data2[j]['index']) {              //Loops to find the saved podcast.
+                    data2[j]["saves"] = data2[j]["saves"] + 1;               //Increments save count by 1.
+                }
+            }
+            
+            //Updates the podcast's save count.
+            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data2, function(){
+                //window.location.href = "dashboard.html";
+            }); 
+            //Update the user's saved podcast list.
+            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
+                window.location.href = "index.html";
+            }); 
+        });
     });       
 </script>
 <script src="postload.js"></script>
