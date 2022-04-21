@@ -21,64 +21,62 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
 //Reusable Display Podcast Function
 function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=false){
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
-                if (Object.keys(data[index]).length === 0) { return; }
-                apiData = data;
-                console.log(data[index])
-                var podcast = document.createElement('div')
-                var htmlString = 
-                `
-                    <div class="podcast rounded" id="${data[index].id}">
-                    <p class="title"><a class="podcastLink font-weight-bold h5" href="#">${data[index].title}</a></p>
-                    <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
-                    <p class="article font-italic"></p>
-                    <p class="year font-italic">Date published: ${data[index].publishedDate}</p>
-                    <p class="doi">DOI: ${data[index].doi}</p>
-                    <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p></div><br>
-                    `;
-                /* Determines what buttons appear on a podcast card */
-                if ( currentUser == data[index]['email'] ) {    /* Block only executes if the displayed podcast is owned by the current user. */
-                    if ( allowDel == true ) {               /* If function call specifies user should be able to edit/delete their own podcasts, delete button is displayed. */
-                        htmlString += `<div style="float:right"><a class="text-white" href="updatepodcast.html?index=${data[index].index}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="delete.html?index=${data[index].index}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
-                    }
-                    else {                                  /* Otherwise, their podcasts are identified as their own using string. */
-                        htmlString += `<i style="float:right">This is your podcast!</i>`;
-                    }
+        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+            if (Object.keys(data[index]).length === 0) { return; }
+            apiData = data;
+            console.log(data[index])
+            var podcast = document.createElement('div')
+            var htmlString = 
+            `
+                <div class="podcast rounded" id="${data[index].id}">
+                <p class="title"><a class="podcastLink font-weight-bold h5" href="#">${data[index].title}</a></p>
+                <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
+                <p class="article font-italic"></p>
+                <p class="year font-italic">Date published: ${data[index].publishedDate}</p>
+                <p class="doi">DOI: ${data[index].doi}</p>
+                <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p></div><br>
+                `;
+            /* Determines what buttons appear on a podcast card */
+            if ( currentUser == data[index]['email'] ) {    /* Block only executes if the displayed podcast is owned by the current user. */
+                if ( allowDel == true ) {               /* If function call specifies user should be able to edit/delete their own podcasts, delete button is displayed. */
+                    htmlString += `<div style="float:right"><a class="text-white" href="updatepodcast.html?index=${data[index].index}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="delete.html?index=${data[index].index}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
                 }
-                
-                var saved = false;
-                var liked = false;
-                for (i = 0; i < data2.length; i++) {    /* Loops for each user. */
-                    if ( currentUser == data2[i]['email'] ) {      /* Checks if the current user matches the currently-looped user. If so, continue... */
-                        for (k = 0; k < data2[i]['likedPodcasts'].length; k++) {        /* Loops for every podcast in user's liked podcasts. */
-                            if ( data[index]['index'] == data2[i]['likedPodcasts'][k] ) {       /* Checks if the podcast is in the user's liked podcast list. */
-                                htmlString += `<a class="text-white" href="unlike.html?index=${data[index].index}"><button type="button" class="btn btn-primary liked"><img class="iconImage" src="icon/liked.png"> <span class="badge badge-light"> 9</span><span class="sr-only">unread messages</span></button></a> `;
-                                liked = true;
-                                break;
-                            }
-                        }
-                        if ( liked == false ) {
-                            htmlString += `<a class="text-white" href="like.html?index=${data[index].index}"><button type="button" class="btn btn-primary unliked"><img class="iconImage" src="icon/unliked.png"> <span class="badge badge-light"> 9</span><span class="sr-only">unread messages</span></button></a> `;
-                            //htmlString += `<button type="button" class="btn btn-success notOwnerButton"><a class="text-white" href="save.html?index=${data[index].index}">Save</a></button>`;
-                        }
-                        for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {        /* Loops for every podcast in user's saved podcasts. */
-                            if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
-                                htmlString += `<a class="text-white" href="unsave.html?index=${data[index].index}"><button type="button" class="btn btn-primary saved"><img class="iconImage" src="icon/saved.png"> <span class="badge badge-light"> 19</span><span class="sr-only">unread messages</span></button></a> `;
-                                saved = true;
-                                break;
-                            }
-                        } 
-                        if ( saved == false ) {
-                            htmlString += `<a class="text-white" href="save.html?index=${data[index].index}"><button type="button" class="btn btn-primary unsaved"><img class="iconImage" src="icon/unsaved.png"> <span class="badge badge-light"> 19</span><span class="sr-only">unread messages</span></button></a> `;
-                        }
-                        break;
-                    }
+                else {                                  /* Otherwise, their podcasts are identified as their own using string. */
+                    htmlString += `<i style="float:right">This is your podcast!</i>`;
                 }
-                
-                htmlString += `</div>`
-                podcast.innerHTML += htmlString;
-                $(appendingClass).append(podcast);
-                
+            }
+            
+            var saved = false;
+            var liked = false;
+            for (i = 0; i < data2.length; i++) {    /* Loops for each user. */
+                if ( currentUser == data2[i]['email'] ) {      /* Checks if the current user matches the currently-looped user. If so, continue... */
+                    for (k = 0; k < data2[i]['likedPodcasts'].length; k++) {        /* Loops for every podcast in user's liked podcasts. */
+                        if ( data[index]['index'] == data2[i]['likedPodcasts'][k] ) {       /* Checks if the podcast is in the user's liked podcast list. */
+                            htmlString += `<a class="text-white" href="unlike.html?index=${data[index].index}"><button type="button" class="btn btn-primary liked"><img class="iconImage" src="icon/liked.png"> <span class="badge badge-light">${data[index].likes}</span><span class="sr-only">unread messages</span></button></a> `;
+                            liked = true;
+                            break;
+                        }
+                    }
+                    if ( liked == false ) {
+                        htmlString += `<a class="text-white" href="like.html?index=${data[index].index}"><button type="button" class="btn btn-primary unliked"><img class="iconImage" src="icon/unliked.png"> <span class="badge badge-light">${data[index].likes}</span><span class="sr-only">unread messages</span></button></a> `;
+                        //htmlString += `<button type="button" class="btn btn-success notOwnerButton"><a class="text-white" href="save.html?index=${data[index].index}">Save</a></button>`;
+                    }
+                    for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {        /* Loops for every podcast in user's saved podcasts. */
+                        if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
+                            htmlString += `<a class="text-white" href="unsave.html?index=${data[index].index}"><button type="button" class="btn btn-primary saved"><img class="iconImage" src="icon/saved.png"> <span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
+                            saved = true;
+                            break;
+                        }
+                    } 
+                    if ( saved == false ) {
+                        htmlString += `<a class="text-white" href="save.html?index=${data[index].index}"><button type="button" class="btn btn-primary unsaved"><img class="iconImage" src="icon/unsaved.png"> <span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
+                    }
+                    break;
+                }
+            }
+            htmlString += `</div>`
+            podcast.innerHTML += htmlString;
+            $(appendingClass).append(podcast);
         });
     });
 }
