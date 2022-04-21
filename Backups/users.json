@@ -6,6 +6,11 @@
     "organization": "Northern Kentucky University",
     "savedPodcasts": [],
     "likedPodcasts": [],
+    "billing": {
+      "card_no": "",
+      "name_on_card": "",
+      "billing_addr": ""
+    },
     "password": "password",
     "isAuthor": "0"
   },
@@ -16,6 +21,11 @@
     "organization": "Norhtern Kentucky University",
     "savedPodcasts": [],
     "likedPodcasts": [],
+    "billing": {
+      "card_no": "",
+      "name_on_card": "",
+      "billing_addr": ""
+    },
     "password": "password",
     "isAuthor": "0"
   },
@@ -26,6 +36,11 @@
     "organization": "Norhtern Kentucky University",
     "savedPodcasts": [],
     "likedPodcasts": [],
+    "billing": {
+      "card_no": "",
+      "name_on_card": "",
+      "billing_addr": ""
+    },
     "password": "password",
     "isAuthor": "0"
   },
@@ -36,6 +51,11 @@
     "organization": "Norhtern Kentucky University",
     "savedPodcasts": [],
     "likedPodcasts": [],
+    "billing": {
+      "card_no": "",
+      "name_on_card": "",
+      "billing_addr": ""
+    },
     "password": "password",
     "isAuthor": "0"
   },
@@ -46,6 +66,11 @@
     "organization": "Norhtern Kentucky University",
     "savedPodcasts": [],
     "likedPodcasts": [],
+    "billing": {
+      "card_no": "",
+      "name_on_card": "",
+      "billing_addr": ""
+    },
     "password": "password",
     "isAuthor": "0"
   },
@@ -56,6 +81,11 @@
     "university": "Norhtern Kentucky University",
     "savedPodcasts": [],
     "likedPodcasts": [],
+    "billing": {
+      "card_no": "",
+      "name_on_card": "",
+      "billing_addr": ""
+    },
     "password": "password",
     "isAuthor": "0"
   },
@@ -66,6 +96,11 @@
     "university": "Norhtern Kentucky University",
     "savedPodcasts": [],
     "likedPodcasts": [],
+    "billing": {
+      "card_no": "",
+      "name_on_card": "",
+      "billing_addr": ""
+    },
     "password": "password",
     "isAuthor": "0"
   }
