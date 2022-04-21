@@ -1,188 +1,260 @@
 [
   {
     "firstname": "Amy",
-    "lastname": "Gigabun",
+    "lastname": "Stevenson",
     "email": "amy@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953476276065419264",
     "title": "The Secrets of Coffee",
     "journal": "Book",
     "publishedDate": "08-02-2020",
     "doi": "111",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+    "tags": [
+      "science"
     ],
-    "index": "0"
+    "scientificDisciplines": [
+      "Computer Science",
+      "Psychology",
+      "Math"
+    ],
+    "index": "0",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "John",
-    "lastname": "Morgan",
-    "email": "john@gmail.com",
+    "firstname": "James",
+    "lastname": "Warden",
+    "email": "james@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953476912341336064",
     "title": "The Mountain Trail",
     "journal": "Book",
     "publishedDate": "10-16-2019",
     "doi": "222",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+    "tags": [
+      "science"
     ],
-    "index": "1"
+    "scientificDisciplines": [
+      "Math",
+      "Psychology"
+    ],
+    "index": "1",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "Phoenix",
-    "lastname": "Ray",
-    "email": "phoenix@gmail.com",
+    "firstname": "Ray",
+    "lastname": "Fredrickson",
+    "email": "ray@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953477213584637952",
-    "title": "Ahh it hurts my eyes",
+    "title": "The Bee Movie: Why Its Script is So Captivating",
     "journal": "Book",
     "publishedDate": "04-23-2022",
     "doi": "333",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+    "tags": [
+      "science"
     ],
-    "index": "2"
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "2",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "Top",
-    "lastname": "Shopper",
-    "email": "letsshop@gmail.com",
+    "firstname": "Elizabeth",
+    "lastname": "Felix",
+    "email": "elizabeth@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953399773055172608",
-    "title": "Walmart",
+    "title": "Walmart and World Politics",
     "journal": "Book",
-    "publishedDate": "08-03-2022",
-    "doi": "vdv",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+    "publishedDate": "09-15-2020",
+    "doi": "992",
+    "tags": [
+      "science"
     ],
-    "index": "3"
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "3",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "Testing",
-    "lastname": "Testing",
-    "email": "testing@gmail.com",
+    "firstname": "Amy",
+    "lastname": "Stevenson",
+    "email": "amy@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953504499805470720",
-    "title": "testing title",
-    "journal": "testing journal",
+    "title": "The Math of the Future",
+    "journal": "MathStation",
     "publishedDate": "02-01-2019",
-    "doi": "testing doi ",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics",
-      "sports"
+    "doi": "11920",
+    "tags": [
+      "science"
     ],
-    "index": "4"
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "4",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "Rick",
-    "lastname": "Gaines",
-    "email": "rick@gmail.com",
+    "firstname": "Jane",
+    "lastname": "McDonald",
+    "email": "jane@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953508883545210880",
-    "title": "Rick Title",
-    "journal": "Rick Journal",
-    "publishedDate": "05-06-2020",
+    "title": "Got Rick Rolled? You Are One of Millions",
+    "journal": "RR Journal",
+    "publishedDate": "06-09-2020",
     "doi": "777",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+    "tags": [
+      "science"
     ],
-    "index": "5"
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "5",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "Chris",
-    "lastname": "Patel",
-    "email": "yes@yes.yes",
+    "firstname": "Amy",
+    "lastname": "Stevenson",
+    "email": "amy@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953706443744493568",
-    "title": "How to say no to snakes that are sexually active.",
-    "journal": "Book",
-    "publishedDate": "10-10-2020",
+    "title": "Why Bacon is the Breakfast You Need.",
+    "journal": "Bacon Enthusiasts",
+    "publishedDate": "3-23-2022",
     "doi": "s9029u392u3923",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+    "tags": [
+      "science"
     ],
-    "index": "6"
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "6",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "Nun",
-    "lastname": "bun",
-    "email": "nan@gmail.com",
+    "firstname": "Jane",
+    "lastname": "McDonald",
+    "email": "jane@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953773045340979200",
-    "title": "The promiscuous nunn.",
-    "journal": "journal nun",
+    "title": "The Aftermath of WWII.",
+    "journal": "History Channel",
     "publishedDate": "04-23-2021",
     "doi": "999",
-    "keywords": [
-      "math",
-      "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+    "tags": [
+      "science"
     ],
-    "index": "7"
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "7",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "Howie",
-    "lastname": "hamilton",
-    "email": "howie@gmail.com",
+    "firstname": "Ryan",
+    "lastname": "Reynolds",
+    "email": "ryan@gmail.com",
     "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953773564398682112",
-    "title": "Jernal is the currect way to spell journal",
-    "journal": "journal howie",
+    "title": "The Guide 19th Century Art",
+    "journal": "Historical Art Collective",
     "publishedDate": "01-20-2021",
     "doi": "88",
+    "tags": [
+      "science"
+    ],
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "8",
+    "likes": 0,
+    "saves": 0
+  },
+  {
+    "firstname": "Phillip",
+    "lastname": "Smith",
+    "email": "phillip@asdf",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953826975290769408",
+    "title": "The Lost Art of Concrete",
+    "journal": "History Channel",
+    "publishedDate": "01-19-2019",
+    "doi": "9999999999",
+    "tags": [
+      "science"
+    ],
+    "scientificDisciplines": [
+      "science"
+    ],
+    "index": "9",
+    "likes": 0,
+    "saves": 0
+  },
+  {
+    "firstname": "s",
+    "lastname": "s",
+    "email": "samlongTGLM1@gmail.com",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/966532413350232064",
+    "title": "s",
+    "journal": "s",
+    "publishedDate": "s",
+    "doi": "",
+    "keywords": [],
+    "index": "11",
+    "likes": 0,
+    "saves": 0
+  },
+  {
+    "firstname": "s",
+    "lastname": "s",
+    "email": "samlongTGLM1@gmail.com",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/966532545328201728",
+    "title": "s",
+    "journal": "s",
+    "publishedDate": "s",
+    "doi": "s",
+    "keywords": [
+      "science"
+    ],
+    "index": "12",
+    "likes": 0,
+    "saves": 0
+  },
+  {
+    "firstname": "Amy",
+    "lastname": "WhatsMyName",
+    "email": "amy@b.c",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/966534149972443136",
+    "title": "Whooping Cough",
+    "journal": "A History of Disease",
+    "publishedDate": "08-02-2021",
+    "doi": "123123123",
     "keywords": [
       "math",
       "science",
-      "history",
-      "art",
-      "technology",
-      "politics"
+      "technology"
     ],
-    "index": "8"
+    "index": "13",
+    "likes": 0,
+    "saves": 0
   },
   {
-    "firstname": "firstadsf",
-    "lastname": "lastasdf",
-    "email": "dsafl@asdf",
-    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/953826975290769408",
-    "title": "asdf asdf asdfasdf asdf asdf asdf asdf asdf",
-    "journal": "asdf",
-    "publishedDate": "01-19-2019",
-    "doi": "9999999999",
+    "firstname": "asd",
+    "lastname": "asda",
+    "email": "samlongTGLM1@gmail.com",
+    "descriptionLocation": "https://jsonblob.com/api/jsonBlob/966534313256697856",
+    "title": "asdasdasdasd",
+    "journal": "asddddd",
+    "publishedDate": "08-02-2021",
+    "doi": "2222",
     "keywords": [
-      null
+      "math",
+      "arts"
     ],
-    "index": "9"
+    "index": "14",
+    "likes": 0,
+    "saves": 0
   }
 ]
