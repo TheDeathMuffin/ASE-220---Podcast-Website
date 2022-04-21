@@ -2,6 +2,8 @@
 const currentUser = 'amy@gmail.com';     
 let apiData;                                   /* To simulate no user being signed in, set this value to null */
 
+var noResultsFound = `<p class="font-italic text-secondary h4 pt-5">No results found.</p>`;
+
 function myAjax(method='GET',endpoint,data=null,onSuccess=null){
     $.ajax({
         url:endpoint,
@@ -20,21 +22,39 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
 
 //Reusable Display Podcast Function
 function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=false){
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
-        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){          //Retreives user data.
+        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){       //Retreives podcast data.
             if (Object.keys(data[index]).length === 0) { return; }
             apiData = data;
             console.log(data[index])
             var podcast = document.createElement('div')
-            var htmlString = 
+            var htmlString =
             `
                 <div class="podcast rounded" id="${data[index].id}">
+                <a style="margin-right: -10px; margin-top: -10px; float:right;" class="text-white" href="report.html?index=${data[index].index}"><button type="button" class="btn liked"><img class="iconImage" src="icon/flag.png"></button></a> 
                 <p class="title"><a class="podcastLink font-weight-bold h5" href="#">${data[index].title}</a></p>
                 <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
                 <p class="article font-italic"></p>
                 <p class="year font-italic">Date published: ${data[index].publishedDate}</p>
                 <p class="doi">DOI: ${data[index].doi}</p>
-                <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p></div><br>
+                <p>Disciplines:`
+                for (let i = 0; i < data[index]['scientificDisciplines'].length; i++) {         //Loops through each discipline, creating anchor tags for each.
+                    if (i != 0) { htmlString += `, ` }                                          //Prepends comma to discipline if not the first discipline.
+                    htmlString += ` <a class="scientificDisciplines" href="disciplines/detail.html?disciplines=${data[index]['scientificDisciplines'][i]}">${data[index]['scientificDisciplines'][i]}</a>`;
+                }
+                htmlString += `</p>
+                <p>Tags:`
+                for (let i = 0; i < data[index]['tags'].length; i++) {                          //Loops through each tag, creating anchor tags for each.
+                    if (i != 0) { htmlString += `, ` }                                          //Prepends comma to tag if not the first tag.
+                    htmlString += ` <a class="tag" href="tags/detail.html?tag=${data[index]['tags'][i]}">${data[index]['tags'][i]}</a>`;
+                }
+                htmlString += `</p>
+                <div class="audioClip bg-dark text-light rounded"><p class="font-weight-bold">${data[index].title}</p>
+                
+                <a  data-toggle="collapse" href="#previewText" role="button" aria-expanded="false" aria-controls="previewText">Preview transcript...</a>
+                <div class="collapse" id="previewText"><div class="card card-body bg-dark font-italic text-light">
+                "This is 2 lines of text from the podcast. This feature is not yet implemented, so please be patient my children. It will dissappear into the void of all space and time, forever and ever until everything goes away and never comes back..."
+                </div></div></div><br>
                 `;
             /* Determines what buttons appear on a podcast card */
             if ( currentUser == data[index]['email'] ) {    /* Block only executes if the displayed podcast is owned by the current user. */
@@ -45,7 +65,6 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=false){
                     htmlString += `<i style="float:right">This is your podcast!</i>`;
                 }
             }
-            
             var saved = false;
             var liked = false;
             for (i = 0; i < data2.length; i++) {    /* Loops for each user. */
@@ -179,7 +198,6 @@ function searchBar(type = "indexSearch"){
         
     })
 }
-
 
 function displayAllShows(){
     for(i =0; i <= 7; i++){
