@@ -105,6 +105,9 @@
                                                 }
                                             }
                                         }
+                                        if (savedList.length == 0) {
+                                            $('.1st-menu').append(noResultsFound);
+                                        }
                                         //Finds necessary information
                                         for (k = 0; k < data.length; k++) {
                                             for (l = 0; l < savedList.length; l++) {

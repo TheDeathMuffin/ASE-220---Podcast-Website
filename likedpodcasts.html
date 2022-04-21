@@ -95,8 +95,8 @@
                             <a class="text-white" href="upload.html"><button type="button" class="btn btn-success">Upload Podcast</button></a>
                             <script>
                                 //GET request to podcasts blob
-                                $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
-                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(data){
+                                $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){          //Gathers user data.
+                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(data){     //Gathers podcast data.
                                         savedList = [];
                                         for (i = 0; i < data2.length; i++) {
                                             if (currentUser == data2[i]["email"]) {
@@ -104,6 +104,9 @@
                                                     savedList.push(data2[i]["likedPodcasts"][j]);
                                                 }
                                             }
+                                        }
+                                        if (savedList.length == 0) {
+                                            $('.1st-menu').append(noResultsFound);
                                         }
                                         //Finds necessary information
                                         for (k = 0; k < data.length; k++) {
