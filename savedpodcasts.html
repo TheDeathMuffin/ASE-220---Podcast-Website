@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html leng="en">
 	<head>	
-		<title>PodScholar - Dashboard.</title>
+		<title>PodScholar - Saved.</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,27 +18,27 @@
 
     <body class="bg-light">
         <!-- Page Header -->
-        <header class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-            <a class="navbar-brand" href="index.html">PodScholar</a>
+        <header class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
+            <a class="navbar-brand text-light" href="index.html">PodScholar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link text-light" href="about.html">About</a>
                 </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item notauthdel">
-                        <a class="nav-link" href="register.html">Register</a>
+                        <a class="nav-link text-light" href="register.html">Register</a>
                     </li>
                     <li class="nav-item notauthdel">
-                        <a class="nav-link" href="login.html">Login</a>
+                        <a class="nav-link text-light" href="login.html">Login</a>
                     </li>
                     <div class="form-inline my-2 my-lg-0 authdel">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle currentName" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                            <a class="nav-link dropdown-toggle currentName text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="dashboard.html">Dashboard</a>
                                 <a class="dropdown-item" href="upload.html">Upload Podcast</a>
@@ -63,27 +63,28 @@
             <div class="main-body">
                 <div class="row">
                     <!-- Profile Information -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="floating-menu rounded">
-                            <h5 class="font-weight-bold">Account</h5>
+                            <a style="float:right" href="updateinfo.html"><button type="button" class="btn btn-secondary">Edit</button></a>
+                            <h4 class="font-weight-bold pb-2">Account</h4>
                             <div class="dropdown-divider"></div>
-                            <p class="font-weight-bold">Name</p><p class="currentName"></p>
-                            <p class="font-weight-bold">Email</p><p class="currentEmail"></p>
-                            <p class="font-weight-bold">University/Organization</p><p class="currentOrganization"></p><br><br>
-                            <h5 class="font-weight-bold">Billing</h5>
+                            <p class="font-weight-bold">Name</p><p class="currentName pb-3"></p>
+                            <p class="font-weight-bold">Email</p><p class="currentEmail pb-3"></p>
+                            <p class="font-weight-bold">Organization</p><p class="currentOrganization"></p><br><br>
+                            <a style="float:right" href="updatebilling.html"><button type="button" class="btn btn-secondary">Edit</button></a>
+                            <h4 class="font-weight-bold pb-2">Billing</h4>
                             <div class="dropdown-divider"></div>
-                            <p class="font-weight-bold">Card #</p><p id="card">XXXX-XXXX-XXXX-XXXX</p>
-                            <p class="font-weight-bold">Name on Card</p><p id="cardname">------ ------</p>
-                            <p class="font-weight-bold">Billing Address</p><p id="address">------, -------, -- -----</p><br><br>
-                            <a href="updateinfo.html"><button type="button" class="btn btn-primary">Edit Info</button></a>
+                            <p class="font-weight-bold">Card #</p><p class="card_no pb-3">XXXX-XXXX-XXXX-XXXX</p>
+                            <p class="font-weight-bold">Name on Card</p><p class="cardname pb-3">------ ------</p>
+                            <p class="font-weight-bold">Billing Address</p><p class="address">------, -------, -- -----</p><br><br>
                             <a href="signout.html"><button type="button" class="btn btn-danger">Sign Out</button></a>
                         </div>
                     </div>
                     <!-- Profile Information -->
 
                     <!-- User Podcasts Menu -->
-                    <div class="col-md-6">
-                        <h3 class="d-inline pr-5">Saved Podcasts</h3><h5 class="d-inline"><a href="dashboard.html" class="text-secondary">Your Podcasts</a></h5><br><br>
+                    <div class="col-md-8">
+                        <h3 class="d-inline pr-5">Saved Podcasts</h3><h5 class="d-inline"><a href="dashboard.html" class="text-secondary pr-5">Your Podcasts</a><a href="likedpodcasts.html" class="text-secondary">Liked Podcasts</a></h5><br><br>
                         <div class="searchBar input-group rounded">
                             <input type="search" class="form-control rounded search" placeholder="Search Saved Podcasts" aria-label="Search Saved Podcasts" aria-describedby="search-addon"/>
                             <span class="input-group-text border-0" id="search-addon">
@@ -91,7 +92,7 @@
                             </span>
                         </div>
                         <div class="podcast-menu 1st-menu mt-0">
-                            <button type="button" class="btn btn-success"><a class="text-white" href="upload.html">Upload Podcast</a></button>
+                            <a class="text-white" href="upload.html"><button type="button" class="btn btn-success">Upload Podcast</button></a>
                             <script>
                                 //GET request to podcasts blob
                                 $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
