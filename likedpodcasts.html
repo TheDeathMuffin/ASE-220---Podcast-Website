@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html leng="en">
+	<head>	
+		<title>PodScholar - Saved.</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="preload.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="icon/icon.ico"/>
+    </head>
+
+    <body class="bg-light">
+        <!-- Page Header -->
+        <header class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
+            <a class="navbar-brand text-light" href="index.html">PodScholar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="about.html">About</a>
+                </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item notauthdel">
+                        <a class="nav-link text-light" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item notauthdel">
+                        <a class="nav-link text-light" href="login.html">Login</a>
+                    </li>
+                    <div class="form-inline my-2 my-lg-0 authdel">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle currentName text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                            <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                                <a class="dropdown-item" href="upload.html">Upload Podcast</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="signout.html">Sign Out</a>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </header>
+        <!-- Page Header -->
+
+        <main class="auth">
+            <!-- Main Header -->
+            <div class="p-5 text-center main-header">
+                <h1 class="mb-3 currentName"></h1>
+            </div>
+            <!-- Main Header -->
+            
+            <!-- Main Body -->
+            <div class="main-body">
+                <div class="row">
+                    <!-- Profile Information -->
+                    <div class="col-md-4">
+                        <div class="floating-menu rounded">
+                            <a style="float:right" href="updateinfo.html"><button type="button" class="btn btn-secondary">Edit</button></a>
+                            <h4 class="font-weight-bold pb-2">Account</h4>
+                            <div class="dropdown-divider"></div>
+                            <p class="font-weight-bold">Name</p><p class="currentName pb-3"></p>
+                            <p class="font-weight-bold">Email</p><p class="currentEmail pb-3"></p>
+                            <p class="font-weight-bold">Organization</p><p class="currentOrganization"></p><br><br>
+                            <a style="float:right" href="updatebilling.html"><button type="button" class="btn btn-secondary">Edit</button></a>
+                            <h4 class="font-weight-bold pb-2">Billing</h4>
+                            <div class="dropdown-divider"></div>
+                            <p class="font-weight-bold">Card #</p><p class="card_no pb-3">XXXX-XXXX-XXXX-XXXX</p>
+                            <p class="font-weight-bold">Name on Card</p><p class="cardname pb-3">------ ------</p>
+                            <p class="font-weight-bold">Billing Address</p><p class="address">------, -------, -- -----</p><br><br>
+                            <a href="signout.html"><button type="button" class="btn btn-danger">Sign Out</button></a>
+                        </div>
+                    </div>
+                    <!-- Profile Information -->
+
+                    <!-- User Podcasts Menu -->
+                    <div class="col-md-8">
+                        <h3 class="d-inline pr-5">Liked Podcasts</h3><h5 class="d-inline"><a href="dashboard.html" class="text-secondary pr-5">Your Podcasts</a><a href="savedpodcasts.html" class="text-secondary">Saved Podcasts</a></h5><br><br>
+                        <div class="searchBar input-group rounded">
+                            <input type="search" class="form-control rounded search" placeholder="Search Saved Podcasts" aria-label="Search Saved Podcasts" aria-describedby="search-addon"/>
+                            <span class="input-group-text border-0" id="search-addon">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                        <div class="podcast-menu 1st-menu mt-0">
+                            <a class="text-white" href="upload.html"><button type="button" class="btn btn-success">Upload Podcast</button></a>
+                            <script>
+                                //GET request to podcasts blob
+                                $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data2){
+                                    myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(data){
+                                        savedList = [];
+                                        for (i = 0; i < data2.length; i++) {
+                                            if (currentUser == data2[i]["email"]) {
+                                                for (j = 0; j < data2[i]["likedPodcasts"].length; j++) {
+                                                    savedList.push(data2[i]["likedPodcasts"][j]);
+                                                }
+                                            }
+                                        }
+                                        //Finds necessary information
+                                        for (k = 0; k < data.length; k++) {
+                                            for (l = 0; l < savedList.length; l++) {
+                                                if (savedList[l] == data[k]['index']) {
+                                                    displayPodcast(data[k]['index'], ".1st-menu");
+                                                }
+                                            }
+                                        }
+                                    })
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- User Podcasts Menu -->
+                </div>
+            </div>
+            <!-- Main Body -->
+		</main>
+
+        <!-- Page Footer -->
+        <footer class="bg-secondary text-center text-lg-start fixed-bottom">
+            <div class="text-center p-3">
+                © 2022 Copyright: <a class="text-dark" href="index.html">PodScholar.org</a>
+            </div>
+        </footer>
+        <script>searchBar("savedSearch");</script>
+        <!-- Page Footer -->
+        <script src="postload.js"></script>
+    </body>
+</html>
