@@ -5,23 +5,21 @@
 <script src="preload.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="icon/icon.ico"/>
 <script>
+    //Saves a podcast to an account
     let params = (new URL(document.location)).searchParams;
-    //pulls the jsonblob for the function
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
-        //an array to create a new podcast save list
         newSavedPodcasts = [];
-        //loops to save the podcast and indicate it in the array
+        //Checks users Email and saves the podcast if it isn't already saved
         for (let i = 0; i < data.length; i++) {              
             if (currentUser == data[i]["email"]) {
-                for (let j = 0; j < data[i]["savedPodcasts"].length; j++) {
-                    if (params.get("index") == data[i]["savedPodcasts"][j]) {
-                        continue;
-                    }
-                    newSavedPodcasts.push(data[i]["savedPodcasts"][j]);
+                for (let j = 0; j < data[i]["likedPodcasts"].length; j++) {
+                    newSavedPodcasts.push(data[i]["likedPodcasts"][j]);
                 }
-                data[i]['savedPodcasts'] = newSavedPodcasts;
+                newSavedPodcasts.push(params.get("index"));
+                data[i]['likedPodcasts'] = newSavedPodcasts;
             }    
         }
+        //For sam to comment the use
         myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
             window.location.href = "index.html";
         }); 
