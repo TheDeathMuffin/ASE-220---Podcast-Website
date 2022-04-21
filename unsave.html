@@ -32,13 +32,11 @@
                 }
             }
 
-            //Updates the podcast's saves count.
-            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data2, function(){
-                //window.location.href = "dashboard.html";
-            }); 
-            //Updates the users saved list.
+            //Updates the podcast's save count.
+            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data2, function(){}); 
+            //Update the user's saved podcast list.
             myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
-                window.location.href = "index.html";
+                window.location.href = history.back();
             });
         }); 
     });       
