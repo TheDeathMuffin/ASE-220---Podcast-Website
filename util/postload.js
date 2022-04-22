@@ -5,12 +5,12 @@ if (currentUser != null) {
     $('.notauth').css("visibility", "hidden");
     $('.notauthdel').css("display", "none");
     if ($('main').hasClass('notauth')) {
-        window.location.href = "index.html";
+        window.location.href = "../general/index.html";
     }
 }
 else {
     if ($('main').hasClass('auth')) {
-        window.location.href = "index.html";
+        window.location.href = "../general/index.html";
     }
     $('.auth').css("visibility", "hidden");
     $('.authdel').css("display", "none");
