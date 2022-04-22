@@ -72,7 +72,7 @@
                         <button type="submit" class="btn btn-block create-account">Login</button>
                     </div>
                     <div class="form-group">
-                        Don't have an account? <a href = "register.html"> Register Here </a>    
+                        Don't have an account? <a href = "../general/register.html"> Register Here </a>    
                     </div>
                 </form>
             </div>
@@ -82,11 +82,11 @@
 		<!-- Page Footer -->
         <footer class="bg-secondary text-center text-lg-start fixed-bottom">
             <div class="text-center p-3">
-                © 2022 Copyright: <a class="text-dark" href="index.html">PodScholar.org</a>
+                © 2022 Copyright: <a class="text-dark" href="../general/index.html">PodScholar.org</a>
             </div>
         </footer>
         <!-- Page Footer -->
-        <script src="postload.js"></script>
+        <script src="../util/postload.js"></script>
     </body>
 </html>
 
@@ -105,10 +105,10 @@
             }
             if (!match) {
                 alert("Your email/password combination is incorrect!");
-                window.location.href = "login.html";
+                window.location.href = "../general/login.html";
             }
             else {
-                window.location.href = "dashboard.html";
+                window.location.href = "../profile/dashboard.html";
             }
         });
     }
