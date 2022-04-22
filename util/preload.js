@@ -100,24 +100,24 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=false){
                 if ( currentUser == data2[i]['email'] ) {      /* Checks if the current user matches the currently-looped user. If so, continue... */
                     for (k = 0; k < data2[i]['likedPodcasts'].length; k++) {        /* Loops for every podcast in user's liked podcasts. */
                         if ( data[index]['index'] == data2[i]['likedPodcasts'][k] ) {       /* Checks if the podcast is in the user's liked podcast list. */
-                            htmlString += `<a class="text-white" href="unlike.html?index=${data[index].index}"><button type="button" class="btn btn-primary liked"><img class="iconImage" src="../icon/liked.png"> <span class="badge badge-light">${data[index].likes}</span><span class="sr-only">unread messages</span></button></a> `;
+                            htmlString += `<a class="text-white" href="../util/unlike.html?index=${data[index].index}"><button type="button" class="btn btn-primary liked"><img class="iconImage" src="../icon/liked.png"> <span class="badge badge-light">${data[index].likes}</span><span class="sr-only">unread messages</span></button></a> `;
                             liked = true;
                             break;
                         }
                     }
                     if ( liked == false ) {
-                        htmlString += `<a class="text-white" href="like.html?index=${data[index].index}"><button type="button" class="btn btn-primary unliked"><img class="iconImage" src="../icon/unliked.png"> <span class="badge badge-light">${data[index].likes}</span><span class="sr-only">unread messages</span></button></a> `;
+                        htmlString += `<a class="text-white" href="../util/like.html?index=${data[index].index}"><button type="button" class="btn btn-primary unliked"><img class="iconImage" src="../icon/unliked.png"> <span class="badge badge-light">${data[index].likes}</span><span class="sr-only">unread messages</span></button></a> `;
                         //htmlString += `<button type="button" class="btn btn-success notOwnerButton"><a class="text-white" href="save.html?index=${data[index].index}">Save</a></button>`;
                     }
                     for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {        /* Loops for every podcast in user's saved podcasts. */
                         if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
-                            htmlString += `<a class="text-white" href="unsave.html?index=${data[index].index}"><button type="button" class="btn btn-primary saved"><img class="iconImage" src="../icon/saved.png"><span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
+                            htmlString += `<a class="text-white" href="../util/unsave.html?index=${data[index].index}"><button type="button" class="btn btn-primary saved"><img class="iconImage" src="../icon/saved.png"><span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
                             saved = true;
                             break;
                         }
                     } 
                     if ( saved == false ) {
-                        htmlString += `<a class="text-white" href="save.html?index=${data[index].index}"><button type="button" class="btn btn-primary unsaved"><img class="iconImage" src="../icon/unsaved.png"> <span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
+                        htmlString += `<a class="text-white" href="../util/save.html?index=${data[index].index}"><button type="button" class="btn btn-primary unsaved"><img class="iconImage" src="../icon/unsaved.png"> <span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
                     }
                     break;
                 }
