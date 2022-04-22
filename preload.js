@@ -121,94 +121,162 @@ function clearBox(className = ".podcast-menu")
 function searchBar(type = "indexSearch"){
     myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
         myAjax('GET', "https://jsonblob.com/api/jsonBlob/953096375785242624", null, function(users){
-            var podcastList = response;
-            var savedPodcasts = [];
-            var yourPodcasts = [];
-            //Loop to find your Podcasts
-            for(i = 0; i < Object.keys(podcastList).length; i++){
-                if(podcastList[i]["email"] == currentUser){
-                    yourPodcasts.push(podcastList[i])
-                }
-            }
-            for (i = 0; i < users.length; i++){
-                if(currentUser == users[i]["email"]){
-                    for(j = 0; j < users[i]["savedPodcasts"].length; j ++){
-                        savedPodcasts.push(users[i]["savedPodcasts"][j])
+            myAjax('GET', "https://jsonblob.com/api/jsonBlob/966066952229634048", null, function(disciplines){
+                var podcastList = response;
+                var savedPodcasts = [];
+                var yourPodcasts = [];
+                //Loop to find your Podcasts
+                for(i = 0; i < Object.keys(podcastList).length; i++){
+                    if(podcastList[i]["email"] == currentUser){
+                        yourPodcasts.push(podcastList[i])
                     }
                 }
-            }
-            console.log(response);
-            $(".search").on("keypress", function(e){
-                if(e.which == 13){
-                    clearBox(".podcast-menu");
-                    //For Dashboard search podcast menu
-                    if(type == "dashboardSearch"){
-                        for(i = 0; i < yourPodcasts.length; i++){
-                            var hasDisplayed = false;
-                            var podcastTitle = podcastList[i]["title"].toLowerCase();
-                            var searchString = e.target.value.toLowerCase();
-                            var searchArray = searchString.split(" ");
-                            var titleArray = podcastTitle.split(" ");
-                            //console.log(searchArray); console.log(titleArray);
-                            for(j = 0; j < titleArray.length; j++){
-                                for(k = 0; k < searchArray.length; k++){
-                                    if(titleArray[j].includes(searchArray[k])){
-                                        displayPodcast(i);
-                                        hasDisplayed = true;
-                                        break;
-                                    }
-                                }
-                                if(hasDisplayed){break};
-                            }
+                for (i = 0; i < users.length; i++){
+                    if(currentUser == users[i]["email"]){
+                        for(j = 0; j < users[i]["savedPodcasts"].length; j ++){
+                            savedPodcasts.push(users[i]["savedPodcasts"][j])
                         }
-                    //For Saved Podcasts Search bar
-                    } else if(type == "savedSearch"){
-                        console.log("Loading Saved Podcasts... \n");
-                        console.log(savedPodcasts);
-                        for(i = 0; i < savedPodcasts.length; i++){
-                            var hasDisplayed = false;
-                            var podcastTitle = podcastList[i]["title"].toLowerCase();
-                            var searchString = e.target.value.toLowerCase();
-                            var searchArray = searchString.split(" ");
-                            var titleArray = podcastTitle.split(" ");
-                            //console.log(searchArray); console.log(titleArray);
-                            for(j = 0; j < titleArray.length; j++){
-                                for(k = 0; k < searchArray.length; k++){
-                                    if(titleArray[j].includes(searchArray[k])){
-                                        displayPodcast(i);
-                                        hasDisplayed = true;
-                                        break;
+                    }
+                }
+                console.log(response);
+                $(".search").on("keypress", function(e){
+                    if(e.which == 13){
+                        clearBox(".podcast-menu");
+                        //Search among podcasts in dashboard page
+                        //For Dashboard search podcast menu
+                        if(type == "dashboardSearch"){
+                            for(i = 0; i < yourPodcasts.length; i++){
+                                var hasDisplayed = false;
+                                var podcastTitle = podcastList[i]["title"].toLowerCase();
+                                var searchString = e.target.value.toLowerCase();
+                                var searchArray = searchString.split(" ");
+                                var titleArray = podcastTitle.split(" ");
+                                //console.log(searchArray); console.log(titleArray);
+                                for(j = 0; j < titleArray.length; j++){
+                                    for(k = 0; k < searchArray.length; k++){
+                                        if(titleArray[j].includes(searchArray[k])){
+                                            displayPodcast(i);
+                                            hasDisplayed = true;
+                                            break;
+                                        }
                                     }
+                                    if(hasDisplayed){break};
                                 }
-                                if(hasDisplayed){break};
                             }
-                        }
-                    //Mainly for normal searches through ALL podcasts
-                    } else {
-                        for(i = 0; i < podcastList.length; i++){
-                            var hasDisplayed = false;
-                            var podcastTitle = podcastList[i]["title"].toLowerCase();
-                            var searchString = e.target.value.toLowerCase();
-                            var searchArray = searchString.split(" ");
-                            var titleArray = podcastTitle.split(" ");
-                            //console.log(searchArray); console.log(titleArray);
-                            for(j = 0; j < titleArray.length; j++){
-                                for(k = 0; k < searchArray.length; k++){
-                                    if(titleArray[j].includes(searchArray[k])){
-                                        displayPodcast(i);
-                                        hasDisplayed = true;
-                                        break;
+                        //Search Bar for saved podcasts
+                        //ONLY USED ON DASHBOARD, SAVED PODCASTS page
+                        } else if(type == "savedSearch"){
+                            console.log("Loading Saved Podcasts... \n");
+                            console.log(podcastList);
+                            for(i = 0; i < podcastList.length; i++){
+                                var hasDisplayed = false;
+                                var podcastTitle = podcastList[i]["title"].toLowerCase();
+                                var searchString = e.target.value.toLowerCase();
+                                var searchArray = searchString.split(" ");
+                                var titleArray = podcastTitle.split(" ");
+                                //console.log(searchArray); console.log(titleArray);
+                                for(j = 0; j < titleArray.length; j++){
+                                    for(k = 0; k < searchArray.length; k++){
+                                        if(titleArray[j].includes(searchArray[k])){
+                                            displayPodcast(i);
+                                            hasDisplayed = true;
+                                            break;
+                                        }
                                     }
+                                    if(hasDisplayed){break};
+                                    //Compares Scientific Disciplines to search
+                                    for(k = 0; k < searchArray.length; k++){
+                                        if(disciplinesArray[j].includes(searchArray[k])){
+                                            displayPodcast(i);
+                                            hasDisplayed = true;
+                                            break;
+                                        }
+                                    }
+                                    if(hasDisplayed){break};
                                 }
-                                if(hasDisplayed){break};
+                            }
+                        //Search bar for specific items within a discipline
+                        //ONLY FOR discipline.detail page
+                        } else if(type == "disciplineSearch"){
+                            console.log("Loading Podcasts Already ordered by discipline... \n");
+                            var currentDiscipline;
+                            //Loop to find current discipline
+                            for(i = 0; i < disciplines.length; i++){
+                                if(disciplines[i].id == params.get("discipline")){
+                                    currentDiscipline = disciplines[i].name;
+                                    break;
+                                }
+                            }
+                            for(i = 0; i < podcastList.length; i++){
+                                var hasDisplayed = false;
+                                var podcastTitle = podcastList[i]["title"].toLowerCase();
+                                //Array of Disciplines Per podcast
+                                var disciplinesArray = podcastList[i].scientificDisciplines
+                                var searchString = e.target.value.toLowerCase();
+                                //Search string split apart into array with each word
+                                var searchArray = searchString.split(" ");
+                                //Podcast Title split into array with each word
+                                var titleArray = podcastTitle.split(" ");
+                                for(j = 0; j < titleArray.length; j++){
+                                    //Compares Titles to search
+                                    for(k = 0; k < searchArray.length; k++){
+                                        if(titleArray[j].includes(searchArray[k])){
+                                            for(r = 0; r < disciplinesArray.length; r++){
+                                                if(currentDiscipline == disciplinesArray[r]){
+                                                    displayPodcast(i);
+                                                    hasDisplayed = true;
+                                                    break;
+                                                }
+                                            }
+                                            if(hasDisplayed){break};
+                                        }
+                                    }
+                                    if(hasDisplayed){break};
+                                }
+                            }
+                        //Mainly for normal searches through ALL podcasts
+                        } else {
+                            for(i = 0; i < podcastList.length; i++){
+                                var hasDisplayed = false;
+                                var podcastTitle = podcastList[i]["title"].toLowerCase();
+                                var disciplinesArray = podcastList[i].scientificDisciplines
+                                var searchString = e.target.value.toLowerCase();
+                                var searchArray = searchString.split(" ");
+                                var titleArray = podcastTitle.split(" ");
+                                //console.log(searchArray); console.log(titleArray);
+
+                                //Compares Podcast Titles to search 
+                                for(j = 0; j < titleArray.length; j++){
+                                    for(k = 0; k < searchArray.length; k++){
+                                        if(titleArray[j].includes(searchArray[k])){
+                                            displayPodcast(i);
+                                            hasDisplayed = true;
+                                            break;
+                                        }
+                                    }
+                                    if(hasDisplayed){break};
+                                }
+                                if(hasDisplayed) continue;
+                                
+                                //Compares Scientific Disciplines to search
+                                for(j = 0; j < disciplinesArray.length; j++){
+                                    for(k = 0; k < searchArray.length; k++){
+                                        console.log(disciplinesArray + " COMPARED WITH " + searchArray)
+                                        if(disciplinesArray[j].toLowerCase().includes(searchArray[k])){
+                                            displayPodcast(i);
+                                            hasDisplayed = true;
+                                            break;
+                                        }
+                                    }
+                                    if(hasDisplayed){break};
+                                }
+                                if(hasDisplayed) continue;
                             }
                         }
                     }
-                    
-                }
+                })
             })
         });
-        
     })
 }
 
