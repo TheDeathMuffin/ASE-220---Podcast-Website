@@ -42,9 +42,25 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=false){
             console.log(data[index])
             var podcast = document.createElement('div')
             var htmlString =
-            `
-                <div class="podcast rounded" id="${data[index].id}">
-                <a style="margin-right: -10px; margin-top: -10px; float:right;" class="text-white" href="report.html?index=${data[index].index}"><button type="button" class="btn liked"><img class="iconImage" src="icon/flag.png"></button></a> 
+            `   <div class="podcast rounded" id="${data[index].id}"><div style="float:right;">`;    
+            var subscribed = false;
+            for (i = 0; i < data2.length; i++) {    /* Loops for each user. */
+                if ( currentUser == data2[i]['email'] ) {      /* Checks if the current user matches the currently-looped user. If so, continue... */
+                    for (j = 0; j < data2[i]['subscribedTo'].length; j++) {        /* Loops for every user in user's subscribed users. */
+                        if ( currentUser != data[index]['email'] && data[index]['email'] == data2[i]['subscribedTo'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
+                            htmlString += `<a class="text-white" href="unsubscribe.html?email=${data[index].email}"><button type="button" class="btn btn-secondary ownerButton">Subscribed</button></a>`;
+                            subscribed = true;
+                            break;
+                        }
+                    } 
+                    if ( currentUser != data[index]['email'] && subscribed == false ) {
+                        htmlString += `<a class="text-white" href="subscribe.html?email=${data[index].email}"><button type="button" class="btn btn-primary ownerButton">Subscribe to Podcast</button></a>`;
+                    }
+                    break;
+                }
+            }
+            htmlString += `
+                <a class="text-white" href="report.html?index=${data[index].index}"><button type="button" class="btn liked"><img class="iconImage" src="icon/flag.png"></button></a></div>
                 <p class="title"><a class="podcastLink font-weight-bold h5" href="#">${data[index].title}</a></p>
                 <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
                 <p class="article font-italic"></p>
@@ -95,7 +111,7 @@ function displayPodcast(index=0,appendingClass=".podcast-menu",allowDel=false){
                     }
                     for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {        /* Loops for every podcast in user's saved podcasts. */
                         if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
-                            htmlString += `<a class="text-white" href="unsave.html?index=${data[index].index}"><button type="button" class="btn btn-primary saved"><img class="iconImage" src="icon/saved.png"> <span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
+                            htmlString += `<a class="text-white" href="unsave.html?index=${data[index].index}"><button type="button" class="btn btn-primary saved"><img class="iconImage" src="icon/saved.png"><span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
                             saved = true;
                             break;
                         }
