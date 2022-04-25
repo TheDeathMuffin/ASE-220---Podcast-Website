@@ -90,7 +90,7 @@
                                     var discipline = document.createElement('div')
                                     var htmlString = `<div>`
                                     for(i = 0; i < response.length; i++){
-                                        htmlString += `<h3><a href="detail.html?discipline=${response[i].id}">${response[i].name}</a></h3>`
+                                        htmlString += `<a href="detail.html?discipline=${response[i].id}"><button type=button class="btn btn-info ml-2">${response[i].name}</button></a>`
                                     }
                                     //Closes the html div 
                                     htmlString += `</div>`
