@@ -28,6 +28,12 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="../general/about.html">About</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="../disciplines/index.html">Scientific Disciplines</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="../tags/index.html">Tags</a>
+                </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item notauthdel">
@@ -90,9 +96,16 @@
                         <input type="text" name="doi" class="form-control item" placeholder="DOI #">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="keywords" class="form-control item" placeholder="3-6 Keywords for Search Optimization" required>
+                        <input type="text" name="tags" class="form-control item" placeholder="tags" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="discipline" class="form-control item" placeholder="Scientific Discipline" required>
                     </div>
                     <label><strong>Upload Podcast File</strong></label>
+                    <div class="form-group">
+                        <label><input type="file" name="manuscript" data-field-type="bootstrap-file-filed" data-label="Select MP3/MP4 Files" data-file-types="application/mp3" data-file-types="application/m4a" multiple ></label>
+                    </div>
+                    <label><strong>Upload Bibtex File</strong></label>
                     <div class="form-group">
                         <label><input type="file" name="manuscript" data-field-type="bootstrap-file-filed" data-label="Select MP3/MP4 Files" data-file-types="application/mp3" data-file-types="application/m4a" multiple ></label>
                     </div>
