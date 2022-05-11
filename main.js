@@ -17,9 +17,15 @@ process.env.mongoose=mongoose
 
 const main=require('./routerWeb.js');
 const mainAPI=require('./routerAPI.js');
+// @ts-ignore
+const disciplines=require('./disciplines/routerWeb.js')
 
 app.use('/general',main)
+app.use('/user',main)
+app.use('/tags',main)
+app.use('/disciplines',main)
 app.use('/api',mainAPI)
+
 
 /* WEB routes */
 app.get('/',(req, res)=>{
