@@ -52,15 +52,32 @@ content-type: application/json
 {
     "firstname": "kjyjjfk",
     "lastname": "Roberts",
-    "email": "jeremy@gmail.com",
-    "title": "Test Podcast"
-    
-    
+    "email": "themanroberts@gmail.com",
+    "title": "Cow huffers"
 }
 
-###
-GET http://localhost:8080/api/podcast/627beda18ec15d05d8598a51
 
+###
+PATCH http://localhost:8080/api/podcast/627c1bf084b5d1ed70a03649
+content-type: application/json
+
+{
+    "firstname":"cow",
+    "lastname":"man"
+}
+
+
+###
+GET http://localhost:8080/api/podcast/627c1bf084b5d1ed70a03649
+content-type: application/json
+
+{}
+
+###
+DELETE http://localhost:8080/api/podcast/627c1f8f9b7f131b8fad2778
+
+###
+//ALL Disciplines routes
 
 
 
