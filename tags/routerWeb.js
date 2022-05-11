@@ -8,7 +8,7 @@ router.get('/',(req, res)=>{
 })
 
 router.get('/detail',(req, res)=>{
-    res.status(200).send(fs.readFileSync('./detail.html','utf-8'))
+    res.status(200).send(fs.readFileSync('./tags/detail.html','utf-8'))
 })
 
 module.exports = router

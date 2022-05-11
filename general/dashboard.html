@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html leng="en">
 	<head>	
-		<title>PodScholar - Upload. Listen. Share.</title>
+		<title>PodScholar - Dashboard.</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -11,10 +11,9 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <link rel="shortcut icon" type="image/x-icon" href="../icon/icon.ico"/>
+        <script src="../util/preload.js"></script>
         <link rel="stylesheet" href="../stylesheets/style.css">
-        
-        
+        <link rel="shortcut icon" type="image/x-icon" href="../icon/icon.ico"/>
     </head>
 
     <body class="bg-light">
@@ -59,88 +58,86 @@
         </header>
         <!-- Page Header -->
 
-        <main>
+        <main class="auth">
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
-                <h1 class="mb-3">PodScholar</h1>
-                <h4 class="mb-3">Scientific Disciplines</h4>
+                <h1 class="mb-3 currentName"></h1>
             </div>
             <!-- Main Header -->
             
             <!-- Main Body -->
             <div class="main-body">
-                <!-- Row 1 -->
                 <div class="row">
-                    <div class="col-md-2">
+                    <!-- Profile Information -->
+                    <div class="col-md-4">
+                        <div class="floating-menu rounded">
+                            <a style="float:right" href="../user/updateinfo.html"><button type="button" class="btn btn-secondary">Edit</button></a>
+                            <h4 class="font-weight-bold pb-2">Account</h4>
+                            <div class="dropdown-divider"></div>
+                            <p class="font-weight-bold">Name</p><p class="currentName pb-3"></p>
+                            <p class="font-weight-bold">Email</p><p class="currentEmail pb-3"></p>
+                            <p class="font-weight-bold">Organization</p><p class="currentOrganization"></p><br><br>
+                            <a class="floating-menu-billing-button" style="float:right" href="../user/updatebilling.html"></a>
+                            <h4 class="font-weight-bold pb-2">Billing</h4>
+                            <div class="dropdown-divider"></div>
+                            <p class="font-weight-bold">Card #</p><p class="card_no pb-3">XXXX-XXXX-XXXX-XXXX</p>
+                            <p class="font-weight-bold">Name on Card</p><p class="name_on_card pb-3">XXXXXX XXXXXX</p>
+                            <p class="font-weight-bold">Billing Address</p><p class="billing_addr">XXXX, XXXX, XX XXXX</p><br><br>
+                            <a href="signout.html"><button type="button" class="btn btn-danger">Sign Out</button></a>
+                            <a href="../user/auth_Veri.html"><button type="button" class="btn btn-success">Author Verification</button></a>
+                        </div>
                     </div>
-                </div>
-                <!-- Row 1 -->
+                    <!-- Profile Information -->
 
-                <!-- Row 2 -->
-                <div class="row">
-                    <!-- Scientific Discipline List -->
+                    <!-- User Podcasts Menu -->
                     <div class="col-md-8">
-                        <!-- Disciplines -->
-                        
-                        <script src="../util/preload.js"></script>
-                        <div class="disciplines">
+                        <h3 class="d-inline pr-5">Your Podcasts</h3><h5 class="d-inline"><a href="../user/savedpodcasts.html" class="text-secondary pr-5">Saved Podcasts</a><a href="../user/subscribed.html" class="text-secondary pr-5">Subscribed Podcasts</a><a href="../user/likedpodcasts.html" class="text-secondary">Liked Podcasts</a></h5><br><br>
+                        <div class="searchBar input-group rounded">
+                            <input type="search" class="form-control rounded search" placeholder="Search Your Podcasts" aria-label="Search Your Podcasts" aria-describedby="search-addon"/>
+                            <span class="input-group-text border-0" id="search-addon">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                        <div class="podcast-menu mt-0">
+                            <a class="text-white" href="../user/upload.html"><button type="button" class="btn btn-success">Upload Podcast</button></a>
                             <script>
-                                myAjax('GET', "https://jsonblob.com/api/jsonBlob/966066952229634048", null, function(response){
-                                    console.log(response);
-                                    var discipline = document.createElement('div')
-                                    var htmlString = `<div>`
-                                    for(i = 0; i < response.length; i++){
-                                        htmlString += `<a href="detail.html?discipline=${response[i].id}"><button type=button class="btn btn-info ml-2">${response[i].name}</button></a>`
+                                //GET request to podcasts blob
+                                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
+                                    console.log("Successful GET...");
+                                    var notFound = true;
+                                    var podcastList;
+                                    podcastList = body;
+                                    var usersPodcasts = 0;
+                                    console.log(podcastList);
+                                    //Displays podcasts associated with logged in user
+                                    for(i = 0; i < Object.keys(podcastList).length; i++){
+                                        if(podcastList[i]["email"] == currentUser){
+                                            displayPodcast(i,".podcast-menu",true);
+                                            notFound = false;
+                                        }
                                     }
-                                    //Closes the html div 
-                                    htmlString += `</div>`
-                                    //Appends discipline to DOM and displays it
-                                    discipline.innerHTML += htmlString;
-                                    $(".disciplines").append(discipline)
+                                    if (notFound) {
+                                            $('.1st-menu').append(noResultsFound);
+                                    }
                                 })
                             </script>
                         </div>
-                        <!-- Disciplines -->
                     </div>
-                    <!-- Scientific Disciplines LIst -->
+                    <!-- User Podcasts Menu -->
                 </div>
-                <!-- Row 2 -->
             </div>
             <!-- Main Body -->
 		</main>
-        
-		<!-- Page Footer -->
+
+        <!-- Page Footer -->
         <footer class="bg-secondary text-center text-lg-start fixed-bottom">
             <div class="text-center p-3">
-                © 2022 Copyright: <a class="text-dark" href="index.html">PodScholar.org</a>
+                © 2022 Copyright: <a class="text-dark" href="../general/index.html">PodScholar.org</a>
             </div>
         </footer>
+        <!-- Implements searchBar function setup in preload.js -->
+        <script>searchBar("dashboardSearch");</script>
         <!-- Page Footer -->
-        <script>
-            //Re-usable AJAX function
-            function myAjax(method='GET',endpoint,data=null,onSuccess=null){
-                $.ajax({
-                    url:endpoint,
-                    type:method,
-                    data: data==null ? null : JSON.stringify(data),
-                    contentType: "application/json; charset=utf-8",
-                    dataType:'json',
-                    success: function (body, status, response) {
-                        onSuccess(body,status,response);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-             }
-            //Request to grab podcast List information and turn it into an array
-
-            
-            let params = (new URL(document.location)).searchParams
-            //var params = new URLSearchParams(window.location.search)
-        </script>
-        
-        <script>searchBar();</script>
         <script src="../util/postload.js"></script>
-	</body>
+    </body>
 </html>
