@@ -18,5 +18,11 @@ router.get('/login',(req, res)=>{
 router.get('/register',(req, res)=>{
 	res.status(200).send(fs.readFileSync('./general/register.html','utf-8'))
 })
+router.get('/disciplines',(req, res)=>{
+	res.status(200).send(fs.readFileSync('./disciplines/index.html','utf-8'))
+})
+router.get('/tags',(req, res)=>{
+	res.status(200).send(fs.readFileSync('./tags/index.html','utf-8'))
+})
 
 module.exports = router
