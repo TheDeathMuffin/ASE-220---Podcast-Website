@@ -1,6 +1,80 @@
 //FOR TESTING PURPOSES
 
+# Database Connection information
+# Username: Administrator
+# Password: ScholarsAreOverrated
+# Connection String: mongodb+srv://Administrator:ScholarsAreOverrated@podscholar.2edjo.mongodb.net/PodScholar
 
+POST http://localhost:8080/api/user/
+content-type: application/json
+
+{
+    "firstname": "kjyjjfk",
+    "lastname": "Roberts",
+    "email": "jeremy@gmail.com",
+    "password": "sterile",
+    "isAuthor":"0"
+    
+}
+
+###
+
+GET http://localhost:8080/api/user/627be54c98be2e675793c20a
+
+###
+
+DELETE http://localhost:8080/api/user/627ad1f6b0d9552c528ff699
+
+###
+
+PATCH http://localhost:8080/api/user/627ad1f6b0d9552c528ff699
+content-type: application/json
+
+{
+    "firstname": "Jacob",
+    "lastname": "leadbetter",
+    "email": "Jacob@gmail.com",
+    "password": "badpassword",
+    "likedPodcasts": [
+        1,2,3
+    ],
+    "savedPodcasts": [
+        1,2,3
+    ]
+}
+
+###
+//ALL Podcast API Route tests
+
+POST http://localhost:8080/api/podcast/
+content-type: application/json
+
+{
+    "firstname": "kjyjjfk",
+    "lastname": "Roberts",
+    "email": "jeremy@gmail.com",
+    "title": "Test Podcast"
+    
+    
+}
+
+###
+GET http://localhost:8080/api/podcast/627beda18ec15d05d8598a51
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#JSON BLOB API STUFF
 POST https://jsonblob.com/api/jsonBlob
 Content-Type: application/json
 
@@ -12,9 +86,6 @@ Content-Type: application/json
 ###
 
 GET https://jsonblob.com/api/jsonBlob/953042859079254016
-
-
-
 
 ###
 
@@ -36,3 +107,6 @@ GET https://jsonblob.com/api/jsonBlob/953093703074070528
 //JSON Blob for podcasts https://jsonblob.com/953093703074070528
 
 //JSON Blob for Scientific Disciplines http://jsonblob.com/966066952229634048
+
+
+
