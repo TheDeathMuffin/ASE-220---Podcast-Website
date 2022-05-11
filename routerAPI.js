@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require("./util/users.js");
+const Podcast = require("./util/podcasts.js");
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({
         extended: false
@@ -10,11 +11,11 @@ const { db } = require('./util/users');
 //const { restart } = require('nodemon');
 
 
-/* API routes */
+/* API routes for USERS*/
 
 //ROUTES FOR USERS
 //GET's a user's information
-router.get('/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
     console.log("GET request executing...")
 	try{
 		// const users = await User.find({id: req.params.id});
@@ -26,14 +27,15 @@ router.get('/:id', async (req, res) => {
 });
 
 //POST's information for a new user
-router.post('/user', async (req,res) => {
+router.post('/user/', async (req,res) => {
     console.log("POST request executing...");
     const user = new User({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
-        isAuthor: req.body.isAuthor
+        isAuthor: req.body.isAuthor,
+        likedPodcasts: req.body.likedPodcasts
     })
     try {
         const newUser = await user.save();
@@ -44,7 +46,7 @@ router.post('/user', async (req,res) => {
 })
 
 //DELETEs user from the database based on ID
-router.delete('/:id', async (req, res) => {
+router.delete('/user/:id', async (req, res) => {
     console.log("DELETE Request executing...")
 	try {
 		await User.findByIdAndRemove(req.params.id).exec();
@@ -55,7 +57,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 //PATCH updates a user's information in the database
-router.patch("/:id", getUser, async (req, res) => {
+router.patch("/user/:id", getUser, async (req, res) => {
     console.log("PATCH Request executing...")
     //Modifies information from getUser() based on what's sent in the PATCH request
     if(req.body.firstname != null){
@@ -91,7 +93,7 @@ router.patch("/:id", getUser, async (req, res) => {
         res.status(200).json(updatedUser);
     } catch (err) {
         //Sends error if the code above fails for whatever reason
-        res.status(500).json({message: err.message})
+        res.status(500).send(err.message);
     }
 })
 
@@ -110,4 +112,41 @@ async function getUser(req, res, next){
 	next()
 }
 
+
+/* API Routes for Podcasts*/
+router.get('/podcast/:id', async (req, res) => {
+    console.log("GET request executing...")
+	try{
+		// const users = await User.find({id: req.params.id});
+		const podcasts = await Podcast.findById(req.params.id).exec();
+		res.status(200).json(podcasts)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
+
+//POST's information for a new podcast
+router.post('/podcast/', async (req,res) => {
+    console.log("POST request executing...");
+    const podcast = new Podcast({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        authors: req.body.authors,
+        title: req.body.title,
+        descriptionLocation: req.body.descriptionLocation,
+        journal: req.body.journal,
+        doi: req.body.doi,
+        disciplines: req.body.disciplines,
+        tags: req.body.tags,
+        likes: req.body.likes,
+        saves: req.body.saves
+    })
+    try {
+        const newPodcast = await podcast.save();
+        res.status(200).json(newPodcast);
+    } catch (err){
+        res.status(400).json({message: err.message})
+    }
+})
 module.exports = router
