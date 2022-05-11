@@ -79,7 +79,7 @@ router.patch("/user/:id", getUser, async (req, res) => {
         res.user.organization = req.body.organization;
     }
     if(req.body.savedPodcasts != null){
-        res.user.savedPodcasts.push(req.body.savedPodcasts);
+        res.user.savedPodcasts = req.body.savedPodcasts;
     }
     if(req.body.likedPodcasts != null){
         res.user.likedPodcasts.push(req.body.likedPodcasts);
