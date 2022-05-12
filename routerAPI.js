@@ -75,6 +75,7 @@ router.delete('/user/:id', async (req, res) => {
 router.patch("/user/:id", getUser, async (req, res) => {
     console.log("PATCH Request executing...")
     //Modifies information from getUser() based on what's sent in the PATCH request
+    //TODO - use loop to condense this code.
     if(req.body.firstname != null){
         res.user.firstname = req.body.firstname;
     }
@@ -154,6 +155,17 @@ router.get('/podcast/:id', async (req, res) => {
 	}
 });
 
+//GET's information from podcasts owned by a user using their email.
+router.get('/podcast/owned/:email', async (req, res) => {
+    console.log("GET request executing...")
+	try{
+		const podcasts = await Podcast.find({email: req.params.email}).exec();
+		res.status(200).json(podcasts)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
+
 //POST's information for a new podcast
 router.post('/podcast/', async (req,res) => {
     console.log("POST request executing...");
@@ -194,6 +206,7 @@ router.delete('/podcast/:id', async (req, res) => {
 router.patch("/podcast/:id", getPodcast, async (req, res) => {
     console.log("PATCH Request executing...")
     //Modifies information from getUser() based on what's sent in the PATCH request
+    //TODO - Use loops to condense this code.
     if(req.body.firstname != null){
         res.podcast.firstname = req.body.firstname;
     }
