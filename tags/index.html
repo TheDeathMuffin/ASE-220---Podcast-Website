@@ -126,7 +126,13 @@
             //var params = new URLSearchParams(window.location.search)
         </script>
         
-        <script>searchBar();</script>
+        <script>
+            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
+                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
+                    searchBar(body, body2);
+                })
+            })
+        </script>
         <script src="../util/postload.js"></script>
 	</body>
 </html>

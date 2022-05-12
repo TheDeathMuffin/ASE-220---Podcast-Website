@@ -101,14 +101,7 @@
                         
                         <div>
                             <script>
-                                myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
-                                    myAjax('GET', "https://jsonblob.com/api/jsonBlob/966066952229634048", null, function(response2){
-                                        displayPodcast(1);
-                                        displayPodcast(2);
-                                        displayPodcast(3);
-                                        displayPodcast(4);
-                                    })
-                                })
+                                
                             </script>
                         </div>
                         <!-- Podcasts -->
@@ -151,7 +144,13 @@
             //var params = new URLSearchParams(window.location.search)
         </script>
         
-        <script>searchBar("disciplineSearch");</script>
+        <script>
+            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
+                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
+                    searchBar(body, body2);
+                })
+            })
+        </script>
         <script src="../util/postload.js"></script>
 	</body>
 </html>

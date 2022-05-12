@@ -171,7 +171,7 @@ function searchBar(podcastList, userList, type = "indexSearch"){
 
                     for(j = 0; j < titleArray.length; j++){
                         for(k = 0; k < searchArray.length; k++){
-                            console.log(titleArray + " COMPARED WITH " + searchArray);
+                            //console.log(titleArray + " COMPARED WITH " + searchArray);
                             if(titleArray[j].includes(searchArray[k])){
                                 displayPodcast(i, podcastList, userList);
                                 hasDisplayed = true;
@@ -185,7 +185,7 @@ function searchBar(podcastList, userList, type = "indexSearch"){
                     //Compares Scientific Disciplines to search
                     for(j = 0; j < disciplinesArray.length; j++){
                         for(k = 0; k < searchArray.length; k++){
-                            console.log(disciplinesArray + " COMPARED WITH " + searchArray)
+                            //console.log(disciplinesArray + " COMPARED WITH " + searchArray)
                             if(disciplinesArray[j].toLowerCase().includes(searchArray[k])){
                                 displayPodcast(i, podcastList, userList);
                                 hasDisplayed = true;
