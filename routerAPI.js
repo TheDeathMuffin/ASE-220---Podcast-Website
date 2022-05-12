@@ -3,6 +3,7 @@ const router = express.Router()
 const User = require("./util/users.js");
 const Podcast = require("./util/podcasts.js");
 const PodcastDescription = require("./util/podcastDescriptions.js");
+const Discipline = require("./util/disciplines.js");
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({
         extended: false
@@ -258,10 +259,10 @@ router.delete('/podcastDescription/:id', async (req, res) => {
 	}
 });
 
-//PATCH updates a user's information in the database
+//PATCH updates a podcast description in the database
 router.patch("/podcastDescription/:id", getPodcastDescription, async (req, res) => {
     console.log("PATCH Request executing...")
-    //Modifies information from getUser() based on what's sent in the PATCH request
+    //Modifies information from getPodcastDescription() based on what's sent in the PATCH request
     if(req.body.description != null){
         res.podcastDescription.description = req.body.description;
     }
@@ -290,6 +291,77 @@ async function getPodcastDescription(req, res, next){
 		return res.status(500).json({ message: err.message })
 	}
 	res.podcastDescription = podcastDescription;
+	next()
+}
+
+/* API routes for Disciplines */
+
+//GET's discipline based on ID
+router.get('/discipline/:id', async (req, res) => {
+    console.log("GET description request executing...")
+	try{
+		// const users = await User.find({id: req.params.id});
+		const discipline = await Discipline.findById(req.params.id).exec();
+		res.status(200).json(discipline)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
+
+//POST's information for a new discipline
+router.post('/discipline/', async (req,res) => {
+    console.log("POST request executing...");
+    const discipline = new Discipline({
+        name: req.body.name
+    })
+    try {
+        const newDiscipline = await discipline.save();
+        res.status(200).json(newDiscipline);
+    } catch (err){
+        res.status(400).json({message: err.message})
+    }
+})
+
+//PATCH updates a discipline's information in the database
+router.patch("/discipline/:id", getDiscipline, async (req, res) => {
+    console.log("PATCH Request executing...")
+    //Modifies information from getUser() based on what's sent in the PATCH request
+    if(req.body.name != null){
+        res.discipline.name = req.body.name;
+    }
+    try {
+        //Saves all the updated information to the database then sends a response back to the requestor with a status of 200
+        const updatedDiscipline = await res.discipline.save();
+        res.status(200).json(updatedDiscipline);
+    } catch (err) {
+        //Sends error if the code above fails for whatever reason
+        res.status(500).send(err.message);
+    }
+})
+
+//DELETE's discipline from the database
+router.delete('/discipline/:id', async (req, res) => {
+    console.log("DELETE Request executing...")
+	try {
+		await Discipline.findByIdAndRemove(req.params.id).exec();
+		res.status(200).send("Discipline Deleted");
+	} catch (err){
+		res.status(404).send(err.message);
+	}
+});
+
+//Asyncronous Function to grab discipline's data by ID and save it to a "res.user" object value
+async function getDiscipline(req, res, next){
+	let discipline
+	try{
+		discipline = await Discipline.findById(req.params.id).exec();
+		if(discipline == null){
+			return res.status(404).json({message: "Can't find Discipline"})
+		}
+	} catch (err) {
+		return res.status(500).json({ message: err.message })
+	}
+	res.discipline = discipline;
 	next()
 }
 module.exports = router

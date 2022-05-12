@@ -108,7 +108,37 @@ DELETE http://localhost:8080/api/podcastDescription/627c8bc51a35615030b011ed
 
 
 ###
+//ALL Discipline routes
 
+POST http://localhost:8080/api/discipline/
+content-type: application/json
+
+{
+    "name": "Science"
+}
+
+
+###
+PATCH http://localhost:8080/api/discipline/627c96c5d996852856ba5098
+content-type: application/json
+
+{
+    "name":"Testing"
+}
+
+
+###
+GET http://localhost:8080/api/discipline/627c96c5d996852856ba5098
+
+content-type: application/json
+
+###
+
+DELETE http://localhost:8080/api/discipline/627c970bd996852856ba509f
+
+
+
+###
 
 
 
