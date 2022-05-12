@@ -11,7 +11,7 @@ router.use('/:pageName',(req, res)=> {
 		res.status(200).send(fs.readFileSync('./general/' + req.params.pageName + '.html','utf-8'))
 	}
 	else {
-		res.status(404)
+		res.status(404).send(fs.readFileSync('./general/404.html','utf-8'))
 	}
 })
 
