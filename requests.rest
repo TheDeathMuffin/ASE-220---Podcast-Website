@@ -71,17 +71,43 @@ content-type: application/json
 GET http://localhost:8080/api/podcast/627c1bf084b5d1ed70a03649
 content-type: application/json
 
-{}
+
 
 ###
 DELETE http://localhost:8080/api/podcast/627c1f8f9b7f131b8fad2778
 
 ###
-//ALL Disciplines routes
+//ALL Podcast Description routes
+
+POST http://localhost:8080/api/podcastDescription/
+content-type: application/json
+
+{
+    "description": "This is a test podcastDescription",
+    "relatedPodcast": "ID"
+}
 
 
+###
+PATCH http://localhost:8080/api/podcastDescription/627c8bc51a35615030b011ed
+content-type: application/json
+
+{
+    "description":"New Desn"
+}
 
 
+###
+GET http://localhost:8080/api/podcastDescription/627c8bc51a35615030b011ed
+
+content-type: application/json
+
+###
+
+DELETE http://localhost:8080/api/podcastDescription/627c8bc51a35615030b011ed
+
+
+###
 
 
 

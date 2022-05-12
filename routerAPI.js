@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require("./util/users.js");
 const Podcast = require("./util/podcasts.js");
+const PodcastDescription = require("./util/podcastDescriptions.js");
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({
         extended: false
@@ -204,10 +205,6 @@ router.patch("/podcast/:id", getPodcast, async (req, res) => {
     }
 })
 
-/* API routes for PodcastDescriptions */
-
-
-//Asyncronous Function to grab user data by ID and save it to a "res.user" object value
 async function getPodcast(req, res, next){
 	let podcast
 	try{
@@ -219,6 +216,80 @@ async function getPodcast(req, res, next){
 		return res.status(500).json({ message: err.message })
 	}
 	res.podcast = podcast;
+	next()
+}
+/* API routes for PodcastDescriptions */
+
+//GET's podcast description based on ID
+router.get('/podcastDescription/:id', async (req, res) => {
+    console.log("GET description request executing...")
+	try{
+		// const users = await User.find({id: req.params.id});
+		const podcastDescription = await PodcastDescription.findById(req.params.id).exec();
+		res.status(200).json(podcastDescription)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
+
+//POST's information for a new podcast
+router.post('/podcastDescription/', async (req,res) => {
+    console.log("POST request executing...");
+    const podcastDescription = new PodcastDescription({
+        description: req.body.description,
+        relatedPodcast: req.body.relatedPodcast
+    })
+    try {
+        const newPodcastDescription = await podcastDescription.save();
+        res.status(200).json(newPodcastDescription);
+    } catch (err){
+        res.status(400).json({message: err.message})
+    }
+})
+
+//DELETE's podcast description from the database
+router.delete('/podcastDescription/:id', async (req, res) => {
+    console.log("DELETE Request executing...")
+	try {
+		await PodcastDescription.findByIdAndRemove(req.params.id).exec();
+		res.status(200).send("Podcast Description Deleted");
+	} catch (err){
+		res.status(404).send(err.message);
+	}
+});
+
+//PATCH updates a user's information in the database
+router.patch("/podcastDescription/:id", getPodcastDescription, async (req, res) => {
+    console.log("PATCH Request executing...")
+    //Modifies information from getUser() based on what's sent in the PATCH request
+    if(req.body.description != null){
+        res.podcastDescription.description = req.body.description;
+    }
+    if(req.body.relatedPodcast != null){
+        res.podcastDescription.relatedPodcast = req.body.relatedPodcast;
+    }
+    try {
+        //Saves all the updated information to the database then sends a response back to the requestor with a status of 200
+        const updatedPodcastDescription = await res.podcastDescription.save();
+        res.status(200).json(updatedPodcastDescription);
+    } catch (err) {
+        //Sends error if the code above fails for whatever reason
+        res.status(500).send(err.message);
+    }
+})
+
+//Asyncronous Function to grab podcast data by ID and save it to a "res.user" object value
+async function getPodcastDescription(req, res, next){
+	let podcastDescription
+	try{
+		podcastDescription = await PodcastDescription.findById(req.params.id).exec();
+		if(podcastDescription == null){
+			return res.status(404).json({message: "Can't find Podcast Description"})
+		}
+	} catch (err) {
+		return res.status(500).json({ message: err.message })
+	}
+	res.podcastDescription = podcastDescription;
 	next()
 }
 module.exports = router
