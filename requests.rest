@@ -20,6 +20,9 @@ content-type: application/json
 ###
 
 GET http://localhost:8080/api/user/627be54c98be2e675793c20a
+###
+GET http://localhost:8080/api/user/findAll
+content-type: application/json
 
 ###
 
@@ -71,7 +74,9 @@ content-type: application/json
 GET http://localhost:8080/api/podcast/627c1bf084b5d1ed70a03649
 content-type: application/json
 
-
+###
+GET http://localhost:8080/api/podcast/findAll
+content-type: application/json
 
 ###
 DELETE http://localhost:8080/api/podcast/627c1f8f9b7f131b8fad2778
@@ -130,6 +135,9 @@ content-type: application/json
 ###
 GET http://localhost:8080/api/discipline/627c96c5d996852856ba5098
 
+content-type: application/json
+###
+GET http://localhost:8080/api/discipline/findAll
 content-type: application/json
 
 ###

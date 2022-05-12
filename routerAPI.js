@@ -16,6 +16,19 @@ const { db } = require('./util/users');
 /* API routes for USERS*/
 
 //ROUTES FOR USERS
+
+//GET's ALL Users
+router.get('/user/findAll', async (req, res) => {
+    console.log("GET request executing...")
+	try{
+		// const users = await User.find({id: req.params.id});
+		const users = await User.find({}).exec();
+		res.status(200).json(users)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
+
 //GET's a user's information
 router.get('/user/:id', async (req, res) => {
     console.log("GET request executing...")
@@ -117,7 +130,19 @@ async function getUser(req, res, next){
 
 /* API Routes for Podcasts*/
 
+//GET's ALL podcasts
+router.get('/podcast/findAll', async (req, res) => {
+    console.log("GET request executing...")
+	try{
+		// const users = await User.find({id: req.params.id});
+		const podcasts = await Podcast.find({}).exec();
+		res.status(200).json(podcasts)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
 
+//GET's information from a podcast using the ID
 router.get('/podcast/:id', async (req, res) => {
     console.log("GET request executing...")
 	try{
@@ -295,6 +320,18 @@ async function getPodcastDescription(req, res, next){
 }
 
 /* API routes for Disciplines */
+
+//GET's discipline based on ID
+router.get('/discipline/findAll', async (req, res) => {
+    console.log("GET description request executing...")
+	try{
+		// const users = await User.find({id: req.params.id});
+		const discipline = await Discipline.find({}).exec();
+		res.status(200).json(discipline)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
 
 //GET's discipline based on ID
 router.get('/discipline/:id', async (req, res) => {

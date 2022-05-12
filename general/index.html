@@ -118,144 +118,32 @@
                         <script>
                             //Code for Impelmenting Feed
                             var podcastList
-                                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
-                                    podcastList = body;
+                            var userList;
+                            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
+                                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
+                                    podcastList = body2;
+                                    userList = body;
                                     //Lists podcasts with Math as category
-                                    if(params.has("category")){
-                                        if(params.get("category") == "math"){
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                var keywordList = podcastList[i]["keywords"];
-                                                for(j = 0; j < keywordList; j++){
-                                                    if(keywordList[j] == params.get("category")){
-                                                        displayPodcast(i);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //Lists podcasts with science as category
-                                        if(params.get("category") == "science"){
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                var keywordList = podcastList[i]["keywords"];
-                                                for(j = 0; j < keywordList; j++){
-                                                    if(keywordList[j] == params.get("category")){
-                                                        displayPodcast(i);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //Lists Podcasts with History as category
-                                        if(params.get("category") == "history"){
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                var keywordList = podcastList[i]["keywords"];
-                                                for(j = 0; j < keywordList; j++){
-                                                    if(keywordList[j] == params.get("category")){
-                                                        displayPodcast(i);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //Lists podcasts with arts as category
-                                        if(params.get("category") == "arts"){
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                var keywordList = podcastList[i]["keywords"];
-
-                                                for(j = 0; j < keywordList; j++){
-                                                    if(keywordList[j] == params.get("category")){
-                                                        displayPodcast(i);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //Lists podcasts by technology
-                                        if(params.get("category") == "technology"){
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                var keywordList = podcastList[i]["keywords"];
-
-                                                for(j = 0; j < keywordList; j++){
-                                                    if(keywordList[j] == params.get("category")){
-                                                        displayPodcast(i);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //Lists podcasts by politics
-                                        if(params.get("category") == "politics"){
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                var keywordList = podcastList[i]["keywords"];
-
-                                                for(j = 0; j < keywordList; j++){
-                                                    if(keywordList[j] == params.get("category")){
-                                                        displayPodcast(i);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        //Lists podcasts by sports
-                                        if(params.get("category") == "sports"){
-                                            for(i = 0; i < Object.keys(podcastList).length; i++){
-                                                var keywordList = podcastList[i]["keywords"];
-
-                                                for(j = 0; j < keywordList; j++){
-                                                    if(keywordList[j] == params.get("category")){
-                                                        displayPodcast(i);
-                                                    }
-                                                }
-                                            }
-                                        }
+                                    console.log(userList[1]);
+                                    console.log(podcastList); 
+                                    for(i = 0; i < podcastList.length; i++){
+                                        //console.log(podcastList[i]);
+                                        displayPodcast(i, podcastList, userList);
                                     }
-                                    //Lists podcasts by date published
-                                    if(params.has("sortDate")){
-                                        //By 2022
-                                        if(params.get("sortDate") == "2022"){
-                                            for (i = 0; i < Object.keys(podcastList).length; i++){
-                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
-                                                    displayPodcast(i);
-                                                }
-                                            }
-                                            //By 2021
-                                        } else if (params.get("sortDate") == "2021"){
-                                            for (i = 0; i < Object.keys(podcastList).length; i++){
-                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
-                                                    displayPodcast(i);
-                                                }
-                                            }
-                                            //By 2020
-                                        } else if (params.get("sortDate") == "2020"){
-                                            for (i = 0; i < Object.keys(podcastList).length; i++){
-                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
-                                                    displayPodcast(i);
-                                                }
-                                            }
-                                            //By 2019
-                                        } else if(params.get("sortDate") == "2019"){
-                                            for (i = 0; i < Object.keys(podcastList).length; i++){
-                                                if(params.get("sortDate") == podcastList[i]["publishedDate"].slice(6, podcastList[i]["publishedDate"].length)){
-                                                    displayPodcast(i);
-                                                }
-                                            }
-                                        }
-                                    //Lists either 5 most recent or 5 oldest podcasts
-                                    } else if(params.has("sortBy")){
-                                        //By 5 Oldest/First Added
-                                        if(params.get("sortBy") == "Oldest"){
-                                            for(i = 0; i < 5; i++){
-                                                displayPodcast(i);
-                                            }
-                                        //By 5 Newest/Most recently added
-                                        } else if(params.get("sortBy") == "Newest"){
-                                            console.log(Object.keys(podcastList).length);
-                                            console.log(Object.keys(podcastList).length - 5);
-                                            for (i = Object.keys(podcastList).length - 1; i > Object.keys(podcastList).length - 6; i--){
-                                                displayPodcast(i);
-                                            }
-                                        }
-                                    } else {
-                                        for (i = 0; i < body.length; i++){
-                                            displayPodcast(i);
-                                        }
-                                    }
+                                    // if(params.has("category")){
+                                    //     if(params.get("category") == "math"){
+                                    //         for(i = 0; i < Object.keys(podcastList).length; i++){
+                                    //             var keywordList = podcastList[i]["keywords"];
+                                    //             for(j = 0; j < keywordList; j++){
+                                    //                 if(keywordList[j] == params.get("category")){
+                                    //                     displayPodcast(i);
+                                    //                 }
+                                    //             }
+                                    //         }
+                                    //     }
+                                    // }
                                 })
-                            
+                            })                            
                         </script>
                         <!-- Podcasts -->
                     </div>
