@@ -166,6 +166,8 @@ router.get('/podcast/owned/:email', async (req, res) => {
 	}
 });
 
+//GET's information from Users to get saved podcasts
+
 //POST's information for a new podcast
 router.post('/podcast/', async (req,res) => {
     console.log("POST request executing...");
