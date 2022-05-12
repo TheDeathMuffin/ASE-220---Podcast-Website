@@ -61,17 +61,18 @@ content-type: application/json
 
 
 ###
-PATCH http://localhost:8080/api/podcast/627c1bf084b5d1ed70a03649
+PATCH http://localhost:8080/api/podcast/627c56be300f7a9a4a71a75f
 content-type: application/json
 
 {
-    "firstname":"cow",
-    "lastname":"man"
+    "disciplines":[
+        "Math", "Science"
+    ]
 }
 
 
 ###
-GET http://localhost:8080/api/podcast/627c1bf084b5d1ed70a03649
+GET http://localhost:8080/api/podcast/627d3dd41876b026894b5f94
 content-type: application/json
 
 ###

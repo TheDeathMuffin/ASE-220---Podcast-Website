@@ -20,7 +20,6 @@ else {
 
 /* Populates Page with User's Details */
 $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
-    console.log(data);
     for (let i = 0; i < data.length; i++) {
         if (currentUser == data[i]['email']) {
             $('.currentName').append(data[i]['firstname'],' ',data[i]['lastname']);

@@ -124,8 +124,6 @@
                                     podcastList = body2;
                                     userList = body;
                                     //Lists podcasts with Math as category
-                                    console.log(userList[1]);
-                                    console.log(podcastList); 
                                     for(i = 0; i < podcastList.length; i++){
                                         //console.log(podcastList[i]);
                                         displayPodcast(i, podcastList, userList);
@@ -191,7 +189,9 @@
                 myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
                     podcastList = body2;
                     userList = body;
-                    searchBar(podcastList,userList);
+                    
+                    //console.log(podcastList)
+                    searchBar(podcastList, userList);
                 })
             })
         
