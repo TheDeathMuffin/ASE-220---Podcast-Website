@@ -1,3 +1,5 @@
+//const { search } = require("../../routerAPI");
+
 /* This is used to store the email for the currently-signed in user. It is a jenky but necessary (for now) form of authentication testing. */
 const currentUser = 'amy@gmail.com';     
 let apiData;                                   /* To simulate no user being signed in, set this value to null */
@@ -135,10 +137,10 @@ function clearBox(className = ".podcast-menu")
     $(".podcast-menu").empty();
 }
 //Working Complicated Search Bar
-function searchBar(type = "indexSearch"){
+function searchBar(podcastList, userList, type = "indexSearch"){
     myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
         myAjax('GET', "https://jsonblob.com/api/jsonBlob/953096375785242624", null, function(users){
-            myAjax('GET', "https://jsonblob.com/api/jsonBlob/966066952229634048", null, function(disciplines){
+            myAjax('GET', "http://localhost:8080/api/discipline/findAll", null, function(disciplines){
                 var podcastList = response;
                 var savedPodcasts = [];
                 var yourPodcasts = [];
@@ -148,6 +150,7 @@ function searchBar(type = "indexSearch"){
                         yourPodcasts.push(podcastList[i])
                     }
                 }
+                //Loop to find your saved Podcasts
                 for (i = 0; i < users.length; i++){
                     if(currentUser == users[i]["email"]){
                         for(j = 0; j < users[i]["savedPodcasts"].length; j ++){
@@ -155,7 +158,6 @@ function searchBar(type = "indexSearch"){
                         }
                     }
                 }
-                console.log(response);
                 $(".search").on("keypress", function(e){
                     if(e.which == 13){
                         clearBox(".podcast-menu");
@@ -168,7 +170,6 @@ function searchBar(type = "indexSearch"){
                                 var searchString = e.target.value.toLowerCase();
                                 var searchArray = searchString.split(" ");
                                 var titleArray = podcastTitle.split(" ");
-                                //console.log(searchArray); console.log(titleArray);
                                 for(j = 0; j < titleArray.length; j++){
                                     for(k = 0; k < searchArray.length; k++){
                                         if(titleArray[j].includes(searchArray[k])){
@@ -260,13 +261,13 @@ function searchBar(type = "indexSearch"){
                                 var searchString = e.target.value.toLowerCase();
                                 var searchArray = searchString.split(" ");
                                 var titleArray = podcastTitle.split(" ");
-                                //console.log(searchArray); console.log(titleArray);
 
                                 //Compares Podcast Titles to search 
                                 for(j = 0; j < titleArray.length; j++){
                                     for(k = 0; k < searchArray.length; k++){
+                                        //console.log(titleArray + " COMPARED WITH " + searchArray);
                                         if(titleArray[j].includes(searchArray[k])){
-                                            displayPodcast(i);
+                                            displayPodcast(i, podcastList, userList);
                                             hasDisplayed = true;
                                             break;
                                         }
@@ -278,9 +279,9 @@ function searchBar(type = "indexSearch"){
                                 //Compares Scientific Disciplines to search
                                 for(j = 0; j < disciplinesArray.length; j++){
                                     for(k = 0; k < searchArray.length; k++){
-                                        console.log(disciplinesArray + " COMPARED WITH " + searchArray)
+                                        //console.log(disciplinesArray + " COMPARED WITH " + searchArray)
                                         if(disciplinesArray[j].toLowerCase().includes(searchArray[k])){
-                                            displayPodcast(i);
+                                            displayPodcast(i, podcastList, userList);
                                             hasDisplayed = true;
                                             break;
                                         }
@@ -293,7 +294,7 @@ function searchBar(type = "indexSearch"){
                     }
                 })
             })
-        });
+        })
     })
 }
 

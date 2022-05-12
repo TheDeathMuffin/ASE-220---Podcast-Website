@@ -130,6 +130,7 @@
                                         //console.log(podcastList[i]);
                                         displayPodcast(i, podcastList, userList);
                                     }
+                                    
                                     // if(params.has("category")){
                                     //     if(params.get("category") == "math"){
                                     //         for(i = 0; i < Object.keys(podcastList).length; i++){
@@ -184,8 +185,17 @@
             let params = (new URL(document.location)).searchParams
             //var params = new URLSearchParams(window.location.search)
         </script>
+            
+        <script>
+            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
+                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
+                    podcastList = body2;
+                    userList = body;
+                    searchBar(podcastList,userList);
+                })
+            })
         
-        <script>searchBar();</script>
+        </script>
         <script src="../util/postload.js"></script>
 	</body>
 </html>
