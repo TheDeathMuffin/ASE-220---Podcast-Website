@@ -123,18 +123,34 @@
  
     /* On Form Submit, Updates User's Information */
     $(document).on('submit','#update',function(e){
-        $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
-            for (let i = 0; i < data.length; i++) {              
-                if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
-                    data[i]['firstname'] = $('input[name=firstname]').val();
-                    data[i]['lastname'] = $('input[name=lastname]').val();
-                    data[i]['organization'] = $('input[name=organization]').val();
-                }
-            }
-            e.preventDefault();
-            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
-                window.location.href = "../user/dashboard.html";
-            }); 
-        });       
+        //console.log(e);
+        
+        myAjax('GET', `http://localhost:8080/api/user/owned/${currentUser}`, null, function(response){
+            console.log(response);
+            response = response[0];
+            response.firstname = $('input[name=firstname]').val();
+            response.lastname = $('input[name=lastname]').val();
+            response.email = $('input[name=email]').val();
+            response.tags = $('input[name=tags]').val();
+            
+            myAjax('PATCH', `http://localhost:8080/api/user/${response._id}`, response, function(body){
+                //console.log(body)
+            })
+        })
+        
+
+        // $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
+        //     for (let i = 0; i < data.length; i++) {              
+        //         if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
+        //             data[i]['firstname'] = $('input[name=firstname]').val();
+        //             data[i]['lastname'] = $('input[name=lastname]').val();
+        //             data[i]['organization'] = $('input[name=organization]').val();
+        //         }
+        //     }
+        //     e.preventDefault();
+        //     myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
+        //         window.location.href = "../user/dashboard.html";
+        //     }); 
+        // });       
     });
 </script>
