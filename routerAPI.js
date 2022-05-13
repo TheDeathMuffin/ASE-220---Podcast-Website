@@ -34,6 +34,7 @@ router.get('/user/owned/:email', async (req, res) => {
     console.log("GET request executing...")
 	try{
 		const user = await User.find({email: req.params.email}).exec();
+        console.log(user);
 		res.status(200).json(user)
 	} catch (err) {
 		res.status(500).json({ message: err.message })
@@ -87,6 +88,7 @@ router.patch("/user/:id", getUser, async (req, res) => {
     console.log("PATCH Request executing...")
     //Modifies information from getUser() based on what's sent in the PATCH request
     //TODO - use loop to condense this code.
+    console.log(req.body);
     if(req.body.firstname != null){
         res.user.firstname = req.body.firstname;
     }
@@ -116,6 +118,7 @@ router.patch("/user/:id", getUser, async (req, res) => {
     }
     try {
         //Saves all the updated information to the database then sends a response back to the requestor with a status of 200
+        console.log(res.user);
         const updatedUser = await res.user.save();
         res.status(200).json(updatedUser);
     } catch (err) {
@@ -127,16 +130,21 @@ router.patch("/user/:id", getUser, async (req, res) => {
 //Asyncronous Function to grab user data by ID and save it to a "res.user" object value
 async function getUser(req, res, next){
 	let user
+    //console.log(req.params.id);
 	try{
 		user = await User.findById(req.params.id).exec();
 		if(user == null){
-			return res.status(404).json({message: "Can't find user"})
-		}
+			return res.status(402).json({message: "Can't find user"})
+		} else {
+            //console.log(req.body);
+            res.user = user;
+            next()
+        }
 	} catch (err) {
 		return res.status(500).json({ message: err.message })
 	}
-	res.user = user;
-	next()
+    
+	
 }
 
 
@@ -304,12 +312,14 @@ async function getPodcast(req, res, next){
 		podcast = await Podcast.findById(req.params.id).exec();
 		if(podcast == null){
 			return res.status(404).json({message: "Can't find Podcast"})
-		}
+		} else {
+            res.podcast = podcast;
+	        next();
+        }
 	} catch (err) {
 		return res.status(500).json({ message: err.message })
 	}
-	res.podcast = podcast;
-	next()
+	
 }
 /* API routes for PodcastDescriptions */
 

@@ -41,7 +41,7 @@ DELETE http://localhost:8080/api/user/627ad1f6b0d9552c528ff699
 
 ###
 
-PATCH http://localhost:8080/api/user/627ad1f6b0d9552c528ff699
+PATCH http://localhost:8080/api/user/627c1bf084b5d1ed70a03649
 content-type: application/json
 
 {
@@ -72,10 +72,11 @@ content-type: application/json
 
 
 ###
-PATCH http://localhost:8080/api/podcast/627c56be300f7a9a4a71a75f
+PATCH http://localhost:8080/api/podcast/627c1bf084b5d1ed70a03649
 content-type: application/json
 
 {
+    "firstname":"Jump cow man",
     "disciplines":[
         "Math", "Science"
     ]

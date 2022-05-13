@@ -126,12 +126,15 @@
         //console.log(e);
         
         myAjax('GET', `http://localhost:8080/api/user/owned/${currentUser}`, null, function(response){
+            console.log(response);
+            response = response[0];
             response.firstname = $('input[name=firstname]').val();
             response.lastname = $('input[name=lastname]').val();
             response.email = $('input[name=email]').val();
             response.tags = $('input[name=tags]').val();
-            myAjax('PATCH', `http://localhost:8080/api/user/${response[0]._id}`, response, function(body){
-                console.log(body)
+            
+            myAjax('PATCH', `http://localhost:8080/api/user/${response._id}`, response, function(body){
+                //console.log(body)
             })
         })
         
