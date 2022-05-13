@@ -17,7 +17,7 @@
     </head>
 
     <body class="bg-light">
-     <!-- Page Header -->
+      <!-- Page Header -->
         <header class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
             <a class="navbar-brand text-light" href="/">PodScholar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,10 +29,10 @@
                     <a class="nav-link text-light" href="/general/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/general/discipline">Scientific Disciplines</a>
+                    <a class="nav-link text-light" href="/disciplines/">Scientific Disciplines</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/general/tags">Tags</a>
+                    <a class="nav-link text-light" href="/tags/">Tags</a>
                 </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -40,7 +40,7 @@
                         <a class="nav-link text-light" href="/general/register">Register</a>
                     </li>
                     <li class="nav-item notauthdel">
-                        <a class="nav-link text-light" href="/general/Login.html">Login</a>
+                        <a class="nav-link text-light" href="/general/login">Login</a>
                     </li>
                     <div class="form-inline my-2 my-lg-0 authdel">
                         <li class="nav-item dropdown">
@@ -97,9 +97,61 @@
         </footer>
         <!-- Page Footer -->
         <script src="../util/postload.js"></script>
+        <script src="/axios.min.js"></script>
+	<script>
+	const user=document.getElementById('users-detail')
+    userid=(window.location.pathname.split(/\//))[2]
+	axios({
+	  method: 'post',
+	  url: '/api/user/findAll',
+	  data: {},
+		validateStatus:()=>true
+	})
+	  .then(function (response) {
+		console.log(response);
+			let cardNumber=document.querySelectorAll('[name="card_no"]')[0]
+			let nameOnCard=document.querySelectorAll('[name="name_on_card"]')[0]
+            let billingAddress=document.querySelectorAll('[name="billing_addr"]')[0]
+            userID.value=response.data._id
+			cardNumber.value=response.data.cardNumber
+			nameOnCard.value=response.data.nameOnCard
+            billingAddress.value=response.data.billingAddress
+	  })
+	  .catch(function (error) {
+		console.log(error);
+	  });
+	  
+	const update=document.getElementById('update')
+	userid=(window.location.pathname.split(/\//))[2]
+
+	update.addEventListener('submit',(e)=>{
+		e.preventDefault();
+		let cardNumber=document.querySelectorAll('[name="card_no"]')[0]
+		let nameOnCard=document.querySelectorAll('[name="name_on_card"]')[0]
+         let billingAddress=document.querySelectorAll('[name="billing_addr"]')[0]
+		console.log()
+		axios({
+		  method: 'patch',
+		  url: '/api/user/findAll/:id',
+		  data: {
+			cardNumber:cardNumber.value,
+            nameOnCard:nameOnCard.value,
+			billingAddress:billingAddress.value
+		  },
+			validateStatus:()=>true
+		})
+		  .then(function (response) {
+			console.log(response);
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		  });
+	})
+    </script>
     </body>
 </html>
 
+    <!---
 <script>
     /* Populates form with User's Informaiton */
     $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){
@@ -130,3 +182,4 @@
         });       
     });
 </script>
+----->
