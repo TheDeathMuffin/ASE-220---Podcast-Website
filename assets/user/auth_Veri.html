@@ -78,14 +78,6 @@
         <!-- Upload Form -->
         <div class="registration-form">
             <form id="upload" onSubmit="return false">
-                <div class="row">
-                    <div class="col form-group">
-                        <input type="text" name="firstname" class="form-control item" placeholder="First Name" required>
-                    </div>
-                    <div class="col form-group">
-                        <input type="text" name="lastname" class="form-control item" placeholder="Last Name" required>
-                    </div>
-                </div>
                 <div class="form-group">
                     <input type="text" name="tags" class="form-control item" placeholder="Author Tags" required>
                 </div>
@@ -94,9 +86,6 @@
                 </div>
                 <div class="form-group">
                     <input type="Affiliation" name="Current Affiliation" class="form-control item" placeholder="NKU">
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email of academic affiliation" class="form-control item" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <input type="website" name="Link to academic center" class="form-control item" placeholder="Proof of Affiliation">
@@ -116,8 +105,6 @@
                                 </select>
                             </div>
                                 --->
-                </div>
-                </div>
                 <a href="../general/terms.html" target="_blank">
                     <h6>Terms and Conditions</h6>
                 </a>
@@ -153,9 +140,6 @@
         for (let i = 0; i < data.length; i++) {
             if (params.get("index") == data[i]['index']) {
                 $.getJSON(data[i]['descriptionLocation'], function (data) { $('textarea[name=description]').html(data['description']); });
-                $('input[name=firstname]').val(data[i]['firstname']);
-                $('input[name=lastname]').val(data[i]['lastname']);
-                $('input[name=email]').val(data[i]['email']);
                 $('input[name=title]').val(data[i]['title']);
                 $('input[name=journal]').val(data[i]['journal']);
                 $('input[name=publishedDate]').val(data[i]['publishedDate']);
@@ -173,9 +157,6 @@
             var descriptionLocation;
             for (let i = 0; i < data.length; i++) {
                 if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
-                    data[i]['firstname'] = $('input[name=firstname]').val();
-                    data[i]['lastname'] = $('input[name=lastname]').val();
-                    data[i]['email'] = $('input[name=email]').val();
                     data[i]['title'] = $('input[name=title]').val();
                     data[i]['journal'] = $('input[name=journal]').val();
                     data[i]['publishedDate'] = $('input[name=publishedDate]').val();
