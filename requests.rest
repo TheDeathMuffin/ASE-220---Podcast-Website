@@ -18,7 +18,18 @@ content-type: application/json
 }
 
 ###
+GET http://localhost:8080/api/podcast/owned/amy@gmail.com
 
+###
+GET http://localhost:8080/api/podcast/saved/amy@gmail.com
+
+###
+GET http://localhost:8080/api/podcast/subscribed/amy@gmail.com
+
+###
+GET http://localhost:8080/api/podcast/liked/amy@gmail.com
+
+###
 GET http://localhost:8080/api/user/627be54c98be2e675793c20a
 ###
 GET http://localhost:8080/api/user/findAll
