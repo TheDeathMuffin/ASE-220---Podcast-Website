@@ -124,6 +124,8 @@
                                     podcastList = body2;
                                     userList = body;
                                     //Lists podcasts with Math as category
+                                    console.log(userList[1]);
+                                    console.log(podcastList); 
                                     for(i = 0; i < podcastList.length; i++){
                                         //console.log(podcastList[i]);
                                         displayPodcast(i, podcastList, userList);
@@ -178,7 +180,6 @@
                 });
              }
             //Request to grab podcast List information and turn it into an array
-
             
             let params = (new URL(document.location)).searchParams
             //var params = new URLSearchParams(window.location.search)
@@ -187,7 +188,9 @@
         <script>
             myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
                 myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
-                    searchBar(body, body2);
+                    podcastList = body2;
+                    userList = body;
+                    searchBar(podcastList,userList);
                 })
             })
         </script>
