@@ -215,7 +215,7 @@ router.get('/podcast/subscribed/:email', async (req, res) => {
         const subscribed = await User.find({email: req.params.email}).select("subscribedPodcasts").exec();
         subscribedPodcasts = [];
         for (i = 0; i < subscribed.length; i++) {
-            subscribedPodcasts.push(await Podcast.find({_id: subscribed[i]}).exec());
+            subscribedPodcasts.push(await Podcast.find({email: subscribed[i]}).exec());
         }
         res.status(200).json(subscribedPodcasts);
     }
