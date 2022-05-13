@@ -37,7 +37,7 @@ function myAjax(method='GET',endpoint,data=null,onSuccess=null){
 }
 
 //Reusable Display Podcast Function
-function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast-menu",allowDel=false,){
+function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast-menu",allowDel=true){
     myAjax('GET', 'http://localhost:8080/api/discipline/findAll', null, function(body){
         //if (Object.keys(data.i).length === 0) { return; };
         var discipline

@@ -88,7 +88,7 @@
                         <input type="text" name="doi" class="form-control item" placeholder="DOI #">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="tags" class="form-control item" placeholder="Tags">
+                        <input type="text" name="tags" class="form-control item" placeholder="Tags !!!ENTER as COMMA Separated List">
                     </div>
                     <div class="container">
                         <div class="row justify-content-center justify-content-between flex-wrap">
@@ -188,12 +188,11 @@
             $(document).on('submit','#upload',function(e){
                 var categories = [];
 				e.preventDefault();
-                console.log($('input[name=title]').val());
-                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953093703074070528', null, function(body){
+                myAjax('GET', `http://localhost:8080/api/podcast/findAll`, null, function(body){
                     //Checks if podcast already exists based on DOI #
-                    var data = body;
+                    //var data = body;
                     var podcastExists = false;
-                    for (i = 0; i < data.length; i++){
+                    for (i = 0; i < body.length; i++){
                         var doi = $('input[name=doi]').val();
                         if (doi == body[i]["doi"]){
                             podcastExists = true;
@@ -202,41 +201,62 @@
                     }
                     if (podcastExists == false){
                         var podcastDescription = {description:$('textarea[name=description]').val()};
-                        myAjax('POST', 'https://jsonblob.com/api/jsonBlob/', podcastDescription, function(body, status, response){
-                                var descriptionLocation = response.getResponseHeader("location");
-                                var betterURL = descriptionLocation.slice(0, 4) + "s" + descriptionLocation.slice(4);
-                                console.log("Successful POST...\nLocation is: " + descriptionLocation);
+                        podcastDescription.relatedPodcast = $('input[name=doi]').val()
+                        myAjax('POST', 'http://localhost:8080/api/podcastDescription/', podcastDescription, function(body, status, response){
+                            var descriptionLocation = body._id;
+                           // var betterURL = descriptionLocation.slice(0, 4) + "s" + descriptionLocation.slice(4);
+                            console.log("Successful POST...\nLocation is: " + descriptionLocation);
 
-                                //Checks if Certain value is checked in checkbox
-                                if($('#math:checked').val()){
-                                    categories.push('math')
-                                }
-                                if($('#science:checked').val()){
-                                    categories.push('science')
-                                }
-                                if($('#history:checked').val()){
-                                    categories.push('history')
-                                }
-                                if($('#arts:checked').val()){
-                                    categories.push('arts')
-                                }
-                                if($('#technology:checked').val()){
-                                    categories.push('technology')
-                                }
-                                if($('#politics:checked').val()){
-                                    categories.push('politics')
-                                }
-                                if($('#sports:checked').val()){
-                                    categories.push('sports')
-                                }
+                            //Checks if Certain value is checked in checkbox
+                            if($('#math:checked').val()){
+                                categories.push('math')
+                            }
+                            if($('#science:checked').val()){
+                                categories.push('science')
+                            }
+                            if($('#history:checked').val()){
+                                categories.push('history')
+                            }
+                            if($('#arts:checked').val()){
+                                categories.push('arts')
+                            }
+                            if($('#technology:checked').val()){
+                                categories.push('technology')
+                            }
+                            if($('#politics:checked').val()){
+                                categories.push('politics')
+                            }
+                            if($('#sports:checked').val()){
+                                categories.push('sports')
+                            }
 
-                                console.log(categories);
-                                //Gets values and puts it into data so it can be used in the put request
-                                data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=title]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:categories, index:(data.length + 1).toString()});
-                                myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
-                                    console.log("Successful PUT...");
-                                    window.location.href = "../user/dashboard.html";
-                                })
+                            console.log(categories);
+                            
+                            
+                            //Formats Tags properly
+                            var tags = $('input[name=tags]').val()
+                            tags = tags.split(',');
+                            for (i = 0; i < tags.length; i++){
+                                tags[i] = tags[i].replace(/\s+/g, ' ').trim()
+                            }
+                            //Gets values and puts it into data so it can be used in the POST request
+                            var newPodcast = {};
+                            newPodcast.firstname = $('input[name=firstname]').val();
+                            newPodcast.lastname = $('input[name=lastname]').val();
+                            newPodcast.email = $('input[name=email]').val();
+                            newPodcast.descriptionLocation = descriptionLocation;
+                            newPodcast.title = $('input[name=title]').val();
+                            newPodcast.journal = $('input[name=journal]').val();
+                            newPodcast.publishedDate = $('input[name=publishedDate]').val();
+                            newPodcast.doi = $('input[name=doi]').val();
+                            newPodcast.disciplines = categories;
+                            newPodcast.tags = tags;
+
+                            //data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=title]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:categories, index:(data.length + 1).toString()});
+                            myAjax('POST', 'http://localhost:8080/api/podcast/', newPodcast, function(){
+                                console.log("New Podcast is Created");
+                                window.location.href = "/user/";
+                            })
                         })
                     }
                 });

@@ -135,26 +135,51 @@
     /* Populates form with Podcast's Informaiton */
     let params = (new URL(document.location)).searchParams;
     $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
-        for (let i = 0; i < data.length; i++) {
-            if (params.get("index") == data[i]['index']) {
-                $.getJSON(data[i]['descriptionLocation'], function(data){ $('textarea[name=description]').html(data['description']); });
-                $('input[name=firstname]').val(data[i]['firstname']);
-                $('input[name=lastname]').val(data[i]['lastname']);
-                $('input[name=email]').val(data[i]['email']);
-                $('input[name=title]').val(data[i]['title']);
-                $('input[name=journal]').val(data[i]['journal']);
-                $('input[name=publishedDate]').val(data[i]['publishedDate']);
-                $('input[name=doi]').val(data[i]['doi']);
-                $('input[name=keywords]').val(data[i]['keywords']);
-                /*$('input[name=manuscript]').val(data[i]['manuscript']);                 */
-                break;
-            }
-        }
+        // for (let i = 0; i < data.length; i++) {
+        //     if (params.get("index") == data[i]['index']) {
+        //         $.getJSON(data[i]['descriptionLocation'], function(data){ $('textarea[name=description]').html(data['description']); });
+        //         $('input[name=firstname]').val(data[i]['firstname']);
+        //         $('input[name=lastname]').val(data[i]['lastname']);
+        //         $('input[name=email]').val(data[i]['email']);
+        //         $('input[name=title]').val(data[i]['title']);
+        //         $('input[name=journal]').val(data[i]['journal']);
+        //         $('input[name=publishedDate]').val(data[i]['publishedDate']);
+        //         $('input[name=doi]').val(data[i]['doi']);
+        //         $('input[name=keywords]').val(data[i]['keywords']);
+        //         /*$('input[name=manuscript]').val(data[i]['manuscript']);                 */
+        //         break;
+        //     }
+        // }
     });
  
     /* On Form Submit, Updates Podcast's Information */
     $(document).on('submit','#update',function(e){
-        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+        // $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
+        //     var descriptionLocation;
+        //     for (let i = 0; i < data.length; i++) {              
+        //         if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
+        //             data[i]['firstname'] = $('input[name=firstname]').val();
+        //             data[i]['lastname'] = $('input[name=lastname]').val();
+        //             data[i]['email'] = $('input[name=email]').val();
+        //             data[i]['title'] = $('input[name=title]').val();
+        //             data[i]['journal'] = $('input[name=journal]').val();
+        //             data[i]['publishedDate'] = $('input[name=publishedDate]').val();
+        //             data[i]['doi'] = $('input[name=doi]').val();
+        //             /*data[i]['manuscript'] = $('input[name=manuscript]').val();                */
+        //             data[i]['keywords'] = $('input[name=keywords]').val().split(",");
+        //             descriptionLocation = data[i]['descriptionLocation'];
+        //         }
+        //     }
+        //     e.preventDefault();
+        //     myAjax('PUT', descriptionLocation, $('textarea[name=description]').val(), function(){
+        //     });
+        //     myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
+        //         window.location.href = "../user/dashboard.html";
+        //     }); 
+        // });       
+    });
+    $(document).on('submit','#update',function(e){
+        myAjax('GET', `http://localhost:8080/api/user/owned/${currentUser}`, null, function(response){
             var descriptionLocation;
             for (let i = 0; i < data.length; i++) {              
                 if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */

@@ -175,6 +175,16 @@ router.get('/podcast/:id', async (req, res) => {
 });
 
 
+//GET's information from podcasts by DOI.
+router.get('/podcast/exist/:doi', async (req, res) => {
+    console.log("GET request executing...")
+	try{
+		const podcasts = await Podcast.find({doi: req.params.doi}).exec();
+		res.status(200).json(podcasts)
+	} catch (err) {
+		res.status(500).json({ message: err.message })
+	}
+});
 //GET's information from podcasts owned by a specified user.
 router.get('/podcast/owned/:email', async (req, res) => {
     console.log("GET request executing...")
@@ -344,6 +354,7 @@ router.post('/podcastDescription/', async (req,res) => {
     })
     try {
         const newPodcastDescription = await podcastDescription.save();
+        res.set("Location")
         res.status(200).json(newPodcastDescription);
     } catch (err){
         res.status(400).json({message: err.message})
