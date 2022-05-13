@@ -155,7 +155,8 @@ router.get('/podcast/:id', async (req, res) => {
 	}
 });
 
-//GET's information from podcasts owned by a user using their email.
+
+//GET's information from podcasts owned by a specified user.
 router.get('/podcast/owned/:email', async (req, res) => {
     console.log("GET request executing...")
 	try{
@@ -165,6 +166,46 @@ router.get('/podcast/owned/:email', async (req, res) => {
 		res.status(500).json({ message: err.message })
 	}
 });
+//GET's information from podcasts saved by a specified user.
+router.get('/podcast/saved/:email', async (req, res) => {
+    try{
+        const saved = await User.find({email: req.params.email}).select("savedPodcasts").exec();
+        savedPodcasts = [];
+        console.log(saved);
+        for (i = 0; i < saved.length; i++) {
+            savedPodcasts.push(await Podcast.find({_id: saved[i]}).exec());
+        }
+        console.log(savedPodcasts);
+        res.status(200).json(savedPodcasts);
+    }
+    catch (err) {res.status(500).json({ message: err.message })}
+});
+//GET's information from podcasts subscribed to by a specified user.
+router.get('/podcast/subscribed/:email', async (req, res) => {
+    try{
+        const subscribed = await User.find({email: req.params.email}).select("subscribedPodcasts").exec();
+        subscribedPodcasts = [];
+        for (i = 0; i < subscribed.length; i++) {
+            subscribedPodcasts.push(await Podcast.find({_id: subscribed[i]}).exec());
+        }
+        res.status(200).json(subscribedPodcasts);
+    }
+    catch (err) {res.status(500).json({ message: err.message })}
+});
+//GET's information from podcasts liked by a specified user.
+router.get('/podcast/liked/:email', async (req, res) => {
+    try{
+        const liked = await User.find({email: req.params.email}).select("likedPodcasts").exec();
+        likedPodcasts = [];
+        for (i = 0; i < liked.length; i++) {
+            likedPodcasts.push(await Podcast.find({_id: liked[i]}).exec());
+        }
+        res.status(200).json(likedPodcasts);
+    }
+    catch (err) {res.status(500).json({ message: err.message })}
+});
+
+
 
 //GET's information from Users to get saved podcasts
 
