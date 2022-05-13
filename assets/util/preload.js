@@ -3,7 +3,7 @@
 /* This is used to store the email for the currently-signed in user. It is a jenky but necessary (for now) form of authentication testing. */
 //const currentUser = null;
 const currentUser = 'amy@gmail.com';     
-const currentUserID = '627d3db21876b026894b5f8a';
+const currentUserID = '627eb60b2b9c41a61298375c';
 let apiData;                                   /* To simulate no user being signed in, set this value to null */
 
 var noResultsFound = `<p class="font-italic text-secondary h4 pt-5">No results found.</p>`;
@@ -93,7 +93,7 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
         /* Determines what buttons appear on a podcast card */
         if ( currentUser == data[index]['email'] ) {    /* Block only executes if the displayed podcast is owned by the current user. */
             if ( allowDel == true ) {               /* If function call specifies user should be able to edit/delete their own podcasts, delete button is displayed. */
-                htmlString += `<div style="float:right"><a class="text-white" href="updatepodcast.html?index=${data[index].index}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="delete.html?index=${data[index].index}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
+                htmlString += `<div style="float:right"><a class="text-white" href="updatepodcast.html?id=${data[index]["_id"]}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="delete.html?id=${data[index].index}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
             }
             else {                                  /* Otherwise, their podcasts are identified as their own using string. */
                 htmlString += `<i style="float:right">This is your podcast!</i>`;
