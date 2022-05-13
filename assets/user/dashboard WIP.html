@@ -91,12 +91,11 @@
 
                     <!-- User Podcasts Menu -->
                     <div class="col-md-8">
-                        <h3 class="d-inline pr-5">Your Podcasts</h3><h5 class="d-inline"><a href="../user/savedpodcasts.html" class="text-secondary pr-5">Saved Podcasts</a><a href="../user/subscribed.html" class="text-secondary pr-5">Subscribed Podcasts</a><a href="../user/likedpodcasts.html" class="text-secondary">Liked Podcasts</a></h5><br><br>
                         <div class="font-weight-bold">
-                            <p class="d-inline pr-5" id="yourPodcasts_title" style="font-size: 1.9em; color: black">Your Podcasts</p>
-                            <p class="d-inline pr-5" id="savedPodcasts_title" style="font-size: 1.2em; color: grey">Saved Podcasts</p>
-                            <p class="d-inline pr-5" id="subscribedPodcasts_title" style="font-size: 1.2em; color: grey">Subscribed Podcasts</p>
-                            <p class="d-inline pr-5" id="likedPodcasts_title" style="font-size: 1.2em; color: grey">Liked Podcasts</p>
+                            <p class="d-inline pr-4" id="yourPodcasts_title" style="font-size: 1.9em; color: black">Your Podcasts</p>
+                            <p class="d-inline pr-4" id="savedPodcasts_title" style="font-size: 1.2em; color: grey">Saved Podcasts</p>
+                            <p class="d-inline pr-4" id="subscribedPodcasts_title" style="font-size: 1.2em; color: grey">Subscribed Podcasts</p>
+                            <p class="d-inline pr-4" id="likedPodcasts_title" style="font-size: 1.2em; color: grey">Liked Podcasts</p>
                         </div>
                         <br><br>
                         <div class="searchBar input-group rounded">
@@ -113,16 +112,14 @@
                                 <script>
                                     //GET request to podcasts blob
                                     myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
-                                        myAjax('GET', 'http://localhost:8080/api/podcast/owned/' + currentUser, null, function(yourPodcasts){
-                                            var usersPodcasts = 0;
-                                            var notFound = true;
+                                        myAjax('GET', 'http://localhost:8080/api/podcast/owned/' + currentUser, null, function(podcasts){
                                             console.log('before');
-                                            console.log(yourPodcasts);
+                                            console.log(podcasts);
                                             console.log('after');
                                             //console.log(userList);
                                             //Displays podcasts associated with logged in user
-                                            for(i = 0; i < yourPodcasts.length; i++){
-                                                displayPodcast(i, yourPodcasts, userList);
+                                            for(i = 0; i < podcasts.length; i++){
+                                                displayPodcast(i, podcasts, userList,"#yourPodcasts");
                                             }
                                         })
                                     })
@@ -130,7 +127,19 @@
                             </div>
                             <div id="savedPodcasts">
                                 <script>
-
+                                    //GET request to podcasts blob
+                                    myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
+                                        myAjax('GET', 'http://localhost:8080/api/podcast/saved/' + currentUser, null, function(podcasts){
+                                            console.log('before');
+                                            console.log(podcasts);
+                                            console.log('after');
+                                            //console.log(userList);
+                                            //Displays podcasts associated with logged in user
+                                            for(i = 0; i < podcasts.length; i++){
+                                                displayPodcast(i, podcasts, userList,"#savedPodcasts");
+                                            }
+                                        })
+                                    })
                                 </script>
                             </div>
                             
@@ -185,7 +194,7 @@
             </div>
         </footer>
         <!-- Implements searchBar function setup in preload.js -->
-        <script>searchBar();</script>
+        <script>//searchBar();</script>
         <!-- Page Footer -->
         <script src="../util/postload.js"></script>
     </body>
