@@ -2,6 +2,7 @@
 
 /* This is used to store the email for the currently-signed in user. It is a jenky but necessary (for now) form of authentication testing. */
 const currentUser = 'amy@gmail.com';     
+const currentUserID = '627d3db21876b026894b5f8a';
 let apiData;                                   /* To simulate no user being signed in, set this value to null */
 
 var noResultsFound = `<p class="font-italic text-secondary h4 pt-5">No results found.</p>`;
