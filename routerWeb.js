@@ -9,7 +9,7 @@ router.use('/',(req,res)=> {
 })
 
 //Compact route director.
-const generalRoutes = ["about","rules","terms","login","register","discipline","tags"];		//Place routes in here. Route name must correspond to the filename at the location ./general/
+const generalRoutes = ["about","rules","terms","login","register","discipline","tags","report"];		//Place routes in here. Route name must correspond to the filename at the location ./general/
 router.use('/:page',(req, res)=> {
 	if (generalRoutes.includes(req.params.page) && fs.existsSync('./general/' + req.params.page + '.html')) {	 //If route and corresponding HTML file exist, send appropriate page.
 		res.status(200).send(fs.readFileSync('./general/' + req.params.page + '.html','utf-8'))
