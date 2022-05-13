@@ -40,7 +40,7 @@
                         <a class="nav-link text-light" href="/general/register">Register</a>
                     </li>
                     <li class="nav-item notauthdel">
-                        <a class="nav-link text-light" href="/general/Login.html">Login</a>
+                        <a class="nav-link text-light" href="/general/login">Login</a>
                     </li>
                     <div class="form-inline my-2 my-lg-0 authdel">
                         <li class="nav-item dropdown">
@@ -136,27 +136,49 @@
 
             //Code For registering users
             $(document).on('submit','#signup',function(e){
-				e.preventDefault();
-                console.log($('input[name=firstname]').val());
-                myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953096375785242624', null, function(body){
-                    //Checks if user already exists * I know it's wrong rn
-                    var data = body;
-                    var userExists = false;
-                    for (i = 0; i < data.length; i++){
-                        var userEmail = $('input[name=email]').val();
-                        if (userEmail == body[i]["email"]){
-                            userExists = true;
-                            console.log("A user with this email already exists");
+				// e.preventDefault();
+                // console.log($('input[name=firstname]').val());
+                // myAjax('GET', 'https://jsonblob.com/api/jsonBlob/953096375785242624', null, function(body){
+                //     //Checks if user already exists * I know it's wrong rn
+                //     var data = body;
+                //     var userExists = false;
+                //     for (i = 0; i < data.length; i++){
+                //         var userEmail = $('input[name=email]').val();
+                //         if (userEmail == body[i]["email"]){
+                //             userExists = true;
+                //             console.log("A user with this email already exists");
+                //         }
+                //     }
+                //     if (userExists == false){
+                //         data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), university:$('input[name=university]').val(), password:$('input[name=password]').val()});
+                //         myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
+                //             console.log("Successful PUT...");
+                //         })
+                //     }
+                // });
+            });
+            $(document).on('submit','#update',function(e){
+                //console.log(e);
+                e.preventDefault();
+                myAjax('GET', `http://localhost:8080/api/user/findAll`, null, function(response){
+                    for(i = 0; i < response.length; i++){
+                        if(response[i].email == $('input[name=firstname]').val()){
+                            console.log("User Already Exists")
+                        } else {
+                            var newUser;
+                            newUser.firstname = $('input[name=firstname]').val();
+                            newUser.lastname = $('input[name=lastname]').val();
+                            newUser.email = $('input[name=email]').val();
+                            newUser.university = $('input[name=university]').val();
+                            newUser.password = $('input[name=password]').val();
+                            myAjax('POST', `http://localhost:8080/api/user/`, newUser, function(body){
+                                console.log("New User Has been Created")  
+                            })
                         }
                     }
-                    if (userExists == false){
-                        data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), university:$('input[name=university]').val(), password:$('input[name=password]').val()});
-                        myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
-                            console.log("Successful PUT...");
-                        })
-                    }
-                });
-            });
+                    
+                }) 
+            })
         </script>
         <script src="../util/postload.js"></script>
     </body>
