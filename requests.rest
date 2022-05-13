@@ -9,9 +9,9 @@ POST http://localhost:8080/api/user/
 content-type: application/json
 
 {
-    "firstname": "kjyjjfk",
-    "lastname": "Roberts",
-    "email": "jeremy@gmail.com",
+    "firstname": "Amy",
+    "lastname": "Johnson",
+    "email": "amy@gmail.com",
     "password": "sterile",
     "isAuthor":"0"
     
@@ -64,7 +64,7 @@ POST http://localhost:8080/api/podcast/
 content-type: application/json
 
 {
-    "firstname": "kjyjjfk",
+    "firstname": "Rello",
     "lastname": "Roberts",
     "email": "themanroberts@gmail.com",
     "title": "Cow huffers"

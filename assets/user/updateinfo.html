@@ -110,9 +110,10 @@
 
 <script>
     /* Populates form with User's Informaiton */
-    $.getJSON('http://localhost:8080/api/user/owned/findAll', function(data){
+    $.getJSON('http://localhost:8080/api/user/findAll', function(data){
         for (let i = 0; i < data.length; i++) {
-            if (currentUser == data[i]['email']) {
+            //console.log(data[i].email)
+            if (currentUser == data[i].email) {
                 $('input[name=firstname]').val(data[i]['firstname']);
                 $('input[name=lastname]').val(data[i]['lastname']);
                 $('input[name=organization]').val(data[i]['organization']);

@@ -71,23 +71,23 @@
                 <form id="signup" action="">
                     <div class="row">
                         <div class="col form-group">
-                            <input type="text" name="firstname" class="form-control item" placeholder="First Name" required>
+                            <input type="text" name="firstname" class="form-control item" id="firstname" placeholder="First Name" required>
                         </div>
                         <div class="col form-group">
-                            <input type="text" name= "lastname"class="form-control item" id="username" placeholder="Last Name" required>
+                            <input type="text" name= "lastname"class="form-control item" id="lastname" placeholder="Last Name" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control item" id="password" placeholder="Email" required>
+                        <input type="email" name="email" class="form-control item" id="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="university" class="form-control item" id="university" placeholder="University/Organization" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control item" id="username" placeholder="Create Password" required>
+                        <input type="password" name="password" class="form-control item" id="password" placeholder="Create Password" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="confirmPassword"class="form-control item" id="username" placeholder="Confirm Password" required>
+                        <input type="password" name="confirmPassword"class="form-control item" id="confirmPassword" placeholder="Confirm Password" required>
                     </div>
                     <a href="terms.html" target="_blank">
                         <h6>Terms and Conditions</h6>
@@ -157,26 +157,30 @@
                 //     }
                 // });
             });
-            $(document).on('submit','#update',function(e){
+            $(document).on('submit','#signup',function(e){
                 //console.log(e);
                 e.preventDefault();
                 myAjax('GET', `http://localhost:8080/api/user/findAll`, null, function(response){
+                    console.log("FOUND ALL USERS")
+                    //Loops through all existing users to make sure they don't already exist
                     for(i = 0; i < response.length; i++){
-                        if(response[i].email == $('input[name=firstname]').val()){
-                            console.log("User Already Exists")
-                        } else {
-                            var newUser;
-                            newUser.firstname = $('input[name=firstname]').val();
-                            newUser.lastname = $('input[name=lastname]').val();
-                            newUser.email = $('input[name=email]').val();
-                            newUser.university = $('input[name=university]').val();
-                            newUser.password = $('input[name=password]').val();
-                            myAjax('POST', `http://localhost:8080/api/user/`, newUser, function(body){
-                                console.log("New User Has been Created")  
-                            })
+                        if(response[i].email == $('input[name=email]').val()){
+                            console.log("User Already Exists");
+                            return;
                         }
                     }
-                    
+                    //Creates new user with data sent to the form
+                    var newUser = {};
+                    newUser.firstname = $('input[name=firstname]').val();
+                    newUser.lastname = $('input[name=lastname]').val();
+                    newUser.email = $('input[name=email]').val();
+                    newUser.university = $('input[name=university]').val();
+                    newUser.password = $('input[name=password]').val();
+                    console.log(newUser);
+                    myAjax('POST', `http://localhost:8080/api/user/`, newUser, function(body){
+                        console.log("New User Has been Created")  
+                        location.href = "/general/"
+                    })
                 }) 
             })
         </script>
