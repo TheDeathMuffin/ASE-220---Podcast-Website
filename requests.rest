@@ -41,13 +41,13 @@ DELETE http://localhost:8080/api/user/627ad1f6b0d9552c528ff699
 
 ###
 
-PATCH http://localhost:8080/api/user/627c1bf084b5d1ed70a03649
+PATCH http://localhost:8080/api/user/627eb60b2b9c41a61298375c
 content-type: application/json
 
 {
-    "firstname": "Jacob",
-    "lastname": "leadbetter",
-    "email": "Jacob@gmail.com",
+    "firstname": "Amy",
+    "lastname": "Dingusheimerschnitzerwiener",
+    "email": "amy@gmail.com",
     "password": "badpassword",
     "likedPodcasts": [
         1,2,3
