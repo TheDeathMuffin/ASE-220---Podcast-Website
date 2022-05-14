@@ -54,13 +54,13 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
             if ( currentUser == data2[i]['email'] ) {      /* Checks if the current user matches the currently-looped user. If so, continue... */
                 for (j = 0; j < data2[i]['subscribedTo'].length; j++) {        /* Loops for every user in user's subscribed users. */
                     if ( currentUser != data[index]['email'] && data[index]['email'] == data2[i]['subscribedTo'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
-                        htmlString += `<a class="text-white" href="unsubscribe.html?email=${data[index].email}"><button type="button" class="btn btn-secondary ownerButton">Subscribed</button></a>`;
+                        htmlString += `<a class="text-white" href="../util/unsubscribe.html?email=${data[index].email}"><button type="button" class="btn btn-secondary ownerButton">Subscribed</button></a>`;
                         subscribed = true;
                         break;
                     }
                 } 
                 if ( currentUser != data[index]['email'] && subscribed == false ) {
-                    htmlString += `<a class="text-white" href="subscribe.html?email=${data[index].email}"><button type="button" class="btn btn-primary ownerButton">Subscribe to Podcast</button></a>`;
+                    htmlString += `<a class="text-white" href="../util/subscribe.html?email=${data[index].email}"><button type="button" class="btn btn-primary ownerButton">Subscribe to Podcast</button></a>`;
                 }
                 break;
             }
