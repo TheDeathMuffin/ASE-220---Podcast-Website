@@ -6,17 +6,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="icon/icon.ico"/>
 <script>
     let params = (new URL(document.location)).searchParams;
-        // $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
-        //     console.log("asdasdasd");
-        //     for (let i = 0; i < data.length; i++) {              
-        //         if (params.get("index") == data[i]['index'] && currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
-        //             data[i] = {};
-        //             console.log("We got these");
-        //         }
-        //     }
-        //     myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
-        //         window.location.href = "../profile/dashboard.html";
-        //     }); 
+        //Runs Confirmation prompt to ensure you want to delete something
         var deleteConfirmation = confirm('Are you sure want to delete this item');
         if(deleteConfirmation){
             var podcastID = params.get("id");
