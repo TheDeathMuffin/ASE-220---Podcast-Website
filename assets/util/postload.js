@@ -33,3 +33,11 @@ $.getJSON('http://localhost:8080/api/user/'+currentUserID, function(data){
         $('.floating-menu-billing-button').append(`<button type="button" class="btn btn-success">Add</button>`);
     }
 });
+let params = (new URL(document.location)).searchParams
+if(params.get("podcastID") != null){
+    myAjax("GET", `http://localhost:8080/api/podcast/${params.get("podcastID")}`, null, function(data){
+        console.log(data)
+        $().append
+    });
+}
+
