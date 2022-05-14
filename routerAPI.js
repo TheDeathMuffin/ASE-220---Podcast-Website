@@ -214,7 +214,11 @@ router.get('/podcast/subscribed/:email', async (req, res) => {
         subscribedPodcasts = {};
         list = [];
         for (i = 0; i < subscribedTo[0].subscribedTo.length; i++) {
-            list.push(await Podcast.find({email: subscribedTo[0].subscribedTo[i]}).exec());
+            list2 = [];
+            list2.push(await Podcast.find({email: subscribedTo[0].subscribedTo[i]}).exec());
+            for(k = 0; k < list2.length; k++) {
+                list.push(list2[k][0]);
+            }
         }
         subscribedPodcasts = list;
         res.status(200).json(subscribedPodcasts);
