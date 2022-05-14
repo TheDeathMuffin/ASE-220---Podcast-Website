@@ -9,15 +9,17 @@
     let params = (new URL(document.location)).searchParams;
     $.getJSON('http://localhost:8080/api/user/'+currentUserID, function(userData){                //Gathers user data.
         $.getJSON('http://localhost:8080/api/podcast/'+params.get("id"), function(podcastData){   //Gathers podcast data.
-            inList = false;
+            let inList = false;
             for (let j = 0; j < userData["likedPodcasts"].length; j++) {            //Loops through each liked podcast to check if the user has alraedy liked it.
                 if (params.get("id") == userData["likedPodcasts"][j]) { inList = true; break; }
             }
             if (!inList) {                                                          //If podcast is not already liked, like it.
                 likedData = {};
+                podcastData["likes"] += 1;
+                likedData.likes = podcastData["likes"];
                 likedPodcasts = {};
-                likedData.likes = podcastData["likes"] + 1;
-                likedPodcasts.likedPodcasts = userData["likedPodcasts"].push(params.get("id"));
+                userData["likedPodcasts"].push(params.get("id"));
+                likedPodcasts.likedPodcasts = userData["likedPodcasts"];
                 //Updates the podcast's like count.
                 myAjax('PATCH', `http://localhost:8080/api/podcast/${params.get("id")}`, likedData, function(){
                 });
