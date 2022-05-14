@@ -19,8 +19,8 @@ else {
 }
 
 /* Populates Page with User's Details */
-let params = (new URL(document.location)).searchParams
-if(params.get("podcastID") == null){
+let urlParams = (new URL(document.location)).searchParams
+if(urlParams.get("podcastID") == null){
     $.getJSON('http://localhost:8080/api/user/'+currentUserID, function(data){
         $('.currentName').append(data['firstname'],' ',data['lastname']);
         $('.currentEmail').append(data['email']);
@@ -37,8 +37,8 @@ if(params.get("podcastID") == null){
     });
 }
 
-if(params.get("podcastID") != null){
-    myAjax("GET", `http://localhost:8080/api/podcast/${params.get("podcastID")}`, null, function(response){
+if(urlParams.get("podcastID") != null){
+    myAjax("GET", `http://localhost:8080/api/podcast/${urlParams.get("podcastID")}`, null, function(response){
         console.log(response);
         $('.currentName').text(response.firstname + " " + response.lastname)
         $('.currentTitle').text(response.title)
