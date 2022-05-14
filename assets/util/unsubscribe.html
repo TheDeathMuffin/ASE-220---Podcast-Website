@@ -6,30 +6,21 @@
 <link rel="shortcut icon" type="image/x-icon" href="../icon/icon.ico"/>
 <script>
     let params = (new URL(document.location)).searchParams;
-    //pulls the jsonblob for the function
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){       //Gathers user data.
-        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data2){  //Gathers podcast data.
-            //an array to create a new podcast save list
-            newSubscribedUsers = [];
-            //loops to save the podcast and indicate it in the array
-            for (let i = 0; i < data.length; i++) {              
-                if (currentUser == data[i]["email"]) {
-                    for (let j = 0; j < data[i]["subscribedTo"].length; j++) {
-                        if (params.get("email") == data[i]["subscribedTo"][j]) {
-                            continue;
-                        }
-                        newSubscribedUsers.push(data[i]["subscribedTo"][j]);
-                    }
-                    data[i]['subscribedTo'] = newSubscribedUsers;
-                }    
+    $.getJSON('http://localhost:8080/api/user/'+currentUserID, function(userData){                //Gathers user data.
+        let inList = false;
+        for (let j = 0; j < userData["subscribedTo"].length; j++) {            //Loops through each subscribed podcast to check if the user has alraedy subscribed.
+            if (params.get("email") == userData["subscribedTo"][j]) { inList = true;
+                if (inList) {                                                          //If podcast is not already subscribed to, subscribes.
+                    subscribedTo = {};
+                    userData["subscribedTo"].splice(j,1);
+                    subscribedTo.subscribedTo = userData["subscribedTo"];
+                    //Update the user's subscribed podcast list.
+                    myAjax('PATCH', `http://localhost:8080/api/user/${currentUserID}`, subscribedTo, function(body){
+                    }); 
+                }
             }
-            //Updates the podcast's save count.
-            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data2, function(){}); 
-            //Update the user's saved podcast list.
-            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
-                window.location.href = history.back();
-            });
-        }); 
-    });       
+        }
+        window.location.href = history.back();
+    });
 </script>
 <script src="postload.js"></script>
