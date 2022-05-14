@@ -66,7 +66,7 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
             }
         }
         htmlString += `
-            <a class="text-white" href="report.html?index=${data[index].index}"><button type="button" class="btn liked"><img class="iconImage" src="../icon/flag.png"></button></a></div>
+            <a class="text-white" href="report.html?index=${data[index]._id}"><button type="button" class="btn liked"><img class="iconImage" src="../icon/flag.png"></button></a></div>
             <p class="title"><a class="podcastLink font-weight-bold h5" href="podcastdetails.html">${data[index].title}</a></p>
             <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
             <p class="article font-italic"></p>
@@ -106,7 +106,7 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
         for (i = 0; i < data2.length; i++) {    /* Loops for each user. */
             if ( currentUser == data2[i]['email'] ) {      /* Checks if the current user matches the currently-looped user. If so, continue... */
                 for (k = 0; k < data2[i]['likedPodcasts'].length; k++) {        /* Loops for every podcast in user's liked podcasts. */
-                    if ( data[index]['index'] == data2[i]['likedPodcasts'][k] ) {       /* Checks if the podcast is in the user's liked podcast list. */
+                    if ( data[index]['_id'] == data2[i]['likedPodcasts'][k] ) {       /* Checks if the podcast is in the user's liked podcast list. */
                         htmlString += `<a class="text-white" href="../util/unlike.html?id=${data[index]._id}"><button type="button" class="btn btn-primary liked"><img class="iconImage" src="../icon/liked.png"> <span class="badge badge-light">${data[index].likes}</span><span class="sr-only">unread messages</span></button></a> `;
                         liked = true;
                         break;
@@ -117,7 +117,7 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
                     //htmlString += `<button type="button" class="btn btn-success notOwnerButton"><a class="text-white" href="save.html?index=${data[index].index}">Save</a></button>`;
                 }
                 for (j = 0; j < data2[i]['savedPodcasts'].length; j++) {        /* Loops for every podcast in user's saved podcasts. */
-                    if ( data[index]['index'] == data2[i]['savedPodcasts'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
+                    if ( data[index]['_id'] == data2[i]['savedPodcasts'][j] ) {       /* Checks if the podcast is in the user's saved podcast list. */
                         htmlString += `<a class="text-white" href="../util/unsave.html?id=${data[index]._id}"><button type="button" class="btn btn-primary saved"><img class="iconImage" src="../icon/saved.png"><span class="badge badge-light">${data[index].saves}</span><span class="sr-only">unread messages</span></button></a> `;
                         saved = true;
                         break;
