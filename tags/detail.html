@@ -102,7 +102,10 @@
                                     var filteredPodcasts = [];
                                     //Displays all podcasts that have a specific tag
                                     for(i = 0; i < podcasts.length; i++){
-                                        if (podcasts[i].tags.includes(params.get("tag"))) {
+                                        var lowerArray = podcasts[i].tags.map(element => {
+                                            return element.toLowerCase();
+                                        });
+                                        if (lowerArray.includes(params.get("tag"))) {
                                             displayPodcast(i, podcasts, userList);
                                             filteredPodcasts.push(podcasts[i]);
                                         }
