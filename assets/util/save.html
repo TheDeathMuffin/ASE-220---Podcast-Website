@@ -15,11 +15,13 @@
             }
             if (!inList) {                                                          //If podcast is not already liked, like it.
                 likedData = {};
-                podcastData["likes"] += 1;
-                likedData.likes = podcastData["likes"];
+                podcastData["saves"] += 1;
+                likedData.saves = podcastData["saves"];
                 likedPodcasts = {};
                 userData["savedPodcasts"].push(params.get("id"));
-                likedPodcasts.likedPodcasts = userData["savedPodcasts"];
+                likedPodcasts.savedPodcasts = userData["savedPodcasts"];
+                console.log(likedData.saves);
+                alert('as');
                 //Updates the podcast's like count.
                 myAjax('PATCH', `http://localhost:8080/api/podcast/${params.get("id")}`, likedData, function(){
                 });
