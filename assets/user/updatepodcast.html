@@ -192,6 +192,13 @@
             $('input[name=publishedDate]').val(data['publishedDate']);
             $('input[name=doi]').val(data['doi']);
             $('input[name=keywords]').val(data['keywords']);
+            //Populates podcast's tags
+            var tagString = '';
+            for(j = 0; j < data.tags.length; j++){
+                tagString += data.tags[j] + ', '
+            }
+            if (tagString.length > 0) { tagString = tagString.slice(0,-2) }
+            $('input[name=tags]').val(tagString);
             //Checks relevant checkboxes
             for(i = 0; i < data.disciplines.length; i++){
                 console.log(data.disciplines[i].toLowerCase());
