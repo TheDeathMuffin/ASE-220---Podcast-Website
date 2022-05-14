@@ -136,10 +136,13 @@
                                         currentDiscipline = params.get("discipline");
                                         //console.log(currentDiscipline);
                                         //Checks if current discipline (As determined by query string) is part of a podcast
+                                        var filteredPodcasts = [];
                                         for(i = 0; i < podcastList.length; i++){
                                             if(podcastList[i].disciplines.includes(currentDiscipline)){
                                                 displayPodcast(i, podcastList, userList);
-                                                break;
+                                                filteredPodcasts.push(podcastList[i]);
+                                                //Searches by filtered podcast
+                                                searchBar(filteredPodcasts,userList);
                                             }
                                         }
                                     })
@@ -191,7 +194,7 @@
                 myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
                     podcastList = body2;
                     userList = body;
-                    searchBar(podcastList,userList);
+                    
                 })
             })
         </script>
