@@ -5,40 +5,36 @@
 <script src="preload.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="../icon/icon.ico"/>
 <script>
+    //Checks users email and likes the podcast.
     let params = (new URL(document.location)).searchParams;
-    //pulls the jsonblob for the function
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953096375785242624', function(data){       //Gathers user data.
-        $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data2){  //Gathers podcast data.
-            //an array to create a new podcast like list
-            newLikedPodcasts = [];
-            //loops to like the podcast and indicate it in the array
-            for (let i = 0; i < data.length; i++) {              
-                if (currentUser == data[i]["email"]) {
-                    for (let j = 0; j < data[i]["likedPodcasts"].length; j++) {
-                        if (params.get("index") == data[i]["likedPodcasts"][j]) {
-                            continue;
-                        }
-                        newLikedPodcasts.push(data[i]["likedPodcasts"][j]);
-                    }
-                    data[i]['likedPodcasts'] = newLikedPodcasts;
-                }    
+    $.getJSON('http://localhost:8080/api/user/'+currentUserID, function(userData){                //Gathers user data.
+        $.getJSON('http://localhost:8080/api/podcast/'+params.get("id"), function(podcastData){   //Gathers podcast data.
+            inList = false;
+            for (let j = 0; j < userData["likedPodcasts"].length; j++) {            //Loops through each liked podcast to check if the user has already liked it.
+                if (params.get("id") == userData["likedPodcasts"][j]) { inList = true; break; }
             }
-            for (let k = 0; k < data2.length; k++) {              
-                if (params.get("index") == data2[k]['index']) {              //Loops to find the liked podcast.
-                    data2[k]["likes"] = data2[k]["likes"] - 1;               //Decrements like count by 1.
-                    if (data2[k]["likes"] < 0) {
-                        data2[k]["likes"] = 0;
-                    }
+            if (inList) {                                                          //If podcast is liked, unlike it.
+                likedData = {};
+                likedPodcasts = {};
+                likedData.likes = podcastData["likes"] - 1;
+                if (likedData.likes < 0) {
+                    likedData.likes = 0;
                 }
+                for (i = 0; i < userData["likedPodcasts"].length; i++) {
+                    if (userData["likedPodcasts"][i] == params.get("id")) {
+                        continue;
+                    }    
+                    likedPodcasts.likedPodcasts.push(userData["likedPodcasts"][i]);
+                }
+                //Updates the podcast's like count.
+                myAjax('PATCH', `http://localhost:8080/api/podcast/${params.get("id")}`, likedData, function(){
+                });
+                //Update the user's liked podcast list.
+                myAjax('PATCH', `http://localhost:8080/api/user/${currentUserID}`, likedPodcasts, function(body){
+                }); 
             }
-
-            //Updates the podcast's like count.
-            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data2, function(){}); 
-            //Update the user's liked podcast list.
-            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953096375785242624', data, function(){
-                window.location.href = history.back();
-            });
-        }); 
-    });       
+            window.location.href = history.back();
+        });
+    });
 </script>
 <script src="postload.js"></script>
