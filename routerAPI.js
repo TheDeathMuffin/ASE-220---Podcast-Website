@@ -219,7 +219,7 @@ router.get('/podcast/subscribed/:email', async (req, res) => {
         const subscribed = await User.find({email: req.params.email}).select("subscribedPodcasts").exec();
         subscribedPodcasts = {};
         for (i = 0; i < subscribed.length; i++) {
-            subscribedPodcasts.push(await Podcast.find({email: subscribed[i]}).exec());
+            subscribedPodcasts = await Podcast.find({email: subscribed[i]}).exec();
         }
         res.status(200).json(subscribedPodcasts);
     }
@@ -231,7 +231,7 @@ router.get('/podcast/liked/:email', async (req, res) => {
         const liked = await User.find({email: req.params.email}).select("likedPodcasts").exec();
         likedPodcasts = {};
         for (i = 0; i < liked.length; i++) {
-            likedPodcasts.push(await Podcast.find({_id: liked[i]}).exec());
+            likedPodcasts = await Podcast.find({_id: liked[i]}).exec();
         }
         res.status(200).json(likedPodcasts);
     }

@@ -88,6 +88,9 @@ GET http://localhost:8080/api/podcast/627d3dd41876b026894b5f94
 content-type: application/json
 
 ###
+GET http://localhost:8080/api/podcast/saved/amy@gmail.com
+content-type: application/json
+###
 GET http://localhost:8080/api/podcast/findAll
 content-type: application/json
 
