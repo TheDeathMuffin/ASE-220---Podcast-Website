@@ -92,7 +92,7 @@
                     <!-- User Podcasts Menu -->
                     <div class="col-md-8">
                         <div class="font-weight-bold">
-                            <p class="d-inline pr-4" id="yourPodcasts_title" style="font-size: 1.9em; color: black">Your Podcasts</p>
+                            <p class="d-inline pr-4" id="yourPodcasts_title" style="font-size: 1.2em; color: grey">Your Podcasts</p>
                             <p class="d-inline pr-4" id="savedPodcasts_title" style="font-size: 1.2em; color: grey">Saved Podcasts</p>
                             <p class="d-inline pr-4" id="subscribedPodcasts_title" style="font-size: 1.2em; color: grey">Subscribed Podcasts</p>
                             <p class="d-inline pr-4" id="likedPodcasts_title" style="font-size: 1.2em; color: grey">Liked Podcasts</p>
@@ -110,58 +110,86 @@
 
                             <div id="yourPodcasts">
                                 <script>
+                                    var queryParams = new URLSearchParams(window.location.search);
+                                    //var params = new URLSearchParams(window.location.search);
                                     //GET request to podcasts blob
-                                    myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
-                                        myAjax('GET', 'http://localhost:8080/api/podcast/owned/' + currentUser, null, function(podcasts){
-                                            //console.log(userList);
-                                            //Displays podcasts associated with logged in user
-                                            for(i = 0; i < podcasts.length; i++){
-                                                displayPodcast(i, podcasts, userList,"#yourPodcasts");
-                                            }
+                                    if(queryParams.get("search") == "yourPodcasts"){
+                                        myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
+                                            myAjax('GET', 'http://localhost:8080/api/podcast/owned/' + currentUser, null, function(podcasts){
+                                                //console.log(userList);
+                                                //console.log(podcasts);
+                                                console.log("Displaying Your Podcasts")
+                                                //Displays podcasts associated with logged in user
+                                                var podcastIdList = [];
+                                                for(i = 0; i < podcasts.length; i++){
+                                                    displayPodcast(i, podcasts, userList,"#yourPodcasts");
+                                                    podcastIdList.push(podcasts[i])
+                                                }
+                                                searchBar(podcastIdList, userList);
+                                            })
                                         })
-                                    })
+                                    }
                                 </script>
                             </div>
                             <div id="savedPodcasts">
                                 <script>
-                                    //GET request to podcasts blob
-                                    myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
-                                        myAjax('GET', 'http://localhost:8080/api/podcast/saved/' + currentUser, null, function(podcasts){
-                                            //console.log(userList);
-                                            //Displays podcasts associated with logged in user
-                                            for(i = 0; i < podcasts.length; i++){
-                                                displayPodcast(i, podcasts, userList,"#savedPodcasts");
-                                            }
+                                    if(queryParams.get("search") == "savedPodcasts"){
+                                        myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
+                                            myAjax('GET', 'http://localhost:8080/api/podcast/saved/' + currentUser, null, function(podcasts){
+                                                //console.log(userList);
+                                                //Displays podcasts associated with logged in user
+                                                console.log("Displaying Saved Podcasts")
+                                                var podcastIdList = [];
+                                                for(i = 0; i < podcasts.length; i++){
+                                                    displayPodcast(i, podcasts, userList,"#savedPodcasts");
+                                                    podcastIdList.push(podcasts[i])
+                                                }
+                                                searchBar(podcastIdList, userList);
+                                            })
                                         })
-                                    })
+                                    }
+                                    //GET request to podcasts blob
+                                    
                                 </script>
                             </div>
                             <div id="subscribedPodcasts">
                                 <script>
-                                    //GET request to podcasts blob
-                                    myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
-                                        myAjax('GET', 'http://localhost:8080/api/podcast/subscribed/' + currentUser, null, function(podcasts){
-                                            //console.log(userList);
-                                            //Displays podcasts associated with logged in user
-                                            for(i = 0; i < podcasts.length; i++){
-                                                displayPodcast(i, podcasts, userList,"#subscribedPodcasts");
-                                            }
+                                    if(queryParams.get("search") == "subscribedPodcasts"){
+                                        //GET request to podcasts blob
+                                        myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
+                                            myAjax('GET', 'http://localhost:8080/api/podcast/subscribed/' + currentUser, null, function(podcasts){
+                                                //console.log(userList);
+                                                //Displays podcasts associated with logged in user
+                                                console.log("Displaying Subscribed Podcasts")
+                                                var podcastIdList = [];
+                                                for(i = 0; i < podcasts.length; i++){
+                                                    displayPodcast(i, podcasts, userList,"#subscribedPodcasts");
+                                                    podcastIdList.push(podcasts[i])
+                                                }
+                                                searchBar(podcastIdList, userList);
+                                            })
                                         })
-                                    })
+                                    }
                                 </script>
                             </div>
                             <div id="likedPodcasts">
                                 <script>
-                                    //GET request to podcasts blob
-                                    myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
-                                        myAjax('GET', 'http://localhost:8080/api/podcast/liked/' + currentUser, null, function(podcasts){
-                                            //console.log(userList);
-                                            //Displays podcasts associated with logged in user
-                                            for(i = 0; i < podcasts.length; i++){
-                                                displayPodcast(i, podcasts, userList,"#likedPodcasts");
-                                            }
+                                    if(queryParams.get("search") == "likedPodcasts"){
+                                        //GET request to podcasts blob
+                                        myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
+                                            myAjax('GET', 'http://localhost:8080/api/podcast/liked/' + currentUser, null, function(podcasts){
+                                                //console.log(userList);
+                                                console.log("Displaying Liked Podcasts");
+                                                //Displays podcasts associated with logged in user
+                                                var podcastIdList = [];
+                                                for(i = 0; i < podcasts.length; i++){
+                                                    displayPodcast(i, podcasts, userList,"#likedPodcasts");
+                                                    podcastIdList.push(podcasts[i])
+                                                }
+                                                searchBar(podcastIdList, userList);
+                                            })
                                         })
-                                    })
+                                    }
                                 </script>
                             </div>
 
@@ -170,38 +198,58 @@
                     <!-- User Podcasts Menu -->
 
                     <script>
+                        
                         $("#yourPodcasts_title").click(function() {
+                            
+                            //console.log("Die");
+                            queryParams.set("search", "yourPodcasts")
+                            window.location.search = queryParams.toString();
+                            return false;
+                        });
+                        if(queryParams.get("search") == "yourPodcasts"){
                             $("#yourPodcasts_title").css("font-size", "1.9em"); $("#yourPodcasts_title").css("color", "black"); $("#yourPodcasts").css("display","inline");
                             $("#savedPodcasts_title").css("font-size", "1.2em"); $("#savedPodcasts_title").css("color", "grey"); $("#savedPodcasts").css("display","none");
                             $("#subscribedPodcasts_title").css("font-size", "1.2em"); $("#subscribedPodcasts_title").css("color", "grey"); $("#subscribedPodcasts").css("display","none");
                             $("#likedPodcasts_title").css("font-size", "1.2em"); $("#likedPodcasts_title").css("color", "grey"); $("#likedPodcasts").css("display","none");
+                        }
+                        $("#savedPodcasts_title").click(function() {
+                            
                             //console.log("Die");
+                            queryParams.set("search", "savedPodcasts")
+                            window.location.search = queryParams.toString();
                             return false;
                         });
-                        $("#savedPodcasts_title").click(function() {
+                        if(queryParams.get("search") == "savedPodcasts"){
                             $("#yourPodcasts_title").css("font-size", "1.2em"); $("#yourPodcasts_title").css("color", "grey"); $("#yourPodcasts").css("display","none");
                             $("#savedPodcasts_title").css("font-size", "1.9em"); $("#savedPodcasts_title").css("color", "black"); $("#savedPodcasts").css("display","inline");
                             $("#subscribedPodcasts_title").css("font-size", "1.2em"); $("#subscribedPodcasts_title").css("color", "grey"); $("#subscribedPodcasts").css("display","none");
                             $("#likedPodcasts_title").css("font-size", "1.2em"); $("#likedPodcasts_title").css("color", "grey"); $("#likedPodcasts").css("display","none");
+                        }
+                        $("#subscribedPodcasts_title").click(function() {
+                            
                             //console.log("Die");
+                            queryParams.set("search", "subscribedPodcasts")
+                            window.location.search = queryParams.toString();
                             return false;
                         });
-                        $("#subscribedPodcasts_title").click(function() {
+                        if(queryParams.get("search") == "subscribedPodcasts"){
                             $("#yourPodcasts_title").css("font-size", "1.2em"); $("#yourPodcasts_title").css("color", "grey"); $("#yourPodcasts").css("display","none");
                             $("#savedPodcasts_title").css("font-size", "1.2em"); $("#savedPodcasts_title").css("color", "grey"); $("#savedPodcasts").css("display","none");
                             $("#subscribedPodcasts_title").css("font-size", "1.9em"); $("#subscribedPodcasts_title").css("color", "black"); $("#subscribedPodcasts").css("display","inline");
                             $("#likedPodcasts_title").css("font-size", "1.2em"); $("#likedPodcasts_title").css("color", "grey"); $("#likedPodcasts").css("display","none");
+                        }
+                        $("#likedPodcasts_title").click(function() {                          
                             //console.log("Die");
+                            queryParams.set("search", "likedPodcasts")
+                            window.location.search = queryParams.toString();
                             return false;
                         });
-                        $("#likedPodcasts_title").click(function() {
+                        if(queryParams.get("search") == "likedPodcasts"){
                             $("#yourPodcasts_title").css("font-size", "1.2em"); $("#yourPodcasts_title").css("color", "grey"); $("#yourPodcasts").css("display","none");
                             $("#savedPodcasts_title").css("font-size", "1.2em"); $("#savedPodcasts_title").css("color", "grey"); $("#savedPodcasts").css("display","none");
                             $("#subscribedPodcasts_title").css("font-size", "1.2em"); $("#subscribedPodcasts_title").css("color", "grey"); $("#subscribedPodcasts").css("display","none");
                             $("#likedPodcasts_title").css("font-size", "1.9em"); $("#likedPodcasts_title").css("color", "black"); $("#likedPodcasts").css("display","inline");
-                            //console.log("Die");
-                            return false;
-                        });
+                        }
                     </script>
                 </div>
             </div>
@@ -215,7 +263,9 @@
             </div>
         </footer>
         <!-- Implements searchBar function setup in preload.js -->
-        <script>//searchBar();</script>
+        <script>
+        
+        </script>
         <!-- Page Footer -->
         <script src="../util/postload.js"></script>
     </body>

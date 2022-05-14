@@ -154,6 +154,7 @@ function searchBar(podcastList, userList, type = "indexSearch"){
         //Loop to find your saved Podcasts
         for (i = 0; i < userList.length; i++){
             if(currentUser == userList[i]["email"]){
+                console.log(userList[i]);
                 for(j = 0; j < userList[i]["savedPodcasts"].length; j ++){
                     savedPodcasts.push(userList[i]["savedPodcasts"][j])
                 }
