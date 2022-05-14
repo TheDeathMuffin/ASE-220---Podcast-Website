@@ -138,13 +138,15 @@
                                         //Checks if current discipline (As determined by query string) is part of a podcast
                                         var filteredPodcasts = [];
                                         for(i = 0; i < podcastList.length; i++){
-                                            if(podcastList[i].disciplines.includes(currentDiscipline)){
+                                            if(podcastList[i].disciplines.includes(currentDiscipline) || podcastList[i].disciplines.includes(currentDiscipline.toLowerCase())){
+                                                console.log("Success");
                                                 displayPodcast(i, podcastList, userList);
                                                 filteredPodcasts.push(podcastList[i]);
                                                 //Searches by filtered podcast
-                                                searchBar(filteredPodcasts,userList);
+                                                
                                             }
                                         }
+                                        searchBar(filteredPodcasts,userList);
                                     })
                                 })
                             </script>
