@@ -75,13 +75,13 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
             <p>Disciplines:`
             for (let i = 0; i < data[index]['disciplines'].length; i++) {         //Loops through each discipline, creating anchor tags for each.
                 if (i != 0) { htmlString += `, ` }                                          //Prepends comma to discipline if not the first discipline.
-                htmlString += ` <a class="scientificDisciplines" href="disciplines/detail.html?disciplines=${data[index]['disciplines'][i]}">${data[index]['disciplines'][i]}</a>`;
+                htmlString += ` <a class="scientificDisciplines" href="/disciplines/detail?discipline=${data[index]['disciplines'][i]}">${data[index]['disciplines'][i]}</a>`;
             }
             htmlString += `</p>
             <p>Tags:`
             for (let i = 0; i < data[index]['tags'].length; i++) {                          //Loops through each tag, creating anchor tags for each.
                 if (i != 0) { htmlString += `, ` }                                          //Prepends comma to tag if not the first tag.
-                htmlString += ` <a class="tag" href="tags/detail.html?tag=${data[index]['tags'][i]}">${data[index]['tags'][i]}</a>`;
+                htmlString += ` <a class="tag" href="/tags/detail?tag=${data[index]['tags'][i]}">${data[index]['tags'][i]}</a>`;
             }
             htmlString += `</p>
             <div class="audioClip bg-dark text-light rounded mb-2"><p class="font-weight-bold">${data[index].title}</p>
