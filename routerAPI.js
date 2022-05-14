@@ -313,8 +313,6 @@ router.patch("/podcast/:id", getPodcast, async (req, res) => {
     }
     if(req.body.saves != null){
         res.podcast.saves = req.body.saves;
-        console.log('heyo');
-        console.log(res.podcast.saves);
     }
     try {
         //Saves all the updated information to the database then sends a response back to the requestor with a status of 200
