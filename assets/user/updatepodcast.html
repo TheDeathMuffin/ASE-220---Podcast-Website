@@ -61,14 +61,14 @@
         <main class="auth">
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
-                <h1 class="mb-3">Update Account Information</h1>
+                <h1 class="mb-3">Update Podcast Information</h1>
             </div>
             <!-- Main Header -->
 
             <!-- Registration Form -->
             <div class="registration-form">
                 <form id="update" onSubmit="return false">
-                    <h4>Account</h4><br>
+                    <h4>Podcast</h4><br>
                     <div class="row">
                         <div class="col form-group">
                             <input type="text" name="firstname" class="form-control item" placeholder="First Name" required>
@@ -99,7 +99,51 @@
                         <input type="text" name="tags" class="form-control item" placeholder="tags" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="discipline" class="form-control item" placeholder="Scientific Discipline" required>
+                        <div class="container">
+                            <div class="row justify-content-center justify-content-between flex-wrap">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="math" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Math</label>
+                                 </div>
+                                 <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="science" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Science</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="history" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">History</label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center justify-content-between flex-wrap">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="arts" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Arts</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="technology" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Technology</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="politics" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Politics</label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center justify-content-between flex-wrap">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="sports" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Sports</label>
+                                   </div>
+                            </div>
+                            <!---
+                            <div class="row justify-content-center justify-content-between flex-wrap">
+                                <select class="form-control" multiple="multiple">
+                                    <option selected="selected">orange</option>
+                                    <option>white</option>
+                                    <option selected="selected">purple</option>
+                                </select>
+                            </div>
+                            --->
+                        </div>
                     </div>
                     <label><strong>Upload Podcast File</strong></label>
                     <div class="form-group">
@@ -133,74 +177,100 @@
 
 <script>
     /* Populates form with Podcast's Informaiton */
-    let params = (new URL(document.location)).searchParams;
-    $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
-        // for (let i = 0; i < data.length; i++) {
-        //     if (params.get("index") == data[i]['index']) {
-        //         $.getJSON(data[i]['descriptionLocation'], function(data){ $('textarea[name=description]').html(data['description']); });
-        //         $('input[name=firstname]').val(data[i]['firstname']);
-        //         $('input[name=lastname]').val(data[i]['lastname']);
-        //         $('input[name=email]').val(data[i]['email']);
-        //         $('input[name=title]').val(data[i]['title']);
-        //         $('input[name=journal]').val(data[i]['journal']);
-        //         $('input[name=publishedDate]').val(data[i]['publishedDate']);
-        //         $('input[name=doi]').val(data[i]['doi']);
-        //         $('input[name=keywords]').val(data[i]['keywords']);
-        //         /*$('input[name=manuscript]').val(data[i]['manuscript']);                 */
-        //         break;
-        //     }
-        // }
+    //let params = (new URL(document.location)).searchParams;
+    var queryString = window.location.search;
+    var params = new URLSearchParams(queryString);
+    var podcastID = params.get("id");
+    //Fills information in the form with current data of the podcast
+    myAjax('GET', `http://localhost:8080/api/podcast/${podcastID}`, null, function(data){
+            $('input[name=firstname]').val(data['firstname']);
+            $('input[name=lastname]').val(data['lastname']);
+            $('input[name=email]').val(data['email']);
+            $('input[name=title]').val(data['title']);
+            $('input[name=journal]').val(data['journal']);
+            $('textarea[name=description]').val(data['description'])
+            $('input[name=publishedDate]').val(data['publishedDate']);
+            $('input[name=doi]').val(data['doi']);
+            $('input[name=keywords]').val(data['keywords']);
+            //Checks relevant checkboxes
+            for(i = 0; i < data.disciplines.length; i++){
+                console.log(data.disciplines[i].toLowerCase());
+                $('#math').prop('checked', true)
+                $(`#${data.disciplines[i].toLowerCase()}`).prop('checked', true);
+            }
+            /*$('input[name=manuscript]').val(data[i]['manuscript']);                 */
     });
  
     /* On Form Submit, Updates Podcast's Information */
     $(document).on('submit','#update',function(e){
-        // $.getJSON('https://jsonblob.com/api/jsonBlob/953093703074070528', function(data){
-        //     var descriptionLocation;
-        //     for (let i = 0; i < data.length; i++) {              
-        //         if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
-        //             data[i]['firstname'] = $('input[name=firstname]').val();
-        //             data[i]['lastname'] = $('input[name=lastname]').val();
-        //             data[i]['email'] = $('input[name=email]').val();
-        //             data[i]['title'] = $('input[name=title]').val();
-        //             data[i]['journal'] = $('input[name=journal]').val();
-        //             data[i]['publishedDate'] = $('input[name=publishedDate]').val();
-        //             data[i]['doi'] = $('input[name=doi]').val();
-        //             /*data[i]['manuscript'] = $('input[name=manuscript]').val();                */
-        //             data[i]['keywords'] = $('input[name=keywords]').val().split(",");
-        //             descriptionLocation = data[i]['descriptionLocation'];
-        //         }
-        //     }
-        //     e.preventDefault();
-        //     myAjax('PUT', descriptionLocation, $('textarea[name=description]').val(), function(){
-        //     });
-        //     myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
-        //         window.location.href = "../user/dashboard.html";
-        //     }); 
-        // });       
-    });
-    $(document).on('submit','#update',function(e){
-        myAjax('GET', `http://localhost:8080/api/user/owned/${currentUser}`, null, function(response){
-            var descriptionLocation;
-            for (let i = 0; i < data.length; i++) {              
-                if (currentUser == data[i]['email']) {              /* If user email matches, loop through properties, and replace firstname, lastname, and organization */
-                    data[i]['firstname'] = $('input[name=firstname]').val();
-                    data[i]['lastname'] = $('input[name=lastname]').val();
-                    data[i]['email'] = $('input[name=email]').val();
-                    data[i]['title'] = $('input[name=title]').val();
-                    data[i]['journal'] = $('input[name=journal]').val();
-                    data[i]['publishedDate'] = $('input[name=publishedDate]').val();
-                    data[i]['doi'] = $('input[name=doi]').val();
-                    /*data[i]['manuscript'] = $('input[name=manuscript]').val();                */
-                    data[i]['keywords'] = $('input[name=keywords]').val().split(",");
-                    descriptionLocation = data[i]['descriptionLocation'];
-                }
+        //Gets podcast ID from the query string
+        
+
+        //Checks if Certain values are checked in the disciplines checkboxes
+        var categories = [];
+        if($('#math:checked').val()){
+            categories.push('math')
+        }
+        if($('#science:checked').val()){
+            categories.push('science')
+        }
+        if($('#history:checked').val()){
+            categories.push('history')
+        }
+        if($('#arts:checked').val()){
+            categories.push('arts')
+        }
+        if($('#technology:checked').val()){
+            categories.push('technology')
+        }
+        if($('#politics:checked').val()){
+            categories.push('politics')
+        }
+        if($('#sports:checked').val()){
+            categories.push('sports')
+        }
+
+        console.log(categories);
+
+        //Setting new information
+        var newInfo = {};
+        if($('input[name=firstname]').val() != null && $('input[name=firstname]').val() != " "){
+            newInfo.firstname = $('input[name=firstname]').val();
+        }
+        if($('input[name=lastname]').val() != null && $('input[name=lastname]').val() != " "){
+            newInfo.lastname = $('input[name=lastname]').val();
+        }
+        if($('input[name=email]').val() != null && $('input[name=email]').val() != " "){
+            newInfo.email = $('input[name=email]').val();
+        }
+        if($('input[name=title]').val() != null && $('input[name=title]').val() != " "){
+            newInfo.title = $('input[name=title]').val();
+        }
+        if($('input[name=journal]').val() != null && $('input[name=journal]').val() != " "){
+            newInfo.journal = $('input[name=journal]').val();
+        }
+        if($('textarea[name=description]').val() != null && $('textarea[name=description]').val() != " "){
+            newInfo.description = $('textarea[name=description]').val();
+        }
+        if($('input[name=publishedDate]').val() != null && $('input[name=publishedDate]').val() != " "){
+            newInfo.publishedDate = $('input[name=publishedDate]').val();
+        }
+        if($('input[name=tags]').val() != null && $('input[name=tags]').val() != " "){
+            //Formats the tags properly
+            var tags = $('input[name=tags]').val()
+            tags = tags.split(',');
+            for (i = 0; i < tags.length; i++){
+                tags[i] = tags[i].replace(/\s+/g, ' ').trim()
             }
-            e.preventDefault();
-            myAjax('PUT', descriptionLocation, $('textarea[name=description]').val(), function(){
-            });
-            myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
-                window.location.href = "../user/dashboard.html";
-            }); 
-        });       
+            newInfo.tags = tags;
+        }
+        //Checks if any of the categories have been adjusted
+        if($('#math:checked').val() || $('#science:checked').val() || $('#history:checked').val() || $('#arts:checked').val() || $('#technology:checked').val() || $('#politics:checked').val() || $('#sports:checked').val()){
+            newInfo.discipline = categories;
+        }
+        myAjax('PATCH', `http://localhost:8080/api/podcast/${podcastID}`, newInfo, function(){
+            
+            //window.location.href = "../user/dashboard.html";
+        });      
     });
 </script>
