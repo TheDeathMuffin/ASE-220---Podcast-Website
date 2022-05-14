@@ -177,7 +177,6 @@ router.get('/podcast/:id', async (req, res) => {
 	}
 });
 
-
 //GET's information from podcasts by DOI.
 router.get('/podcast/exist/:doi', async (req, res) => {
     console.log("GET request executing...")

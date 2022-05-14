@@ -68,23 +68,22 @@
             <div class="p-5 text-center main-header">
                 <h1 class="mb-3">PodScholar</h1>
                 <script>
-                    
-                    myAjax('GET', "https://jsonblob.com/api/jsonBlob/966066952229634048", null, function(response2){
-                        var currentDiscipline = 1;
-                        var disciplineList = response2;
-                        //Loop to Assign current discipline
-                        for(i = 0; i < disciplineList.length; i++){
-                            if(disciplineList[i].id == params.get("discipline")){
-                                currentDiscipline = disciplineList[i].name.toString();
-                                break;
-                            }
-                        }
-                        let htmlString = `Podcasts ordered by ${currentDiscipline}`
-                        let header = document.createElement('h4');
-                        header.setAttribute("class","mb-3")
-                        header.innerHTML = htmlString;
-                        $(".main-header").append(header);
-                    })
+                    // myAjax('GET', "http://localhost:8080/api/podcast/findAll", null, function(response2){
+                    //     var currentDiscipline = ;
+                    //     var disciplineList = response2;
+                    //     //Loop to Assign current discipline
+                    //     for(i = 0; i < disciplineList.length; i++){
+                    //         if(disciplineList[i].id == params.get("discipline")){
+                    //             currentDiscipline = disciplineList[i].name.toString();
+                    //             break;
+                    //         }
+                    //     }
+                    //     let htmlString = `Podcasts ordered by ${currentDiscipline}`
+                    //     let header = document.createElement('h4');
+                    //     header.setAttribute("class","mb-3")
+                    //     header.innerHTML = htmlString;
+                    //     $(".main-header").append(header);
+                    // })
                     
                     
                 </script>
@@ -121,28 +120,26 @@
                         
                         <div>
                             <script>
-                                myAjax('GET', "https://jsonblob.com/api/jsonBlob/953093703074070528", null, function(response){
-                                    myAjax('GET', "https://jsonblob.com/api/jsonBlob/966066952229634048", null, function(response2){
+                                myAjax('GET', "http://localhost:8080/api/podcast/findAll", null, function(response){
+                                    myAjax('GET', "http://localhost:8080/api/user/findAll", null, function(response2){
                                         var currentDiscipline;
                                         var podcastList = response; 
-                                        var disciplineList = response2;
+                                        var userList = response2;
                                         //Loop to Assign current discipline
-                                        for(i = 0; i < disciplineList.length; i++){
-                                            if(disciplineList[i].id == params.get("discipline")){
-                                                currentDiscipline = disciplineList[i].name.toString();
-                                                break;
-                                            }
-                                        }
-                                        console.log(podcastList[i].scientificDisciplines.length);
-                                        console.log(podcastList);
+                                        // for(i = 0; i < disciplineList.length; i++){
+                                        //     if(disciplineList[i].name == params.get("discipline")){
+                                        //         currentDiscipline = disciplineList[i].name.toString();
+                                        //         break;
+                                        //     }
+                                        // }
+
+                                        currentDiscipline = params.get("discipline");
+                                        //console.log(currentDiscipline);
                                         //Checks if current discipline (As determined by query string) is part of a podcast
                                         for(i = 0; i < podcastList.length; i++){
-                                            for (j = 0; j < podcastList[i].scientificDisciplines.length; j++){
-                                                if(podcastList[i].scientificDisciplines[j] == currentDiscipline){
-                                                    displayPodcast(i);
-                                                    break;
-                                                }
-                                                //if (test) break;
+                                            if(podcastList[i].disciplines.includes(currentDiscipline)){
+                                                displayPodcast(i, podcastList, userList);
+                                                break;
                                             }
                                         }
                                     })
@@ -189,7 +186,15 @@
             //var params = new URLSearchParams(window.location.search)
         </script>
         
-        <script>searchBar("disciplineSearch");</script>
+        <script>
+            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
+                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
+                    podcastList = body2;
+                    userList = body;
+                    searchBar(podcastList,userList);
+                })
+            })
+        </script>
         <script src="../util/postload.js"></script>
 	</body>
 </html>
