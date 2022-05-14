@@ -98,7 +98,7 @@
                                 var htmlString = ``;
                                 for (var [key, value] of Object.entries(tagsList)) {
                                     console.log(key);
-                                    htmlString += `<div class="pb-3 pr-2 pl-2" style="display: inline-block"><a href="/tags/detail?tag=${key}"><button type="button" class="btn btn-success">${key} (${value})</button></a></div>`
+                                    htmlString += `<div class="m-1 pb-3 pr-2 pl-2" style="display: inline-block"><a href="/tags/detail?tag=${key}"><button type="button" class="btn btn-primary">${key} (${value})</button></a></div>`
                                 
                                 }
                                 tags.innerHTML = htmlString;
