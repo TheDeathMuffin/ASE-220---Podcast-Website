@@ -21,7 +21,6 @@
                 userData["savedPodcasts"].push(params.get("id"));
                 likedPodcasts.savedPodcasts = userData["savedPodcasts"];
                 console.log(likedData.saves);
-                alert('as');
                 //Updates the podcast's like count.
                 myAjax('PATCH', `http://localhost:8080/api/podcast/${params.get("id")}`, likedData, function(){
                 });
