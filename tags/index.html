@@ -75,18 +75,35 @@
                     <!-- Tags List -->
                     <div class="col-md-12">
                         <!-- Tags -->
-                        
                         <script src="../util/preload.js"></script>
-                        
-                        <div class="tags d-flex flex-row flex-wrap align-self-center justify-content-around">
-                            <div class="d-flex"><a href="detail.html?tag=Machine_learning"><button type="button" class="btn btn-success">Machine Learning</button></a></div>
-                            <div class="d-flex"><a href="detail.html?tag=Machine_learning"><button type="button" class="btn btn-success">Machine Learning</button></a></div>
-                            <div class="d-flex"><a href="detail.html?tag=Machine_learning"><button type="button" class="btn btn-success">Machine Learning</button></a></div>
-                            <div class="d-flex"><a href="detail.html?tag=Machine_learning"><button type="button" class="btn btn-success">Machine Learning</button></a></div>
-                            <div class="d-flex"><a href="detail.html?tag=Machine_learning"><button type="button" class="btn btn-success">Machine Learning</button></a></div>
-                            <div class="d-flex"><a href="detail.html?tag=Machine_learning"><button type="button" class="btn btn-success">Machine Learning</button></a></div>
+                        <div class="tags">
                         </div>
                         <!-- Tags -->
+                        <script>
+                            myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body){ //Retreives List of all Podcasts
+                                var tagsList = {};
+                                var tags = document.createElement('div')
+                                tags.classList.add('row');
+                                for (i = 0; i < body.length; i++) {                     //Loops through each podcast.
+                                    for (j = 0; j < body[i].tags.length; j++) {         //Loops through each podcast's list of tags.
+                                        if (body[i].tags[j] in tagsList && body[i].tags[j] != ''){          //If a non-"" tag exist in tagsList, increment the list count.
+                                            tagsList[body[i].tags[j]] = tagsList[body[i].tags[j]] + 1;
+                                        }
+                                        else if (body[i].tags[j] != '') {               //If a non="" tag does not exist in tagsList, add it and set the value to 1.
+                                            tagsList[body[i].tags[j]] = 1;
+                                        }
+                                    }
+                                }
+                                console.log(tagsList);
+                                var htmlString = ``;
+                                for (var [key, value] of Object.entries(tagsList)) {
+                                    console.log(key);
+                                    htmlString += `<div class="pb-3 pr-2 pl-2" style="display: inline-block"><a href="/tags/detail?tag=${key}"><button type="button" class="btn btn-success">${key} (${value})</button></a></div>`
+                                }
+                                tags.innerHTML = htmlString;
+                                $('.tags').append(tags);
+                            })
+                        </script>
                     </div>
                     <!-- Tags LIst -->
                 </div>
@@ -102,37 +119,6 @@
             </div>
         </footer>
         <!-- Page Footer -->
-        <script>
-            //Re-usable AJAX function
-            function myAjax(method='GET',endpoint,data=null,onSuccess=null){
-                $.ajax({
-                    url:endpoint,
-                    type:method,
-                    data: data==null ? null : JSON.stringify(data),
-                    contentType: "application/json; charset=utf-8",
-                    dataType:'json',
-                    success: function (body, status, response) {
-                        onSuccess(body,status,response);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-             }
-            //Request to grab podcast List information and turn it into an array
-
-            
-            let params = (new URL(document.location)).searchParams
-            //var params = new URLSearchParams(window.location.search)
-        </script>
-        
-        <script>
-            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
-                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
-                    searchBar(body, body2);
-                })
-            })
-        </script>
         <script src="../util/postload.js"></script>
 	</body>
 </html>
