@@ -111,10 +111,13 @@ router.patch("/user/:id", getUser, async (req, res) => {
         res.user.savedPodcasts = req.body.savedPodcasts;
     }
     if(req.body.likedPodcasts != null){
-        res.user.likedPodcasts.push(req.body.likedPodcasts);
+        console.log('Before: ' + res.user.likedPodcasts);
+        res.user.likedPodcasts = req.body.likedPodcasts;
+        console.log('After: ' + res.user.likedPodcasts);
+        
     }
     if(req.body.subscribedTo != null){
-        res.user.subscribedTo.push(req.body.subscribedTo);
+        res.user.subscribedTo = req.body.subscribedTo;
     }
     try {
         //Saves all the updated information to the database then sends a response back to the requestor with a status of 200
@@ -305,6 +308,9 @@ router.patch("/podcast/:id", getPodcast, async (req, res) => {
     }
     if(req.body.disciplines != null){
         res.podcast.disciplines = req.body.disciplines;
+    }
+    if(req.body.likes != null){
+        res.podcast.likes = req.body.likes;
     }
     try {
         //Saves all the updated information to the database then sends a response back to the requestor with a status of 200
