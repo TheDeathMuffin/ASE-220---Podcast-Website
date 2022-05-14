@@ -47,6 +47,7 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
         //console.log("Running displayPodcast");
         //console.log(data[index]);
         var podcast = document.createElement('div')
+        console.log(podcastList);
         var htmlString =
         `   <div class="podcast rounded" id="${data[index]["_id"]}"><div style="float:right;">`;    
         var subscribed = false;
@@ -146,20 +147,23 @@ function searchBar(podcastList, userList, type = "indexSearch"){
         var savedPodcasts = [];
         var yourPodcasts = [];
         //Loop to find your Podcasts
-        for(i = 0; i < Object.keys(podcastList).length; i++){
-            if(podcastList[i]["email"] == currentUser){
-                yourPodcasts.push(podcastList[i])
-            }
-        }
-        //Loop to find your saved Podcasts
-        for (i = 0; i < userList.length; i++){
-            if(currentUser == userList[i]["email"]){
-                console.log(userList[i]);
-                for(j = 0; j < userList[i]["savedPodcasts"].length; j ++){
-                    savedPodcasts.push(userList[i]["savedPodcasts"][j])
-                }
-            }
-        }
+        
+        // //for(i = 0; i < Object.keys(podcastList).length; i++){
+        // for(i = 0; i < podcastList.length; i++){
+        //     console.log(podcastList[i])
+        //     if(podcastList[i]["email"] == currentUser){
+        //         yourPodcasts.push(podcastList[i])
+        //     }
+        // }
+        // //Loop to find your saved Podcasts
+        // for (i = 0; i < userList.length; i++){
+        //     if(currentUser == userList[i]["email"]){
+        //         console.log(userList[i]);
+        //         for(j = 0; j < userList[i]["savedPodcasts"].length; j ++){
+        //             savedPodcasts.push(userList[i]["savedPodcasts"][j])
+        //         }
+        //     }
+        // }
         $(".search").on("keypress", function(e){
             if(e.which == 13){
                 clearBox(".podcast-menu");

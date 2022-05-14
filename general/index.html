@@ -11,6 +11,7 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="../util/preload.js"></script>
         <link rel="shortcut icon" type="image/x-icon" href="../icon/icon.ico"/>
         <link rel="stylesheet" href="../stylesheets/style.css">
     </head>
@@ -97,15 +98,18 @@
                             <a href="?sortBy=Oldest">Oldest</a>
                             <a href="?sortBy=Newest">Newest</a>
                         </div>
-                        <div class="navBox">
+                        <div class="navBox categories">
                             <p class="font-weight-bold">Category Feed</p>
-                            <a href="?category=math">Math</a>
-                            <a href="?category=science">Science</a>
-                            <a href="?category=history">History</a>
-                            <a href="?category=arts">Arts</a>
-                            <a href="?category=technology">Technology</a>
-                            <a href="?category=politics">Politics</a>
-                            <a href="?category=sports">Sports</a>
+                            <script>
+                                myAjax("GET", "http://localhost:8080/api/discipline/findAll", null, function(response){
+                                    var htmlString = "";
+                                    for(i = 0; i < response.length; i++){
+                                        htmlString = `<a href="?category=${response[i].name}">${response[i].name}</a>`
+                                        $('.categories').append(htmlString);
+                                    }
+                                    
+                                })
+                            </script>
                         </div>
                     </div>
                     <!-- Navigation -->
@@ -114,7 +118,7 @@
                     <div class="col-md-8 podcast-menu">
                         <p class="font-weight-bold">Uploads</p>
                         <!-- Podcasts -->
-                        <script src="../util/preload.js"></script>
+                        
                         <script>
                             //Code for Impelmenting Feed
                             var podcastList
@@ -123,26 +127,59 @@
                                 myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
                                     podcastList = body2;
                                     userList = body;
-                                    //Lists podcasts with Math as category
-                                    console.log(userList[1]);
-                                    console.log(podcastList); 
-                                    for(i = 0; i < podcastList.length; i++){
-                                        //console.log(podcastList[i]);
-                                        displayPodcast(i, podcastList, userList);
+                                    var queryParams = new URLSearchParams(window.location.search);
+                                    if(queryParams.has("sortDate")){
+                                        var datePodcasts = [];
+                                        for(i = 0; i < podcastList.length; i++){
+                                            //Checks the list of all podcasts for Any that match the query string
+                                            if(podcastList[i].publishedDate.includes(queryParams.get("sortDate"))){
+                                                displayPodcast(i, podcastList, userList)
+                                                //Find all Podcasts that match the sortdate in the query string
+                                                datePodcasts.push(podcastList[i]);
+                                            }
+                                        }
+                                        //searches for podcasts with specified sortdate from query string
+                                        searchBar(datePodcasts,userList);
+                                    } else if(queryParams.has("category")){
+                                        //Checks for podcasts that match the discipline in the query string
+                                        var disciplinePodcasts = [];
+                                        for(i = 0; i < podcastList.length; i++){
+                                            if(podcastList[i].disciplines.includes(queryParams.get("category")) || podcastList[i].disciplines.includes(queryParams.get("category").toLowerCase())){
+                                                //Displays podcasts with matching discipline to the query string
+                                                displayPodcast(i, podcastList, userList);
+                                                disciplinePodcasts.push(podcastList[i]);
+                                            }
+                                        }
+                                        //Searches For podcasts with oldest/newest that match the query string
+                                        searchBar(disciplinePodcasts,userList);
+                                    } else if(queryParams.has("sortBy")){
+                                        //Checks for podcasts that match the oldest/newest in the query string
+                                        var agePodcasts = [];
+                                        if(queryParams.get("sortBy") == "Oldest"){
+                                            for(i = 0; i < podcastList.length; i++){
+                                                //Displays all podcasts in order of when they were created
+                                                displayPodcast(i, podcastList, userList);
+                                                
+                                            }
+                                            searchBar(podcastList,userList);
+                                        }
+                                        if(queryParams.get("sortBy") == "Newest"){
+                                            for(i = podcastList.length; i > 0; i--){
+                                                //Displays all podcasts in Reverse order of when they were created
+                                                displayPodcast(i, podcastList, userList);
+                                            }
+                                            searchBar(podcastList,userList);
+                                        }
+                                        //Searches For podcasts with discipline that match the query string
+                                        searchBar(disciplinePodcasts,userList);
+                                    } else {
+                                        for(i = 0; i < podcastList.length; i++){
+                                            //Lists all podcasts
+                                            displayPodcast(i, podcastList, userList);
+                                        }
+                                        //Searches all Podcasts
+                                        searchBar(podcastList,userList);
                                     }
-                                    
-                                    // if(params.has("category")){
-                                    //     if(params.get("category") == "math"){
-                                    //         for(i = 0; i < Object.keys(podcastList).length; i++){
-                                    //             var keywordList = podcastList[i]["keywords"];
-                                    //             for(j = 0; j < keywordList; j++){
-                                    //                 if(keywordList[j] == params.get("category")){
-                                    //                     displayPodcast(i);
-                                    //                 }
-                                    //             }
-                                    //         }
-                                    //     }
-                                    // }
                                 })
                             })                            
                         </script>
@@ -190,7 +227,7 @@
                 myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
                     podcastList = body2;
                     userList = body;
-                    searchBar(podcastList,userList);
+                    
                 })
             })
         </script>
