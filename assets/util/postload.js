@@ -19,25 +19,36 @@ else {
 }
 
 /* Populates Page with User's Details */
-$.getJSON('http://localhost:8080/api/user/'+currentUserID, function(data){
-    $('.currentName').append(data['firstname'],' ',data['lastname']);
-    $('.currentEmail').append(data['email']);
-    $('.currentOrganization').append(data['organization']);
-    if (!no_card_added) {
-        $('.card_no').text(data[i]['billing']['card_no']);
-        $('.name_on_card').text(data['billing']['name_on_card']);
-        $('.billing_addr').text(data['billing']['billing_addr']);
-        $('.floating-menu-billing-button').append(`<button type="button" class="btn btn-secondary">Edit</button>`);
-    }
-    else {
-        $('.floating-menu-billing-button').append(`<button type="button" class="btn btn-success">Add</button>`);
-    }
-});
 let params = (new URL(document.location)).searchParams
+if(params.get("podcastID") == null){
+    $.getJSON('http://localhost:8080/api/user/'+currentUserID, function(data){
+        $('.currentName').append(data['firstname'],' ',data['lastname']);
+        $('.currentEmail').append(data['email']);
+        $('.currentOrganization').append(data['organization']);
+        if (!no_card_added) {
+            $('.card_no').text(data[i]['billing']['card_no']);
+            $('.name_on_card').text(data['billing']['name_on_card']);
+            $('.billing_addr').text(data['billing']['billing_addr']);
+            $('.floating-menu-billing-button').append(`<button type="button" class="btn btn-secondary">Edit</button>`);
+        }
+        else {
+            $('.floating-menu-billing-button').append(`<button type="button" class="btn btn-success">Add</button>`);
+        }
+    });
+}
+
 if(params.get("podcastID") != null){
-    myAjax("GET", `http://localhost:8080/api/podcast/${params.get("podcastID")}`, null, function(data){
-        console.log(data)
-        $().append
+    myAjax("GET", `http://localhost:8080/api/podcast/${params.get("podcastID")}`, null, function(response){
+        console.log(response);
+        $('.currentName').text(response.firstname + " " + response.lastname)
+        $('.currentTitle').text(response.title)
+        $('.currentEmail').text(response.email)
+        $('.manuscript').text(response.journal)
+        $('.currentdoi').text(response.doi)
+        $('.currentlikes').text(response.likes)
+        $('.currentsaves').text(response.saves)
+        $('.currentdescription').text(response.description)
+        //$('.currentdoi').innerHTML = response.firstname;
     });
 }
 
