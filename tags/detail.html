@@ -99,12 +99,16 @@
                         <script>
                             myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
                                 myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(podcasts){
-                                    console.log(podcasts);
+                                    var filteredPodcasts = [];
+                                    //Displays all podcasts that have a specific tag
                                     for(i = 0; i < podcasts.length; i++){
                                         if (podcasts[i].tags.includes(params.get("tag"))) {
                                             displayPodcast(i, podcasts, userList);
+                                            filteredPodcasts.push(podcasts[i]);
                                         }
                                     }
+                                    //Implements the Search bar using the filtered podcast list 
+                                    searchBar(filteredPodcasts, userList);
                                 })
                             })
                         </script>
@@ -126,13 +130,6 @@
         <!-- Page Footer -->
         <script>
             $('.tag_header').text('Podcasts ordered by "' + params.get('tag') +  '"');
-
-
-            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
-                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
-                    searchBar(body, body2);
-                })
-            })
         </script>
         <script src="../util/postload.js"></script>
 	</body>
