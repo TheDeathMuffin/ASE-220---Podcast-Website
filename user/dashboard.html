@@ -113,9 +113,6 @@
                                     //GET request to podcasts blob
                                     myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
                                         myAjax('GET', 'http://localhost:8080/api/podcast/owned/' + currentUser, null, function(podcasts){
-                                            console.log('before');
-                                            console.log(podcasts);
-                                            console.log('after');
                                             //console.log(userList);
                                             //Displays podcasts associated with logged in user
                                             for(i = 0; i < podcasts.length; i++){
