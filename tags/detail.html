@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="../stylesheets/style.css">
         
         <script>
-            
+            let params = (new URL(document.location)).searchParams;
         </script>
     </head>
 
@@ -66,7 +66,7 @@
             <!-- Main Header -->
             <div class="p-5 text-center main-header">
                 <h1 class="mb-3">PodScholar</h1>
-                <h4 class="mb-3">Podcasts ordered by Machine Learning</h4>
+                <h4 class="mb-3 tag_header"></h4>
             </div>
             <!-- Main Header -->
             
@@ -83,7 +83,6 @@
                                 <i class="fas fa-search"></i>
                             </span>
                         </div>
-                        <div class="d-flex mt-3"><button type="button" class="btn btn-success">Machine Learning</button></div>
                     </div>
                 </div>
                 <!-- Row 1 -->
@@ -94,16 +93,21 @@
                     <div class="col-md-2 nav-bar">
                     </div>
                     <!-- Navigation -->
-                    
                     <!-- Podcast List -->
                     <div class="col-md-8 podcast-menu">
                         <!-- Podcasts -->
-                        
-                        <div>
-                            <script>
-                                
-                            </script>
-                        </div>
+                        <script>
+                            myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
+                                myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(podcasts){
+                                    console.log(podcasts);
+                                    for(i = 0; i < podcasts.length; i++){
+                                        if (podcasts[i].tags.includes(params.get("tag"))) {
+                                            displayPodcast(i, podcasts, userList);
+                                        }
+                                    }
+                                })
+                            })
+                        </script>
                         <!-- Podcasts -->
                     </div>
                     <!-- Podcast List -->
@@ -121,30 +125,9 @@
         </footer>
         <!-- Page Footer -->
         <script>
-            //Re-usable AJAX function
-            function myAjax(method='GET',endpoint,data=null,onSuccess=null){
-                $.ajax({
-                    url:endpoint,
-                    type:method,
-                    data: data==null ? null : JSON.stringify(data),
-                    contentType: "application/json; charset=utf-8",
-                    dataType:'json',
-                    success: function (body, status, response) {
-                        onSuccess(body,status,response);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-             }
-            //Request to grab podcast List information and turn it into an array
+            $('.tag_header').text('Podcasts ordered by "' + params.get('tag') +  '"');
 
-            
-            let params = (new URL(document.location)).searchParams
-            //var params = new URLSearchParams(window.location.search)
-        </script>
-        
-        <script>
+
             myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(body){ //Retrievies List of all users
                 myAjax('GET', 'http://localhost:8080/api/podcast/findAll', null, function(body2){ //Retreives List of all Podcasts
                     searchBar(body, body2);
