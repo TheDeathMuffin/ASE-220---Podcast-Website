@@ -155,7 +155,6 @@ async function getUser(req, res, next){
 
 //GET's ALL podcasts
 router.get('/podcast/findAll', async (req, res) => {
-    console.log("GET request executing...")
 	try{
 		// const users = await User.find({id: req.params.id});
 		const podcasts = await Podcast.find({}).exec();
@@ -167,7 +166,6 @@ router.get('/podcast/findAll', async (req, res) => {
 
 //GET's information from a podcast using the ID
 router.get('/podcast/:id', async (req, res) => {
-    console.log("GET request executing...")
 	try{
 		// const users = await User.find({id: req.params.id});
 		const podcasts = await Podcast.findById(req.params.id).exec();
@@ -179,7 +177,6 @@ router.get('/podcast/:id', async (req, res) => {
 
 //GET's information from podcasts by DOI.
 router.get('/podcast/exist/:doi', async (req, res) => {
-    console.log("GET request executing...")
 	try{
 		const podcasts = await Podcast.find({doi: req.params.doi}).exec();
 		res.status(200).json(podcasts)
@@ -189,7 +186,6 @@ router.get('/podcast/exist/:doi', async (req, res) => {
 });
 //GET's information from podcasts owned by a specified user.
 router.get('/podcast/owned/:email', async (req, res) => {
-    console.log("GET request executing...")
 	try{
 		const podcasts = await Podcast.find({email: req.params.email}).exec();
 		res.status(200).json(podcasts)
@@ -203,24 +199,24 @@ router.get('/podcast/saved/:email', async (req, res) => {
         const saved = await User.find({email: req.params.email}).select("savedPodcasts").exec();
         savedPodcasts = {};
         list = [];
-        console.log(saved);
         for (i = 0; i < saved[0].savedPodcasts.length; i++) {
-            list2 = await Podcast.findById(saved[0].savedPodcasts[i]).exec();
-            console.log('beef');
-            console.log(list2);
+            list.push(await Podcast.findById(saved[0].savedPodcasts[i]).exec());
         }
-        res.status(200).json(list2);
+        savedPodcasts = list;
+        res.status(200).json(savedPodcasts);
     }
     catch (err) {res.status(500).json({ message: err.message })}
 });
 //GET's information from podcasts subscribed to by a specified user.
 router.get('/podcast/subscribed/:email', async (req, res) => {
     try{
-        const subscribed = await User.find({email: req.params.email}).select("subscribedPodcasts").exec();
+        const subscribedTo = await User.find({email: req.params.email}).select("subscribedTo").exec();
         subscribedPodcasts = {};
-        for (i = 0; i < subscribed.length; i++) {
-            subscribedPodcasts = await Podcast.find({email: subscribed[i]}).exec();
+        list = [];
+        for (i = 0; i < subscribedTo[0].subscribedTo.length; i++) {
+            list.push(await Podcast.find({email: subscribedTo[0].subscribedTo[i]}).exec());
         }
+        subscribedPodcasts = list;
         res.status(200).json(subscribedPodcasts);
     }
     catch (err) {res.status(500).json({ message: err.message })}
@@ -230,9 +226,11 @@ router.get('/podcast/liked/:email', async (req, res) => {
     try{
         const liked = await User.find({email: req.params.email}).select("likedPodcasts").exec();
         likedPodcasts = {};
-        for (i = 0; i < liked.length; i++) {
-            likedPodcasts = await Podcast.find({_id: liked[i]}).exec();
+        list = [];
+        for (i = 0; i < liked[0].likedPodcasts.length; i++) {
+            list.push(await Podcast.findById(liked[0].likedPodcasts[i]).exec());
         }
+        likedPodcasts = list;
         res.status(200).json(likedPodcasts);
     }
     catch (err) {res.status(500).json({ message: err.message })}
