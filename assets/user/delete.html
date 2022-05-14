@@ -17,10 +17,14 @@
         //     myAjax('PUT', 'https://jsonblob.com/api/jsonBlob/953093703074070528', data, function(){
         //         window.location.href = "../profile/dashboard.html";
         //     }); 
-        var podcastID = params.get("id");
-        myAjax('DELETE', `http://localhost:8080/api/podcast/${podcastID}`, null, function(){
-            window.location.href = "/user/";
-        }); 
+        var deleteConfirmation = confirm('Are you sure want to delete this item');
+        if(deleteConfirmation){
+            var podcastID = params.get("id");
+            myAjax('DELETE', `http://localhost:8080/api/podcast/${podcastID}`, null, function(){
+                window.location.href = "/user/";
+            }); 
+        }
+        
 
         //});       
 </script>

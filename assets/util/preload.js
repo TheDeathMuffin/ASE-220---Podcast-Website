@@ -95,7 +95,7 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
         /* Determines what buttons appear on a podcast card */
         if ( currentUser == data[index]['email'] ) {    /* Block only executes if the displayed podcast is owned by the current user. */
             if ( allowDel == true ) {               /* If function call specifies user should be able to edit/delete their own podcasts, delete button is displayed. */
-                htmlString += `<div style="float:right"><a class="text-white" href="../user/updatepodcast.html?id=${data[index]._id}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="../util/delete.html?id=${data[index]._id}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
+                htmlString += `<div style="float:right"><a class="text-white" href="../user/updatepodcast.html?id=${data[index]._id}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="../user/delete.html?id=${data[index]._id}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
             }
             else {                                  /* Otherwise, their podcasts are identified as their own using string. */
                 htmlString += `<i style="float:right">This is your podcast!</i>`;
