@@ -66,8 +66,8 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
             }
         }
         htmlString += `
-            <a class="text-white" href="report.html?index=${data[index]._id}"><button type="button" class="btn liked"><img class="iconImage" src="../icon/flag.png"></button></a></div>
-            <p class="title"><a class="podcastLink font-weight-bold h5" href="podcastdetails.html">${data[index].title}</a></p>
+            <a class="text-white" href="report.html?index=${data[index].index}"><button type="button" class="btn liked"><img class="iconImage" src="../icon/flag.png"></button></a></div>
+            <p class="title"><a class="podcastLink font-weight-bold h5" href="/general/podcastdetails">${data[index].title}</a></p>
             <p class="authors">${data[index].firstname +" " + data[index].lastname}</p>
             <p class="article font-italic"></p>
             <p class="year font-italic">Date published: ${data[index].publishedDate}</p>

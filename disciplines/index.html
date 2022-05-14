@@ -85,12 +85,13 @@
                         <script src="../util/preload.js"></script>
                         <div class="disciplines">
                             <script>
-                                myAjax('GET', "https://jsonblob.com/api/jsonBlob/966066952229634048", null, function(response){
+                                myAjax('GET', "http://localhost:8080/api/discipline/findAll", null, function(response){
                                     console.log(response);
-                                    var discipline = document.createElement('div')
+                                    var discipline = document.createElement('div');
                                     var htmlString = `<div>`
+                                    //console.log(response[1].name)
                                     for(i = 0; i < response.length; i++){
-                                        htmlString += `<a href="detail.html?discipline=${response[i].id}"><button type=button class="btn btn-info ml-2">${response[i].name}</button></a>`
+                                        htmlString += `<a href="/disciplines/detail?discipline=${response[i].name}"><button type=button class="btn btn-info ml-2">${response[i].name}</button></a>`
                                     }
                                     //Closes the html div 
                                     htmlString += `</div>`
@@ -139,8 +140,6 @@
             let params = (new URL(document.location)).searchParams
             //var params = new URLSearchParams(window.location.search)
         </script>
-        
-        <script>searchBar();</script>
         <script src="../util/postload.js"></script>
 	</body>
 </html>
