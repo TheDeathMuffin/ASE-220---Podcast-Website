@@ -59,7 +59,19 @@
         <!-- Page Header -->
         
         <main>
-            <p class="text-center p-5">This is a report page. A report form should be presented in place of this text.</p>
+            <!-- Upload Form --> 
+            <div class="registration-form">
+                <form id="upload" onSubmit="return false">
+                    <div class="form-group">
+                        <textarea name="description" class="form-control item" placeholder="Reason for Reporting" rows="4"></textarea>
+                    </div>
+                    <div class="form-group"> 
+                            <button type="submit" class="btn btn-block create-account"><a href="#"></a>Submit Report</a></button>
+                        <button onclick="history.back()" class="btn btn-block create-account bg-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Upload Form -->
         </main>
 
 		<!-- Page Footer -->
@@ -69,6 +81,13 @@
             </div>
         </footer>
         <!-- Page Footer -->
+        <script>
+            $(document).on('submit','#upload',function(e){ 
+                console.log("Another report ignored."); 
+                alert("Thank you for submitting this report. We take your feedback very seriously!");
+                window.location.href = "/";
+            })
+        </script>
         <script src="../util/postload.js"></script>
     </body>
 </html>
