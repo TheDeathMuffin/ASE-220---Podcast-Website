@@ -139,6 +139,7 @@
                                                 //console.log(userList);
                                                 //Displays podcasts associated with logged in user
                                                 console.log("Displaying Saved Podcasts")
+                                                console.log(podcasts);
                                                 var podcastIdList = [];
                                                 for(i = 0; i < podcasts.length; i++){
                                                     displayPodcast(i, podcasts, userList,"#savedPodcasts");
@@ -158,7 +159,7 @@
                                         //GET request to podcasts blob
                                         myAjax('GET', 'http://localhost:8080/api/user/findAll', null, function(userList){
                                             myAjax('GET', 'http://localhost:8080/api/podcast/subscribed/' + currentUser, null, function(podcasts){
-                                                //console.log(userList);
+                                                console.log(podcasts[0]);
                                                 //Displays podcasts associated with logged in user
                                                 console.log("Displaying Subscribed Podcasts")
                                                 var podcastIdList = [];
