@@ -67,43 +67,27 @@
             
             <!-- Main Body -->
             <div class="main-body">
-                <!-- Row 1 -->
-                <div class="row">
-                    <div class="col-md-2">
-                    </div>
+                <script src="../util/preload.js"></script>    
+                <!-- Disciplines -->
+                <div class="disciplines row">
                 </div>
-                <!-- Row 1 -->
-
-                <!-- Row 2 -->
-                <div class="row">
-                    <!-- Scientific Discipline List -->
-                    <div class="col-md-8">
-                        <!-- Disciplines -->
-                        
-                        <script src="../util/preload.js"></script>
-                        <div class="disciplines">
-                            <script>
-                                myAjax('GET', "http://localhost:8080/api/discipline/findAll", null, function(response){
-                                    console.log(response);
-                                    var discipline = document.createElement('div');
-                                    var htmlString = `<div>`
-                                    //console.log(response[1].name)
-                                    for(i = 0; i < response.length; i++){
-                                        htmlString += `<a class="pl-2 pr-2 pb-3" href="/disciplines/detail?discipline=${response[i].name}"><button type=button class="btn btn-info">${response[i].name}</button></a>`
-                                    }
-                                    //Closes the html div 
-                                    htmlString += `</div>`
-                                    //Appends discipline to DOM and displays it
-                                    discipline.innerHTML += htmlString;
-                                    $(".disciplines").append(discipline)
-                                })
-                            </script>
-                        </div>
-                        <!-- Disciplines -->
-                    </div>
-                    <!-- Scientific Disciplines LIst -->
-                </div>
-                <!-- Row 2 -->
+                <!-- Disciplines -->
+                <script>
+                    myAjax('GET', "http://localhost:8080/api/discipline/findAll", null, function(response){
+                        console.log(response);
+                        var discipline = document.createElement('div');
+                        var htmlString = `<div>`
+                        //console.log(response[1].name)
+                        for(i = 0; i < response.length; i++){
+                            htmlString += `<div class="m-1 pb-3 pl-2 pr-2" style="display: inline-block"><a href="/disciplines/detail?discipline=${response[i].name}"><button type=button class="btn btn-primary">${response[i].name}</button></a></div>`
+                        }
+                        //Closes the html div 
+                        htmlString += `</div>`
+                        //Appends discipline to DOM and displays it
+                        discipline.innerHTML += htmlString;
+                        $(".disciplines").append(discipline)
+                    })
+                </script>
             </div>
             <!-- Main Body -->
 		</main>
