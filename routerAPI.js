@@ -253,7 +253,7 @@ router.post('/podcast/', async (req,res) => {
         email: req.body.email,
         authors: req.body.authors,
         title: req.body.title,
-        descriptionLocation: req.body.descriptionLocation,
+        description: req.body.description,
         journal: req.body.journal,
         doi: req.body.doi,
         disciplines: req.body.disciplines,

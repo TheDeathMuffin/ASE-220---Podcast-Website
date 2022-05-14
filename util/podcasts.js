@@ -29,7 +29,7 @@ const podcastSchema = new Schema(
             type: String,
             required: true
         },
-        descriptionLocation: {
+        description: {
             type: String,
         },
         journal: {
@@ -49,10 +49,12 @@ const podcastSchema = new Schema(
             type: Array
         },
         likes: {
-            type: Number
+            type: Number,
+            default: 0
         },
         saves: {
-            type: Number
+            type: Number,
+            default: 0
         }
     }
 ) 

@@ -245,7 +245,8 @@
                             newPodcast.lastname = $('input[name=lastname]').val();
                             newPodcast.email = $('input[name=email]').val();
                             //newPodcast.descriptionLocation = descriptionLocation;
-                            newPodcast.description = $('textarea[name=description]').val()
+                            console.log($('textarea[name=description]').val());
+                            newPodcast.description = $('textarea[name=description]').val();
                             newPodcast.title = $('input[name=title]').val();
                             newPodcast.journal = $('input[name=journal]').val();
                             newPodcast.publishedDate = $('input[name=publishedDate]').val();
@@ -256,7 +257,7 @@
                             //data.push({firstname:$('input[name=firstname]').val(), lastname:$('input[name=lastname]').val(), email:$('input[name=email]').val(), descriptionLocation:betterURL, title:$('input[name=title]').val(), journal:$('input[name=journal]').val(), publishedDate:$('input[name=publishedDate]').val(), doi:$('input[name=doi]').val(), keywords:categories, index:(data.length + 1).toString()});
                             myAjax('POST', 'http://localhost:8080/api/podcast/', newPodcast, function(){
                                 console.log("New Podcast is Created");
-                                window.location.href = "/user/";
+                                //window.location.href = "/user/";
                             })
                         })
                     }
