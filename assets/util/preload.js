@@ -89,12 +89,13 @@ function displayPodcast(index=0, podcastList, userList, appendingClass=".podcast
             <a  data-toggle="collapse" href="#previewText" role="button" aria-expanded="false" aria-controls="previewText">Preview transcript...</a>
             <div class="collapse" id="previewText"><div class="card card-body bg-dark font-italic text-light">
             "This is 2 lines of text from the podcast. This feature is not yet implemented, so please be patient my children. It will dissappear into the void of all space and time, forever and ever until everything goes away and never comes back..."
+
             </div></div></div>
             `;
         /* Determines what buttons appear on a podcast card */
         if ( currentUser == data[index]['email'] ) {    /* Block only executes if the displayed podcast is owned by the current user. */
             if ( allowDel == true ) {               /* If function call specifies user should be able to edit/delete their own podcasts, delete button is displayed. */
-                htmlString += `<div style="float:right"><a class="text-white" href="updatepodcast.html?id=${data[index]._id}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="delete.html?index=${data[index]._id}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
+                htmlString += `<div style="float:right"><a class="text-white" href="updatepodcast.html?id=${data[index]._id}"><button type="button" class="btn btn-primary ownerButton">Edit</button></a> <a class="text-white" href="./delete.html?id=${data[index]._id}"><button type="button" class="btn btn-danger ownerButton deleteButton">Delete</button></a></div>`;
             }
             else {                                  /* Otherwise, their podcasts are identified as their own using string. */
                 htmlString += `<i style="float:right">This is your podcast!</i>`;
