@@ -202,12 +202,14 @@ router.get('/podcast/saved/:email', async (req, res) => {
     try{
         const saved = await User.find({email: req.params.email}).select("savedPodcasts").exec();
         savedPodcasts = {};
+        list = [];
         console.log(saved);
-        for (i = 0; i < saved.length; i++) {
-            savedPodcasts.push(await Podcast.find({_id: saved[i]}).exec());
+        for (i = 0; i < saved[0].savedPodcasts.length; i++) {
+            list2 = await Podcast.findById(saved[0].savedPodcasts[i]).exec();
+            console.log('beef');
+            console.log(list2);
         }
-        console.log(savedPodcasts);
-        res.status(200).json(savedPodcasts);
+        res.status(200).json(list2);
     }
     catch (err) {res.status(500).json({ message: err.message })}
 });
