@@ -13,20 +13,19 @@
             for (let j = 0; j < userData["likedPodcasts"].length; j++) {            //Loops through each liked podcast to check if the user has alraedy liked it.
                 if (params.get("id") == userData["likedPodcasts"][j]) { inList = true; break; }
             }
-            if (!inList) { userData["likedPodcasts"].push(params.get("id")); }      //If podcast is not already liked, like it.
-            podcastData["likes"] = podcastData["likes"] + 1;        //Increments like count by 1.
-            likedData = `{ "likes" : "${podcastData["likes"]}" }`;
-            
-            console.log(userData);
-            //Updates the podcast's like count.
-            myAjax('PATCH', `http://localhost:8080/api/podcast/${params.get("id")}`, likedData, function(body){
-                //console.log(body);
-            }); 
-            //Update the user's liked podcast list.
-            myAjax('PATCH', `http://localhost:8080/api/user/${currentUserID}`, userData, function(body){
-                window.location.href = history.back();
-                console.log(body);
-            }); 
+            if (!inList) {                                                          //If podcast is not already liked, like it.
+                likedData = {};
+                likedPodcasts = {};
+                likedData.likes = podcastData["likes"] + 1;
+                likedPodcasts.likedPodcasts = userData["likedPodcasts"].push(params.get("id"));
+                //Updates the podcast's like count.
+                myAjax('PATCH', `http://localhost:8080/api/podcast/${params.get("id")}`, likedData, function(){
+                });
+                //Update the user's liked podcast list.
+                myAjax('PATCH', `http://localhost:8080/api/user/${currentUserID}`, likedPodcasts, function(body){
+                }); 
+            }
+            window.location.href = history.back();
         });
     });
 </script>
