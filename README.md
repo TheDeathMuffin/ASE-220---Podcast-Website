@@ -1,5 +1,5 @@
 # ASE-220---Podcast-Website
-Podscholar is a web application for uploading and viewing uploaded podcasts. It was built as a group project in class based on the requests given by a client for our university. Podscholar is built using JavaScript/NodeJS, Express, MongoDB, HTML, and CSS (Bootstrap).
+Podscholar is a web application for uploading and viewing uploaded podcasts. It was built as a group project in class based on the requests given by a client for our university. This project contributed to the refining and buildling of [PodScholar](https://www.podscholars.com).  Podscholar is built using JavaScript/NodeJS, Express, MongoDB, HTML, and CSS (Bootstrap).
 
 Features
 - Search Bar
