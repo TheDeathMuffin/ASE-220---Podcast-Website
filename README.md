@@ -1,10 +1,10 @@
 # ASE-220---Podcast-Website
-Podscholar is a web application for uploading and viewing uploaded podcasts. It was built as a class group project based on the requests on a client for our university. Podscholar is built using JavaScript/NodeJS, Express, MongoDB, HTML, and CSS (Bootstrap).
+Podscholar is a web application for uploading and viewing uploaded podcasts. It was built as a group project in class based on the requests given by a client for our university. Podscholar is built using JavaScript/NodeJS, Express, MongoDB, HTML, and CSS (Bootstrap).
 
 Setup Instructions
 1. Clone the Repo to a local directory
 3. Open terminal window
-4. Navigate to the repo in your local directory it was saved in
+4. Navigate to the file "main.js" in the repo in your local directory it was saved in
 2. run the command "node main.js" in terminal to start the local webserver
 3. Close local webserver with Ctrl+c in the terminal
 
